@@ -4045,6 +4045,7 @@ class ArmoryMainWindow(QMainWindow):
             wltID = str(self.walletsView.model().index(row, WLTVIEWCOLS.ID).data().toString())
          dlg = DlgWalletSelect(self, self, 'Receive coins with wallet...', '', \
                                        firstSelect=wltID, onlyMyWallets=False)
+         loading.reject()
          if dlg.exec_():
             wltID = dlg.selectedID
          else:
