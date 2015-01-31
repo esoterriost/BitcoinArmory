@@ -1535,11 +1535,11 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       isReady = TheBDM.getBDMState() == 'BlockchainReady'
 
       info = { \
-               'versionstr':        getVersionString(DGBARMORY_VERSION),
-               'version':           getVersionInt(DGBARMORY_VERSION),
+               'versionstr':        getVersionString(BTCARMORY_VERSION),
+               'version':           getVersionInt(BTCARMORY_VERSION),
                #'protocolversion':   0,
-               'walletversionstr':  getVersionString(PYDGBWALLET_VERSION),
-               'walletversion':     getVersionInt(PYDGBWALLET_VERSION),
+               'walletversionstr':  getVersionString(PYBTCWALLET_VERSION),
+               'walletversion':     getVersionInt(PYBTCWALLET_VERSION),
                'bdmstate':          TheBDM.getBDMState(),
                'balance':           AmountToJSON(self.curWlt.getBalance()) \
                                     if isReady else -1,
@@ -2685,7 +2685,7 @@ class Armory_Daemon(object):
             # that armoryd is still beta software and that the API may change.
             LOGWARN('************************************************************************')
             LOGWARN('* Please note that digiarmoryd v%s is beta software and is still in ' % \
-                  getVersionString(DGBARMORY_VERSION))
+                  getVersionString(BTCARMORY_VERSION))
             LOGWARN('* development. Whenever applicable, the interface is designed to match ')
             LOGWARN('* that of digibyted, with function parameters and return values closely ')
             LOGWARN('* matching those of digibyted. Despite this, the function parameters and ')
