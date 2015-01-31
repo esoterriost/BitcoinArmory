@@ -2200,7 +2200,7 @@ void BlockDataManager_LevelDB::SetHomeDirLocation(string homeDir)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// Bitcoin-Qt/bitcoind 0.8+ changed the location and naming convention for 
+// Digibyte-Qt/digibyted 0.8+ changed the location and naming convention for 
 // the blkXXXX.dat files.  The first block file use to be:
 //
 //    ~/.bitcoin/blocks/blk00000.dat   
@@ -4879,7 +4879,7 @@ uint32_t BlockDataManager_LevelDB::readBlkFileUpdate(void)
    else if((int64_t)filesize-(int64_t)endOfLastBlockByte_ < 8)
    {
       // This condition triggers if we hit the end of the file -- will
-      // usually only be triggered by Bitcoin-Qt/bitcoind pre-0.8
+      // usually only be triggered by Digibyte-Qt/digibyted pre-0.8
       currBlkBytesToRead = 0;
    }
    else
@@ -4941,7 +4941,7 @@ uint32_t BlockDataManager_LevelDB::readBlkFileUpdate(void)
 
    // If a new block file exists, read that one too
    // nextBlkBytesToRead will include up to 16 MB of padding if our gateway
-   // is a bitcoind/qt 0.8+ node.  Either way, it will be easy to detect when
+   // is a digibyted/qt 0.8+ node.  Either way, it will be easy to detect when
    // we've reached the end of the real data, as long as there is no gap 
    // between the end of currBlk data and the start of newBlk data (there isn't)
    if(nextBlkBytesToRead>0)
@@ -5708,7 +5708,7 @@ double BlockDataManager_LevelDB::traceChainDown(BlockHeader & bhpStart)
 /////////////////////////////////////////////////////////////////////////////
 // In practice, orphan chains shouldn't ever happen.  It means that there's
 // a block in our database that doesn't trace down to the genesis block. 
-// Currently, we get our blocks from Bitcoin-Qt/bitcoind which is incapable
+// Currently, we get our blocks from Digibyte-Qt/digibyted which is incapable
 // of passing such blocks to us (or putting them in the blk*.dat files), so
 // if this function gets called, it's most likely in error.
 void BlockDataManager_LevelDB::markOrphanChain(BlockHeader & bhpStart)

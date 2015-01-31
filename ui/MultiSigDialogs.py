@@ -36,7 +36,7 @@ class DlgLockboxEditor(ArmoryDialog):
 
       lblDescr3 = QRichLabel(tr("""
          <b><u>NOTE:</u> Multi-sig "lockboxes" require <u>public keys</u>, not 
-         the address strings most Bitcoin users are familiar with.</b>
+         the address strings most Digibyte users are familiar with.</b>
          <a href="None">Click for more info</a>."""))
 
       def openMoreInfo(*args): 
@@ -45,14 +45,14 @@ class DlgLockboxEditor(ArmoryDialog):
             address string, and always starts with "02", "03" or "04". 
             Most wallet applications do not provide an easy way to access  
             a public key associated with a given address.  This is easiest
-            if everyone is using Armory. 
+            if everyone is using DigiArmory. 
             <br><br>
             The address book buttons next to each input box below will show you 
             normal address strings, but will enter the correct public 
             key of the address you select.  
             <br><br>
             If you are creating this lockbox with other
-            Armory users, they can use the "Select Public Key" button
+            DigiArmory users, they can use the "Select Public Key" button
             from the Lockbox Manager dashboard to pick a key and enter
             their contact info.  You can use the "Import" button
             on each public key line to import the data they send you."""),
@@ -567,11 +567,11 @@ class DlgLockboxEditor(ArmoryDialog):
       
       if not USE_TESTNET and isMofNNonStandardToSpend(currM, currN):
          reply = QMessageBox.warning(self, tr('Non-Standard to Spend'), tr("""
-            If you are running any Bitcoin Core version earlier than 0.9.3
+            If you are running any Digibyte Core version earlier than 0.9.2
             all spending transactions from this lockbox
             will be rejected as non-standard.  There will be no problem sending coins  
             <u>to</u> the lockbox, but subsequent spends <u>from</u> the 
-            lockbox will require you to upgrade Bitcoin Core to at least 0.9.3 or later.  
+            lockbox will require you to upgrade Digibyte Core to at least 0.9.3 or later.  
             <br><br>
             Do you wish to continue creating the lockbox, anyway?"""), QMessageBox.Yes | QMessageBox.No)
 
@@ -952,8 +952,8 @@ class DlgLockboxManager(ArmoryDialog):
                'button':  tr('Create Spending Tx'),
                'callbk':  self.doSpend,
                'organiz': True,
-               'lbltxt':  tr('Send bitcoins from lockbox'),
-               'tiptxt':  tr("""Create a proposed transaction sending bitcoins
+               'lbltxt':  tr('Send digibytes from lockbox'),
+               'tiptxt':  tr("""Create a proposed transaction sending digibytes
                                 to an address, wallet or another lockbox.  
                                 The transaction will not be final until enough
                                 signatures have been collected and then 
@@ -1186,7 +1186,7 @@ class DlgLockboxManager(ArmoryDialog):
             self.lblDispAddr.setEnabled(True)
             self.lblDispAddr.setText(tr("""
                Anyone can send funds to this lockbox using this
-               Bitcoin address: <br><b>%s</b>""") % p2shAddr)
+               Digibyte address: <br><b>%s</b>""") % p2shAddr)
 
       self.updateDashFuncs.append(updateRegFundCell)
 
@@ -1321,7 +1321,7 @@ class DlgLockboxManager(ArmoryDialog):
       if pytx==None:
          QMessageBox.critical(self, 'Invalid Tx:',
          'The transaction you requested be displayed does not exist in '
-         'in Armory\'s database.  This is unusual...', QMessageBox.Ok)
+         'in DigiArmory\'s database.  This is unusual...', QMessageBox.Ok)
          return
 
       lboxId  = str(self.ledgerView.model().index(row, LEDGERCOLS.WltID).data().toString())
@@ -1372,7 +1372,7 @@ class DlgLockboxManager(ArmoryDialog):
          except:
             LOGEXCEPT('Failed to open webbrowser')
             QMessageBox.critical(self, 'Could not open browser', \
-               'Armory encountered an error opening your web browser.  To view '
+               'DigiArmory encountered an error opening your web browser.  To view '
                'this transaction on blockchain.info, please copy and paste '
                'the following URL into your browser: '
                '<br><br>%s' % blkExploreURL, QMessageBox.Ok)
@@ -1431,7 +1431,7 @@ class DlgLockboxManager(ArmoryDialog):
                webbrowser.open(urlToOpen)
             except:
                QMessageBox.critical(self, tr('Could not open browser'), tr("""
-                  Armory encountered an error opening your web browser.  To view 
+                  DigiArmory encountered an error opening your web browser.  To view 
                   this address on %s, please copy and paste 
                   the following URL into your browser: 
                   <br><br>
@@ -1448,7 +1448,7 @@ class DlgLockboxManager(ArmoryDialog):
                reply = MsgBoxWithDNAA(MSGBOX.Warning, tr('Compatibility Warning'), 
                   tr("""You are about to request payment to a "P2SH" address 
                   which is the format used for receiving to multi-signature
-                  addresses/lockboxes.  "P2SH" are like regular Bitcoin 
+                  addresses/lockboxes.  "P2SH" are like regular Digibyte 
                   addresses but start with %s instead of %s.
                   <br><br>
                   Unfortunately, not all software and services support sending 
@@ -1631,7 +1631,7 @@ class DlgLockboxManager(ArmoryDialog):
                   can start using it right away.  
                   <br><br>
                   If the lockbox is not new and has been used before,
-                  Armory will not know about its history until you rescan
+                  DigiArmory will not know about its history until you rescan
                   the databases.  You can manually initiate a rescan by
                   going to "<i>Help</i>"\xe2\x86\x92"<i>Rescan Databases</i>"
                   from the main window."""), tr("Do not show this message again"))
@@ -1701,7 +1701,7 @@ class DlgLockboxManager(ArmoryDialog):
       reply = QMessageBox.warning(self, tr('Confirm Delete'), tr("""
          "Removing" a lockbox does not delete any signing keys, so you 
          maintain signing authority for any coins that are sent there.     
-         However, Armory will stop tracking its history and balance, and you
+         However, DigiArmory will stop tracking its history and balance, and you
          will have to re-import it later in order to sign any transactions.
          <br><br>
          You are about to remove the following lockbox:
@@ -2127,9 +2127,9 @@ class DlgSelectPublicKey(ArmoryDialog):
          <center><font size=4><b><u>Select Public Key for Lockbox 
          Creation</u></b></font></center>
          <br>
-         Lockbox creation requires <b>public keys</b> not the regular Bitcoin
+         Lockbox creation requires <b>public keys</b> not the regular Digibyte
          addresses most users are accustomed to.  A public key is much longer
-         than a regular bitcoin address, usually starting with "02", "03" or
+         than a regular digibyte address, usually starting with "02", "03" or
          "04".  Once you have selected a public key, send it to the lockbox 
          organizer (person or device).  The organizer will create the lockbox 
          which then must be imported by all devices that will track the funds
@@ -2140,7 +2140,7 @@ class DlgSelectPublicKey(ArmoryDialog):
          You <u>can</u> use a public key from a watching-only wallet (for 
          an offline wallet), but you will have to sign the transactions the
          same way you would a regular offline transaction.  Additionally the 
-         offline computer will need to have Armory version 0.92 or later.
+         offline computer will need to have DigiArmory version 0.92 or later.
          <br><br>
          <b><font color="%s">BACKUP WARNING</b></b>:  
          It is highly recommended that you select a public key from a
@@ -2232,8 +2232,8 @@ class DlgSelectPublicKey(ArmoryDialog):
          LOGEXCEPT('Invalid public key entered')
          QMessageBox.warning(self, tr('Invalid Public Key'), tr("""
             You must enter a public key into the box, <b>not</b> a regular 
-            Bitcoin address that most users are accustomed to.  A public key 
-            is much longer than a Bitcoin address, and always starts with 
+            Digibyte address that most users are accustomed to.  A public key 
+            is much longer than a Digibyte address, and always starts with 
             "02", "03" or "04"."""), QMessageBox.Ok)
          return None
 
@@ -2354,7 +2354,7 @@ class DlgExportAsciiBlock(ArmoryDialog):
       
       if not self.main.getSettingOrSetDefault('DNAA_MailtoWarn', False):
          reply = MsgBoxWithDNAA(MSGBOX.Warning, tr('Email Triggered'), tr("""
-            Armory attempted to execute a "mailto:" link which should trigger
+            DigiArmory attempted to execute a "mailto:" link which should trigger
             your email application or web browser to open a compose-email window.
             This does not work in all environments, and you might have to 
             manually copy and paste the text in the box into an email.
@@ -2468,7 +2468,7 @@ class DlgMultiSpendReview(ArmoryDialog):
          <br><br>
          Change outputs have been hidden where it is obvious (such as coins
          returning to the same lockbox from where it came).  If there is 
-         any ambiguity, Armory will display all outputs."""))
+         any ambiguity, DigiArmory will display all outputs."""))
 
       KEYW,KEYH = 25,36
       CHKW,CHKH = 32,32
@@ -3062,7 +3062,7 @@ class DlgMultiSpendReview(ArmoryDialog):
          #self.ustx.evaluateSigningStatus().pprint()
          QMessageBox.critical(self, tr('Invalid Signatures'), tr("""
             Somehow not all inputs have valid sigantures!  You can choose  
-            to attempt to broadcast anyway, in case you think Armory is
+            to attempt to broadcast anyway, in case you think DigiArmory is
             not evaluating the transaction state correctly.  
             <br><br>
             Otherwise, please confirm that you have created signatures 
@@ -3109,14 +3109,14 @@ class DlgCreatePromNote(ArmoryDialog):
          will review and sign it.  
          <br><br>
          If this lockbox is being funded by only one party, using this
-         interface is unnecessary.  Have the funding party send Bitcoins 
+         interface is unnecessary.  Have the funding party send Digibytes 
          to the destination address or lockbox in the normal way."""))
 
       lblNoteSrc = QRichLabel(tr("""
          <b>NOTE:</b> At the moment, simulfunding is restricted to using
          single-signature wallets/addresses for funding.    More
          complex simulfunding transactions will be possible in a future 
-         version of Armory."""))
+         version of DigiArmory."""))
 
       if len(self.main.walletIDList)>0:
          self.spendFromWltID = self.main.walletIDList[0]
@@ -3136,8 +3136,8 @@ class DlgCreatePromNote(ArmoryDialog):
       lblAddress = QRichLabel(tr('Address:'))
       lblAmount  = QRichLabel(tr('Amount:'))
       lblFee     = QRichLabel(tr('Add fee:'))
-      lblBTC1    = QRichLabel(tr('BTC'))
-      lblBTC2    = QRichLabel(tr('BTC'))
+      lblBTC1    = QRichLabel(tr('DGB'))
+      lblBTC2    = QRichLabel(tr('DGB'))
 
       startStr = ''
       if defaultIDorAddr:
@@ -3278,7 +3278,7 @@ class DlgCreatePromNote(ArmoryDialog):
             The blockchain has become unavailable since you opened this
             window.  Creation of the promissory note cannot continue.  If 
             you think you should be online, please try again in a minute,
-            or after restarting Armory"""), QMessageBox.Ok)
+            or after restarting DigiArmory"""), QMessageBox.Ok)
          return False
 
       # TODO:  Expand this to allow simulfunding from lockbox(es)
@@ -3287,7 +3287,7 @@ class DlgCreatePromNote(ArmoryDialog):
       if lbox is not None:
          LOGERROR('Simulfunding from lockbox not currently implemented')
          QMessageBox.critical(self, tr('Lockbox Selected'), tr("""
-            Currently, Armory does not implement simulfunding with lockbox
+            Currently, DigiArmory does not implement simulfunding with lockbox
             inputs.  Please choose a regular wallet as your input"""),
             QMessageBox.Ok)
          return False
@@ -3304,7 +3304,7 @@ class DlgCreatePromNote(ArmoryDialog):
          valueAmt = str2coin(valueStr)
          if valueAmt == 0:
             QMessageBox.critical(self, tr('Zero Amount'), tr("""
-               You cannot promise 0 BTC.   <br>Please enter 
+               You cannot promise 0 DGB.   <br>Please enter 
                a positive amount."""), QMessageBox.Ok)
             return False
       except NegativeValueError:
@@ -3314,8 +3314,8 @@ class DlgCreatePromNote(ArmoryDialog):
          return False
       except TooMuchPrecisionError:
          QMessageBox.critical(self, tr('Too much precision'), tr("""
-            Bitcoins can only be specified down to 8 decimal places. 
-            The smallest value that can be sent is  0.0000 0001 BTC. 
+            Digibytes can only be specified down to 8 decimal places. 
+            The smallest value that can be sent is  0.0000 0001 DGB. 
             Please enter a new amount"""), QMessageBox.Ok)
          return False
       except ValueError:
@@ -3340,8 +3340,8 @@ class DlgCreatePromNote(ArmoryDialog):
          return False
       except TooMuchPrecisionError:
          QMessageBox.critical(self, tr('Too much precision'), tr("""
-            Bitcoins can only be specified down to 8 decimal places. 
-            The smallest value that can be sent is  0.0000 0001 BTC. 
+            Digibytes can only be specified down to 8 decimal places. 
+            The smallest value that can be sent is  0.0000 0001 DGB. 
             Please enter a new amount"""), QMessageBox.Ok)
          return False
       except ValueError:
@@ -3360,8 +3360,8 @@ class DlgCreatePromNote(ArmoryDialog):
       availBal = wlt.getBalance('Spendable')
       if totalAmt > availBal:
          QMessageBox.critical(self, tr('Not enough funds!'), tr("""
-            You specified <b>%s</b> BTC (amount + fee), but the selected wallet
-            only has <b>%s</b> BTC spendable.""") % (coin2strNZS(totalAmt), 
+            You specified <b>%s</b> DGB (amount + fee), but the selected wallet
+            only has <b>%s</b> DGB spendable.""") % (coin2strNZS(totalAmt), 
             coin2strNZS(availBal)), QMessageBox.Ok)
          return False
 
@@ -3371,8 +3371,8 @@ class DlgCreatePromNote(ArmoryDialog):
       if len(utxoSelect) == 0:
          QMessageBox.critical(self, tr('Coin Selection Error'), tr("""
             There was an error constructing your transaction, due to a 
-            quirk in the way Bitcoin transactions work.  If you see this
-            error more than once, try sending your BTC in two or more 
+            quirk in the way Digibyte transactions work.  If you see this
+            error more than once, try sending your DGB in two or more 
             separate transactions."""), QMessageBox.Ok)
          return False
 
@@ -3405,7 +3405,7 @@ class DlgCreatePromNote(ArmoryDialog):
                There was an error creating the promissory note -- the selected
                coins were not found in the blockchain.  Please go to 
                "<i>Help</i>"\xe2\x86\x92"<i>Submit Bug Report</i>" from 
-               the main window and submit your log files so the Armory team
+               the main window and submit your log files so the DigiArmory team
                can review this error."""), QMessageBox.Ok)
 
          rawTx = cppTx.serialize()
@@ -3434,7 +3434,7 @@ class DlgCreatePromNote(ArmoryDialog):
             transaction before signing.""")
          
          ftypes = ['Promissory Notes (*.promnote)']
-         defaultFN = 'Contrib_%s_%sBTC.promnote' % \
+         defaultFN = 'Contrib_%s_%sDGB.promnote' % \
                (self.finalPromNote.promID, coin2strNZS(valueAmt))
             
    
@@ -3499,8 +3499,8 @@ class DlgMergePromNotes(ArmoryDialog):
       lblFeeText = QRichLabel('Total Fee:', doWrap=False)
       self.lblCurrPay = QMoneyLabel(0, maxZeros=2)
       self.lblCurrFee = QMoneyLabel(0, maxZeros=2)
-      self.lblPayUnits = QRichLabel('BTC')
-      self.lblFeeUnits = QRichLabel('BTC')
+      self.lblPayUnits = QRichLabel('DGB')
+      self.lblFeeUnits = QRichLabel('DGB')
 
       
 
@@ -3561,7 +3561,7 @@ class DlgMergePromNotes(ArmoryDialog):
       self.chkBareMS = QCheckBox(tr('Use bare multisig (no P2SH)'))
       self.ttipBareMS = self.main.createToolTipWidget( tr("""
          EXPERT OPTION:  Do not check this box unless you know what it means
-                         and you need it!  Forces Armory to exposes public 
+                         and you need it!  Forces DigiArmory to exposes public 
                          keys to the blockchain before the funds are spent.  
                          This is only needed for very specific use cases, 
                          and otherwise creates blockchain bloat."""))
@@ -3628,7 +3628,7 @@ class DlgMergePromNotes(ArmoryDialog):
    def createPromAdd(self):
       if not TheBDM.getBDMState()=='BlockchainReady':
          QMessageBox.warning(self, tr("Not Online"), tr("""
-            Armory is currently in offline mode and cannot create any 
+            DigiArmory is currently in offline mode and cannot create any 
             transactions or promissory notes.  You can only merge 
             pre-existing promissory notes at this time."""), QMessageBox.Ok)
          return
@@ -3829,7 +3829,7 @@ class DlgSelectMultiSigOption(ArmoryDialog):
          create, fund and spend from multi-sig "lockboxes."  This 
          includes turning multiple wallets into a multi-factor lock-box
          for your personal coins, or can be used for escrow between
-         multiple parties, using the Bitcoin network itself to hold the
+         multiple parties, using the Digibyte network itself to hold the
          escrow.
          <br><br>
          <b><u>IMPORTANT:</u></b>  If you are using an lockbox that requires
@@ -3839,7 +3839,7 @@ class DlgSelectMultiSigOption(ArmoryDialog):
          to collect funding promises into a single transaction, to limit 
          the ability of any party to scam you.  Read more about it by
          clicking [NO LINK YET]  (if the above doesn't hold, you can use
-         the regular "Send Bitcoins" dialog to fund the lockbox)."""))
+         the regular "Send Digibytes" dialog to fund the lockbox)."""))
 
 
       self.lblCreate = QRichLabel(tr("""
@@ -3935,3 +3935,4 @@ class DlgSelectMultiSigOption(ArmoryDialog):
 
 # Get around circular dependencies
 from ui.WalletFrames import SelectWalletFrame
+

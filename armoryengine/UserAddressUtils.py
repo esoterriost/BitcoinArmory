@@ -116,7 +116,7 @@ def getDisplayStringForScript(binScript, wltMap, lboxList, maxChars=256,
                               doBold=0, prefIDOverAddr=False, 
                               lblTrunc=12, lastTrunc=12):
    """
-   NOTE: This was originally in ArmoryQt.py, but we really needed this to be
+   NOTE: This was originally in DigiArmoryQt.py, but we really needed this to be
    more widely accessible.  And it's easier to test when this is in ArmoryUtils.  
    Yes, I realize that it's awkward that we have wltMap {WltID-->Wallet} but
    we have a lboxList [Lbox0, Lbox1, ...].  I will have to standardize the 

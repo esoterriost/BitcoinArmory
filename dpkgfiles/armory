@@ -1,2 +1,2 @@
 #!/bin/sh
-exec python /usr/lib/armory/ArmoryQt.py "$@"
+exec python /usr/lib/armory/DigiArmoryQt.py "$@"

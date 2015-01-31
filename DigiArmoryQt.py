@@ -88,13 +88,13 @@ class ArmoryMainWindow(QMainWindow):
       # SETUP THE WINDOWS DECORATIONS
       self.lblLogoIcon = QLabel()
       if USE_TESTNET:
-         self.setWindowTitle('Armory - Bitcoin Wallet Management [TESTNET]')
+         self.setWindowTitle('DigiArmory - Digibyte Wallet Management [TESTNET]')
          self.iconfile = ':/armory_icon_green_32x32.png'
          self.lblLogoIcon.setPixmap(QPixmap(':/armory_logo_green_h56.png'))
          if Colors.isDarkBkgd:
             self.lblLogoIcon.setPixmap(QPixmap(':/armory_logo_white_text_green_h56.png'))
       else:
-         self.setWindowTitle('Armory - Bitcoin Wallet Management')
+         self.setWindowTitle('DigiArmory - Digibyte Wallet Management')
          self.iconfile = ':/armory_icon_32x32.png'
          self.lblLogoIcon.setPixmap(QPixmap(':/armory_logo_h44.png'))
          if Colors.isDarkBkgd:
@@ -196,7 +196,7 @@ class ArmoryMainWindow(QMainWindow):
 
       # setupNetworking may have set this flag if something went wrong
       if self.abortLoad:
-         LOGWARN('Armory startup was aborted.  Closing.')
+         LOGWARN('DigiArmory startup was aborted.  Closing.')
          os._exit(0)
 
       # We need to query this once at the beginning, to avoid having
@@ -212,7 +212,7 @@ class ArmoryMainWindow(QMainWindow):
       else:
          self.loadBlockchainIfNecessary()
 
-      # Setup system tray and register "bitcoin:" URLs with the OS
+      # Setup system tray and register "digibyte:" URLs with the OS
       self.setupSystemTray()
       self.setupUriRegistration()
 
@@ -498,8 +498,8 @@ class ArmoryMainWindow(QMainWindow):
       ##########################################################################
 
 
-      btnSendBtc   = QPushButton(tr("Send Bitcoins"))
-      btnRecvBtc   = QPushButton(tr("Receive Bitcoins"))
+      btnSendBtc   = QPushButton(tr("Send Digibytes"))
+      btnRecvBtc   = QPushButton(tr("Receive Digibytes"))
       btnWltProps  = QPushButton(tr("Wallet Properties"))
       btnOfflineTx = QPushButton(tr("Offline Transactions"))
       btnMultisig  = QPushButton(tr("Lockboxes (Multi-Sig)"))
@@ -510,7 +510,7 @@ class ArmoryMainWindow(QMainWindow):
       self.connect(btnOfflineTx,SIGNAL('clicked()'), self.execOfflineTx)
       self.connect(btnMultisig, SIGNAL('clicked()'), self.browseLockboxes)
 
-      verStr = 'Armory %s / %s User' % (getVersionString(BTCARMORY_VERSION),
+      verStr = 'DigiArmory %s / %s User' % (getVersionString(BTCARMORY_VERSION),
                                               UserModeStr(self.usermode))
       lblInfo = QRichLabel(verStr, doWrap=False)
       lblInfo.setFont(GETFONT('var',10))
@@ -572,8 +572,8 @@ class ArmoryMainWindow(QMainWindow):
       def exportTx():
          if not TheBDM.getBDMState()=='BlockchainReady':
             QMessageBox.warning(self, 'Transactions Unavailable', \
-               'Transaction history cannot be collected until Armory is '
-               'in online mode.  Please try again when Armory is online. ',
+               'Transaction history cannot be collected until DigiArmory is '
+               'in online mode.  Please try again when DigiArmory is online. ',
                QMessageBox.Ok)
             return
          else:
@@ -582,9 +582,9 @@ class ArmoryMainWindow(QMainWindow):
 
       actExportTx    = self.createAction('&Export Transactions...', exportTx)
       actSettings    = self.createAction('&Settings...', self.openSettings)
-      actMinimApp    = self.createAction('&Minimize Armory', self.minimizeArmory)
+      actMinimApp    = self.createAction('&Minimize DigiArmory', self.minimizeArmory)
       actExportLog   = self.createAction('Export &Log File...', self.exportLogFile)
-      actCloseApp    = self.createAction('&Quit Armory', self.closeForReal)
+      actCloseApp    = self.createAction('&Quit DigiArmory', self.closeForReal)
       self.menusList[MENUS.File].addAction(actExportTx)
       self.menusList[MENUS.File].addAction(actSettings)
       self.menusList[MENUS.File].addAction(actMinimApp)
@@ -632,7 +632,7 @@ class ArmoryMainWindow(QMainWindow):
       def openBlindBroad():
          if not satoshiIsAvailable():
             QMessageBox.warning(self, tr("Not Online"), tr("""
-               Bitcoin Core is not available, so Armory will not be able
+               Digibyte Core is not available, so DigiArmory will not be able
                to broadcast any transactions for you."""), QMessageBox.Ok)
             return
          DlgBroadcastBlindTx(self,self).exec_()
@@ -652,8 +652,8 @@ class ArmoryMainWindow(QMainWindow):
       def mkprom():
          if not TheBDM.getBDMState()=='BlockchainReady':
             QMessageBox.warning(self, tr('Offline'), tr("""
-               Armory is currently offline, and cannot determine what funds are
-               available for simulfunding.  Please try again when Armory is in
+               DigiArmory is currently offline, and cannot determine what funds are
+               available for simulfunding.  Please try again when DigiArmory is in
                online mode."""), QMessageBox.Ok)
          else:
             DlgCreatePromNote(self, self).exec_()
@@ -719,8 +719,8 @@ class ArmoryMainWindow(QMainWindow):
 
 
       execVerifySigned = lambda: VerifyOfflinePackageDialog(self, self).exec_()
-      actAboutWindow  = self.createAction(tr('&About Armory...'), execAbout)
-      actVersionCheck = self.createAction(tr('Armory Version'), execVersion)
+      actAboutWindow  = self.createAction(tr('&About DigiArmory...'), execAbout)
+      actVersionCheck = self.createAction(tr('DigiArmory Version'), execVersion)
       actDownloadUpgrade = self.createAction(tr('Update Software...'), self.openDownloaderAll)
       actVerifySigned = self.createAction(tr('Verify Signed Package...'), execVerifySigned)
       actTroubleshoot = self.createAction(tr('Troubleshooting Armory'), execTrouble)
@@ -729,7 +729,7 @@ class ArmoryMainWindow(QMainWindow):
       actRescanDB     = self.createAction(tr('Rescan Databases'), self.rescanNextLoad)
       actRebuildDB    = self.createAction(tr('Rebuild and Rescan Databases'), self.rebuildNextLoad)
       actFactoryReset = self.createAction(tr('Factory Reset'), self.factoryReset)
-      actPrivacyPolicy = self.createAction(tr('Armory Privacy Policy'), self.showPrivacyGeneric)
+      actPrivacyPolicy = self.createAction(tr('DigiArmory Privacy Policy'), self.showPrivacyGeneric)
 
       self.menusList[MENUS.Help].addAction(actAboutWindow)
       self.menusList[MENUS.Help].addAction(actVersionCheck)
@@ -905,7 +905,7 @@ class ArmoryMainWindow(QMainWindow):
 
          if not isSignedByATI and not USE_TESTNET:
             reply = QMessageBox.warning(self, tr("UNSIGNED Module"), tr("""
-               Armory detected the following module which is 
+               DigiArmory detected the following module which is 
                <font color="%s"><b>unsigned</b></font> and may be dangerous:
                <br><br>
                   <b>Module Name:</b>  %s<br>
@@ -913,7 +913,7 @@ class ArmoryMainWindow(QMainWindow):
                   <b>Module Hash:</b>  %s<br>
                <br><br>
                You should <u>never</u> trust unsigned modules!  At this time,
-               Armory will not allow you to run this module unless you are 
+               DigiArmory will not allow you to run this module unless you are 
                in testnet mode.""") % \
                (name, modPath, modHash[:16]), QMessageBox.Ok)
 
@@ -929,7 +929,7 @@ class ArmoryMainWindow(QMainWindow):
             LOGERROR('Module is malformed!  No tabToDisplay or tabName attrs')
             QMessageBox.critical(self, tr("Bad Module"), tr("""
                The module you attempted to load (%s) is malformed.  It is 
-               missing attributes that are needed for Armory to load it.  
+               missing attributes that are needed for DigiArmory to load it.  
                It will be skipped.""") % name, QMessageBox.Ok)
             continue
                
@@ -937,8 +937,8 @@ class ArmoryMainWindow(QMainWindow):
          verArmoryInt = getVersionInt(BTCARMORY_VERSION)
          if verArmoryInt >verPluginInt:
             reply = QMessageBox.warning(self, tr("Outdated Module"), tr("""
-               Module "%s" is only specified to work up to Armory version %s.
-               You are using Armory version %s.  Please remove the module if
+               Module "%s" is only specified to work up to DigiArmory version %s.
+               You are using DigiArmory version %s.  Please remove the module if
                you experience any problems with it, or contact the maintainer
                for a new version.
                <br><br>
@@ -967,7 +967,7 @@ class ArmoryMainWindow(QMainWindow):
                continue
       
             if not hasattr(self, funcListName):
-               LOGERROR('Missing an ArmoryQt list variable: %s' % funcListName)
+               LOGERROR('Missing an DigiArmoryQt list variable: %s' % funcListName)
                continue
 
             LOGINFO('Found module function: %s' % plugFuncName)
@@ -980,11 +980,11 @@ class ArmoryMainWindow(QMainWindow):
    def factoryReset(self):
       """
       reply = QMessageBox.information(self,'Factory Reset', \
-         'You are about to revert all Armory settings '
-         'to the state they were in when Armory was first installed.  '
+         'You are about to revert all DigiArmory settings '
+         'to the state they were in when DigiArmory was first installed.  '
          '<br><br>'
-         'If you click "Yes," Armory will exit after settings are '
-         'reverted.  You will have to manually start Armory again.'
+         'If you click "Yes," DigiArmory will exit after settings are '
+         'reverted.  You will have to manually start DigiArmory again.'
          '<br><br>'
          'Do you want to continue? ', \
          QMessageBox.Yes | QMessageBox.No)
@@ -1007,13 +1007,13 @@ class ArmoryMainWindow(QMainWindow):
    def clearMemoryPool(self):
       touchFile( os.path.join(ARMORY_HOME_DIR, 'clearmempool.flag') )
       msg = tr("""
-         The next time you restart Armory, all unconfirmed transactions will
+         The next time you restart DigiArmory, all unconfirmed transactions will
          be cleared allowing you to retry any stuck transactions.""")
       if not self.doAutoBitcoind:
          msg += tr("""
-         <br><br>Make sure you also restart Bitcoin-Qt
-         (or bitcoind) and let it synchronize again before you restart
-         Armory.  Doing so will clear its memory pool, as well""")
+         <br><br>Make sure you also restart Digibyte-Qt
+         (or digibyted) and let it synchronize again before you restart
+         DigiArmory.  Doing so will clear its memory pool, as well""")
       QMessageBox.information(self, tr('Memory Pool'), msg, QMessageBox.Ok)
 
 
@@ -1136,7 +1136,7 @@ class ArmoryMainWindow(QMainWindow):
       
 
       allEntropy = ''.join([str(a) for a in [source1, source1, source3]])
-      return SecureBinaryData(HMAC256('Armory Entropy', allEntropy))
+      return SecureBinaryData(HMAC256('DigiArmory Entropy', allEntropy))
       
 
 
@@ -1144,11 +1144,11 @@ class ArmoryMainWindow(QMainWindow):
    ####################################################
    def rescanNextLoad(self):
       reply = QMessageBox.warning(self, tr('Queue Rescan?'), tr("""
-         The next time you restart Armory, it will rescan the blockchain
+         The next time you restart DigiArmory, it will rescan the blockchain
          database, and reconstruct your wallet histories from scratch.
          The rescan will take 10-60 minutes depending on your system.
          <br><br>
-         Do you wish to force a rescan on the next Armory restart?"""), \
+         Do you wish to force a rescan on the next DigiArmory restart?"""), \
          QMessageBox.Yes | QMessageBox.No)
       if reply==QMessageBox.Yes:
          touchFile( os.path.join(ARMORY_HOME_DIR, 'rescan.flag') )
@@ -1156,11 +1156,11 @@ class ArmoryMainWindow(QMainWindow):
    ####################################################
    def rebuildNextLoad(self):
       reply = QMessageBox.warning(self, tr('Queue Rebuild?'), tr("""
-         The next time you restart Armory, it will rebuild and rescan
+         The next time you restart DigiArmory, it will rebuild and rescan
          the entire blockchain database.  This operation can take between
          30 minutes and 4 hours depending on you system speed.
          <br><br>
-         Do you wish to force a rebuild on the next Armory restart?"""), \
+         Do you wish to force a rebuild on the next DigiArmory restart?"""), \
          QMessageBox.Yes | QMessageBox.No)
       if reply==QMessageBox.Yes:
          touchFile( os.path.join(ARMORY_HOME_DIR, 'rebuild.flag') )
@@ -1266,7 +1266,7 @@ class ArmoryMainWindow(QMainWindow):
       self.sysTray = QSystemTrayIcon(self)
       self.sysTray.setIcon( QIcon(self.iconfile) )
       self.sysTray.setVisible(True)
-      self.sysTray.setToolTip('Armory' + (' [Testnet]' if USE_TESTNET else ''))
+      self.sysTray.setToolTip('DigiArmory' + (' [Testnet]' if USE_TESTNET else ''))
       self.connect(self.sysTray, SIGNAL('messageClicked()'), self.bringArmoryToFront)
       self.connect(self.sysTray, SIGNAL('activated(QSystemTrayIcon::ActivationReason)'), \
                    self.sysTrayActivated)
@@ -1280,10 +1280,10 @@ class ArmoryMainWindow(QMainWindow):
          self.bringArmoryToFront()
          self.clickReceiveCoins()
 
-      actShowArmory = self.createAction('Show Armory', self.bringArmoryToFront)
-      actSendBtc    = self.createAction('Send Bitcoins', traySend)
-      actRcvBtc     = self.createAction('Receive Bitcoins', trayRecv)
-      actClose      = self.createAction('Quit Armory', self.closeForReal)
+      actShowArmory = self.createAction('Show DigiArmory', self.bringArmoryToFront)
+      actSendBtc    = self.createAction('Send Digibytes', traySend)
+      actRcvBtc     = self.createAction('Receive Digibytes', trayRecv)
+      actClose      = self.createAction('Quit DigiArmory', self.closeForReal)
       # Create a short menu of options
       menu.addAction(actShowArmory)
       menu.addAction(actSendBtc)
@@ -1362,7 +1362,7 @@ class ArmoryMainWindow(QMainWindow):
    #############################################################################
    def setupUriRegistration(self, justDoIt=False):
       """
-      Setup Armory as the default application for handling bitcoin: links
+      Setup DigiArmory as the default application for handling digibyte: links
       """
       LOGINFO('setupUriRegistration')
 
@@ -1379,8 +1379,8 @@ class ArmoryMainWindow(QMainWindow):
          self.registerBitcoinWithFF(async=True)
 
          def setAsDefault():
-            LOGINFO('Setting up Armory as default URI handler...')
-            execAndWait('gconftool-2 -t string -s /desktop/gnome/url-handlers/bitcoin/command "python /usr/lib/armory/ArmoryQt.py \"%s\""')
+            LOGINFO('Setting up DigiArmory as default URI handler...')
+            execAndWait('gconftool-2 -t string -s /desktop/gnome/url-handlers/bitcoin/command "python /usr/lib/armory/DigiArmoryQt.py \"%s\""')
             execAndWait('gconftool-2 -s /desktop/gnome/url-handlers/bitcoin/needs_terminal false -t bool')
             execAndWait('gconftool-2 -t bool -s /desktop/gnome/url-handlers/bitcoin/enabled true')
             execAndWait('xdg-mime default armory.desktop x-scheme-handler/bitcoin')
@@ -1395,8 +1395,8 @@ class ArmoryMainWindow(QMainWindow):
             # needed.  They have enough to worry about with this weird new program...
             if not self.getSettingOrSetDefault('DNAA_DefaultApp', False):
                reply = MsgBoxWithDNAA(MSGBOX.Question, 'Default URL Handler', \
-                  'Armory is not set as your default application for handling '
-                  '"bitcoin:" links.  Would you like to use Armory as the '
+                  'DigiArmory is not set as your default application for handling '
+                  '"digibyte:" links.  Would you like to use DigiArmory as the '
                   'default?', 'Do not ask this question again')
                if reply[0]==True:
                   setAsDefault()
@@ -1432,7 +1432,7 @@ class ArmoryMainWindow(QMainWindow):
             val,code = QueryValueEx(registryKey, '')
             if 'armory' in val.lower():
                if val.lower()==modulepathname.lower():
-                  LOGINFO('Armory already registered for current user.  Done!')
+                  LOGINFO('DigiArmory already registered for current user.  Done!')
                   return
                else:
                   action = 'DoIt' #armory is registered, but to another path
@@ -1445,7 +1445,7 @@ class ArmoryMainWindow(QMainWindow):
                registryKey = OpenKey(HKEY_CLASSES_ROOT, rootKey, 0, KEY_READ)
                val,code = QueryValueEx(registryKey, '')
                if 'armory' in val.lower():
-                  LOGINFO('Armory already registered at admin level.  Done!')
+                  LOGINFO('DigiArmory already registered at admin level.  Done!')
                   return
                else:
                   # Root key is set (or at least created, which is enough)
@@ -1466,8 +1466,8 @@ class ArmoryMainWindow(QMainWindow):
             # Don't bother the user on the first load with it if verification is
             # needed.  They have enough to worry about with this weird new program...
             reply = MsgBoxWithDNAA(MSGBOX.Question, 'Default URL Handler', \
-               'Armory is not set as your default application for handling '
-               '"bitcoin:" links.  Would you like to use Armory as the '
+               'DigiArmory is not set as your default application for handling '
+               '"digibyte:" links.  Would you like to use DigiArmory as the '
                'default?', 'Do not ask this question again')
 
             if reply[1]==True:
@@ -1478,14 +1478,14 @@ class ArmoryMainWindow(QMainWindow):
             if reply[0]==True:
                action = 'DoIt'
             else:
-               LOGINFO('User requested not to use Armory as URI handler')
+               LOGINFO('User requested not to use DigiArmory as URI handler')
                return
 
          # Finally, do it if we're supposed to!
          LOGINFO('URL-register action: %s', action)
          if action=='DoIt':
 
-            LOGINFO('Registering Armory  for current user')
+            LOGINFO('Registering DigiArmory  for current user')
             baseDir = os.path.dirname(unicode(passstr[0:(rtlength*2)], encoding='utf16'))
             regKeys = []
             regKeys.append(['Software\\Classes\\bitcoin', '', 'URL:bitcoin Protocol'])
@@ -1519,14 +1519,14 @@ class ArmoryMainWindow(QMainWindow):
    def warnNewUSTXFormat(self):
       if not self.getSettingOrSetDefault('DNAA_Version092Warn', False):
          reply = MsgBoxWithDNAA(MSGBOX.Warning, tr("Version Warning"), tr("""
-            Since Armory version 0.92 the formats for offline transaction
+            Since DigiArmory version 0.92 the formats for offline transaction
             operations has changed to accommodate multi-signature 
             transactions.  This format is <u>not</u> compatible with
-            versions of Armory before 0.92.
+            versions of DigiArmory before 0.92.
             <br><br>
             To continue, the other system will need to be upgraded to
             to version 0.92 or later.  If you cannot upgrade the other 
-            system, you will need to reinstall an older version of Armory
+            system, you will need to reinstall an older version of DigiArmory
             on this system."""), dnaaMsg='Do not show this warning again')
          self.writeSetting('DNAA_Version092Warn', reply[1])
 
@@ -1671,8 +1671,8 @@ class ArmoryMainWindow(QMainWindow):
       LOGINFO('     To: %s', self.settings.get('User_Mode'))
 
       if not self.firstModeSwitch:
-         QMessageBox.information(self,'Restart Armory', \
-         'You may have to restart Armory for all aspects of '
+         QMessageBox.information(self,'Restart DigiArmory', \
+         'You may have to restart DigiArmory for all aspects of '
          'the new usermode to go into effect.', QMessageBox.Ok)
 
       self.firstModeSwitch = False
@@ -1813,7 +1813,7 @@ class ArmoryMainWindow(QMainWindow):
 
          # Check ARMORY versions
          if not 'Armory' in self.downloadLinks:
-            LOGWARN('No Armory links in the downloads list')
+            LOGWARN('No DigiArmory links in the downloads list')
          else:
             maxVer = 0
             self.versionNotification = {}
@@ -1851,7 +1851,7 @@ class ArmoryMainWindow(QMainWindow):
                      if thisVer >= maxVer:
                         continue
 
-                     shortDescr = tr('Armory Testing version %s is now available!') % verStr
+                     shortDescr = tr('DigiArmory Testing version %s is now available!') % verStr
                      notifyID = binary_to_hex(hash256(shortDescr)[:4])
                      self.versionNotification['UNIQUEID'] = notifyID
                      self.versionNotification['VERSION'] = '0'
@@ -1886,7 +1886,7 @@ class ArmoryMainWindow(QMainWindow):
                if not self.NetworkingFactory:
                   return
 
-               # This is to detect the running versions of Bitcoin-Qt/bitcoind
+               # This is to detect the running versions of Digibyte-Qt/digibyted
                thisVerStr = self.NetworkingFactory.proto.peerInfo['subver']
                thisVerStr = thisVerStr.strip('/').split(':')[-1]
 
@@ -1922,14 +1922,14 @@ class ArmoryMainWindow(QMainWindow):
 
       if testing:
          return tr("""
-            A new testing version of Armory is out. You can upgrade to version
-            %s through our secure downloader inside Armory (link at the bottom
+            A new testing version of DigiArmory is out. You can upgrade to version
+            %s through our secure downloader inside DigiArmory (link at the bottom
             of this notification window).
             """) % (verStr)
          
       return tr("""
-         Your version of Armory is now outdated.  Please upgrade to version
-         %s through our secure downloader inside Armory (link at the bottom
+         Your version of DigiArmory is now outdated.  Please upgrade to version
+         %s through our secure downloader inside DigiArmory (link at the bottom
          of this notification window).  Alternatively, you can get the new
          version from our website downloads page at:
          <br><br>
@@ -2118,9 +2118,9 @@ class ArmoryMainWindow(QMainWindow):
                                                           uriClick_partial )
             reactor.listenTCP(CLI_OPTIONS.interport, self.InstanceListener)
          except twisted.internet.error.CannotListenError:
-            LOGWARN('Socket already occupied!  This must be a duplicate Armory')
+            LOGWARN('Socket already occupied!  This must be a duplicate DigiArmory')
             QMessageBox.warning(self, tr('Already Open'), tr("""
-               Armory is already running!  You can only have one Armory open
+               DigiArmory is already running!  You can only have one DigiArmory open
                at a time.  Exiting..."""), QMessageBox.Ok)
             os._exit(0)
       else:
@@ -2157,7 +2157,7 @@ class ArmoryMainWindow(QMainWindow):
 
 
       LOGINFO('Internet connection is Available: %s', self.internetAvail)
-      LOGINFO('Bitcoin-Qt/bitcoind is Available: %s', satoshiIsAvailable())
+      LOGINFO('Digibyte-Qt/digibyted is Available: %s', satoshiIsAvailable())
       LOGINFO('The first blk*.dat was Available: %s', str(self.checkHaveBlockfiles()))
       LOGINFO('Online mode currently possible:   %s', self.onlineModeIsPossible())
 
@@ -2170,73 +2170,73 @@ class ArmoryMainWindow(QMainWindow):
 
       if not satoshiIsAvailable():
          reply = MsgBoxCustom(MSGBOX.Question, tr('BitTorrent Option'), tr("""
-            You are currently configured to run the core Bitcoin software
-            yourself (Bitcoin-Qt or bitcoind).  <u>Normally</u>, you should
-            start the Bitcoin software first and wait for it to synchronize
-            with the network before starting Armory.
+            You are currently configured to run the core Digibyte software
+            yourself (Digibyte-Qt or digibyted).  <u>Normally</u>, you should
+            start the Digibyte software first and wait for it to synchronize
+            with the network before starting DigiArmory.
             <br><br>
-            <b>However</b>, Armory can shortcut most of this initial
+            <b>However</b>, DigiArmory can shortcut most of this initial
             synchronization
             for you using BitTorrent.  If your firewall allows it,
             using BitTorrent can be an order of magnitude faster (2x to 20x)
-            than letting the Bitcoin software download it via P2P.
+            than letting the Digibyte software download it via P2P.
             <br><br>
             <u>To synchronize using BitTorrent (recommended):</u>
-            Click "Use BitTorrent" below, and <u>do not</u> start the Bitcoin
+            Click "Use BitTorrent" below, and <u>do not</u> start the Digibyte
             software until after it is complete.
             <br><br>
-            <u>To synchronize using Bitcoin P2P (fallback):</u>
-            Click "Cancel" below, then close Armory and start Bitcoin-Qt
-            (or bitcoind).  Do not start Armory until you see a green checkmark
-            in the bottom-right corner of the Bitcoin-Qt window."""), \
+            <u>To synchronize using Digibyte P2P (fallback):</u>
+            Click "Cancel" below, then close DigiArmory and start Digibyte-Qt
+            (or digibyted).  Do not start DigiArmory until you see a green checkmark
+            in the bottom-right corner of the Digibyte-Qt window."""), \
             wCancel=True, yesStr='Use BitTorrent')
 
          if not reply:
             QMessageBox.warning(self, tr('Synchronize'), tr("""
-               When you are ready to start synchronization, close Armory and
-               start Bitcoin-Qt or bitcoind.  Restart Armory only when
-               synchronization is complete.  If using Bitcoin-Qt, you will see
+               When you are ready to start synchronization, close DigiArmory and
+               start Digibyte-Qt or digibyted.  Restart DigiArmory only when
+               synchronization is complete.  If using Digibyte-Qt, you will see
                a green checkmark in the bottom-right corner"""), QMessageBox.Ok)
             return False
 
       else:
          reply = MsgBoxCustom(MSGBOX.Question, tr('BitTorrent Option'), tr("""
-            You are currently running the core Bitcoin software, but it
+            You are currently running the core Digibyte software, but it
             is not fully synchronized with the network, yet.  <u>Normally</u>,
-            you should close Armory until Bitcoin-Qt (or bitcoind) is
+            you should close DigiArmory until Digibyte-Qt (or digibyted) is
             finished
             <br><br>
-            <b><u>However</u></b>, Armory can speed up this initial
+            <b><u>However</u></b>, DigiArmory can speed up this initial
             synchronization for you using BitTorrent.  If your firewall
             allows it, using BitTorrent can be an order of magnitude
             faster (2x to 20x)
-            than letting the Bitcoin software download it via P2P.
+            than letting the Digibyte software download it via P2P.
             <br><br>
             <u>To synchronize using BitTorrent (recommended):</u>
-            Close the running Bitcoin software <b>right now</b>.  When it is
-            closed, click "Use BitTorrent" below.  Restart the Bitcoin software
-            when Armory indicates it is complete.
+            Close the running Digibyte software <b>right now</b>.  When it is
+            closed, click "Use BitTorrent" below.  Restart the Digibyte software
+            when DigiArmory indicates it is complete.
             <br><br>
-            <u>To synchronize using Bitcoin P2P (fallback):</u>
-            Click "Cancel" below, and then close Armory until the Bitcoin
-            software is finished synchronizing.  If using Bitcoin-Qt, you
+            <u>To synchronize using Digibyte P2P (fallback):</u>
+            Click "Cancel" below, and then close DigiArmory until the Digibyte
+            software is finished synchronizing.  If using Digibyte-Qt, you
             will see a green checkmark in the bottom-right corner of the
             main window."""), QMessageBox.Ok)
 
          if reply:
             if satoshiIsAvailable():
                QMessageBox.warning(self, tr('Still Running'), tr("""
-                  The Bitcoin software still appears to be open!
+                  The Digibyte software still appears to be open!
                   Close it <b>right now</b>
                   before clicking "Ok."  The BitTorrent engine will start
                   as soon as you do."""), QMessageBox.Ok)
          else:
             QMessageBox.warning(self, tr('Synchronize'), tr("""
                You chose to finish synchronizing with the network using
-               the Bitcoin software which is already running.  Please close
-               Armory until it is finished.  If you are running Bitcoin-Qt,
+               the Digibyte software which is already running.  Please close
+               DigiArmory until it is finished.  If you are running Digibyte-Qt,
                you will see a green checkmark in the bottom-right corner,
-               when it is time to open Armory again."""), QMessageBox.Ok)
+               when it is time to open DigiArmory again."""), QMessageBox.Ok)
             return False
 
          return True
@@ -2280,15 +2280,15 @@ class ArmoryMainWindow(QMainWindow):
    def startBitcoindIfNecessary(self):
       LOGINFO('startBitcoindIfNecessary')
       if not (self.forceOnline or self.internetAvail) or CLI_OPTIONS.offline:
-         LOGWARN('Not online, will not start bitcoind')
+         LOGWARN('Not online, will not start digibyted')
          return False
 
       if not self.doAutoBitcoind:
-         LOGWARN('Tried to start bitcoind, but ManageSatoshi==False')
+         LOGWARN('Tried to start digibyted, but ManageSatoshi==False')
          return False
 
       if satoshiIsAvailable():
-         LOGWARN('Tried to start bitcoind, but satoshi already running')
+         LOGWARN('Tried to start digibyted, but satoshi already running')
          return False
 
       self.setSatoshiPaths()
@@ -2307,10 +2307,10 @@ class ArmoryMainWindow(QMainWindow):
 
       try:
          # "satexe" is actually just the install directory, not the direct
-         # path the executable.  That dir tree will be searched for bitcoind
+         # path the executable.  That dir tree will be searched for digibyted
          TheSDM.setupSDM(extraExeSearch=self.satoshiExeSearchPath)
          TheSDM.startBitcoind()
-         LOGDEBUG('Bitcoind started without error')
+         LOGDEBUG('digibyted started without error')
          return True
       except:
          LOGEXCEPT('Failed to setup SDM')
@@ -2325,7 +2325,7 @@ class ArmoryMainWindow(QMainWindow):
       # it if it doesn't exist
       if self.settings.hasSetting('SatoshiExe'):
          if not os.path.exists(self.settings.get('SatoshiExe')):
-            LOGERROR('Bitcoin installation setting is a non-existent directory')
+            LOGERROR('Digibyte installation setting is a non-existent directory')
          self.satoshiExeSearchPath = [self.settings.get('SatoshiExe')]
       else:
          self.satoshiExeSearchPath = []
@@ -2403,7 +2403,7 @@ class ArmoryMainWindow(QMainWindow):
 
             try:
                self.sysTray.showMessage('Disconnected', \
-                     'Connection to Bitcoin-Qt client lost!  Armory cannot send \n'
+                     'Connection to Digibyte-Qt client lost!  DigiArmory cannot send \n'
                      'or receive bitcoins until connection is re-established.', \
                      QSystemTrayIcon.Critical, 10000)
             except:
@@ -2423,7 +2423,7 @@ class ArmoryMainWindow(QMainWindow):
             try:
                if self.connectCount>0:
                   self.sysTray.showMessage('Connected', \
-                     'Connection to Bitcoin-Qt re-established', \
+                     'Connection to Digibyte-Qt re-established', \
                      QSystemTrayIcon.Information, 10000)
                self.connectCount += 1
             except:
@@ -2472,18 +2472,18 @@ class ArmoryMainWindow(QMainWindow):
 
       uriDict = parseBitcoinURI(uriStr)
       if TheBDM.getBDMState() in ('Offline','Uninitialized'):
-         LOGERROR('%sed "bitcoin:" link in offline mode.' % ClickOrEnter)
+         LOGERROR('%sed "digibyte:" link in offline mode.' % ClickOrEnter)
          self.bringArmoryToFront()
          QMessageBox.warning(self, 'Offline Mode',
-            'You %sed on a "bitcoin:" link, but Armory is in '
+            'You %sed on a "digibyte:" link, but DigiArmory is in '
             'offline mode, and is not capable of creating transactions. '
-            '%sing links will only work if Armory is connected '
-            'to the Bitcoin network!' % (clickOrEnter, ClickOrEnter), \
+            '%sing links will only work if DigiArmory is connected '
+            'to the Digibyte network!' % (clickOrEnter, ClickOrEnter), \
              QMessageBox.Ok)
          return {}
 
       if len(uriDict)==0:
-         warnMsg = ('It looks like you just %sed a "bitcoin:" link, but '
+         warnMsg = ('It looks like you just %sed a "digibyte:" link, but '
                     'that link is malformed.  ' % clickOrEnter)
          if self.usermode == USERMODE.Standard:
             warnMsg += ('Please check the source of the link and enter the '
@@ -2495,10 +2495,10 @@ class ArmoryMainWindow(QMainWindow):
          return {}
 
       if not uriDict.has_key('address'):
-         QMessageBox.warning(self, 'The "bitcoin:" link you just %sed '
+         QMessageBox.warning(self, 'The "digibyte:" link you just %sed '
             'does not even contain an address!  There is nothing that '
-            'Armory can do with this link!' % clickOrEnter, QMessageBox.Ok)
-         LOGERROR('No address in "bitcoin:" link!  Nothing to do!')
+            'DigiArmory can do with this link!' % clickOrEnter, QMessageBox.Ok)
+         LOGERROR('No address in "digibyte:" link!  Nothing to do!')
          return {}
 
       # Verify the URI is for the same network as this Armory instnance
@@ -2508,7 +2508,7 @@ class ArmoryMainWindow(QMainWindow):
          if NETWORKS.has_key(theAddrByte):
             net = NETWORKS[theAddrByte]
          QMessageBox.warning(self, 'Wrong Network!', \
-            'The address for the "bitcoin:" link you just %sed is '
+            'The address for the "digibyte:" link you just %sed is '
             'for the wrong network!  You are on the <b>%s</b> '
             'and the address you supplied is for the the '
             '<b>%s</b>!' % (clickOrEnter, NETWORKS[ADDRBYTE], net), \
@@ -2520,9 +2520,9 @@ class ArmoryMainWindow(QMainWindow):
       recognized = ['address','version','amount','label','message']
       for key,value in uriDict.iteritems():
          if key.startswith('req-') and not key[4:] in recognized:
-            QMessageBox.warning(self,'Unsupported URI', 'The "bitcoin:" link '
+            QMessageBox.warning(self,'Unsupported URI', 'The "digibyte:" link '
                'you just %sed contains fields that are required but not '
-               'recognized by Armory.  This may be an older version of Armory, '
+               'recognized by DigiArmory.  This may be an older version of DigiArmory, '
                'or the link you %sed on uses an exotic, unsupported format.'
                '<br><br>The action cannot be completed.' % (clickOrEnter, clickOrEnter), \
                QMessageBox.Ok)
@@ -2538,9 +2538,9 @@ class ArmoryMainWindow(QMainWindow):
       LOGINFO('uriLinkClicked')
       if TheBDM.getBDMState()=='Offline':
          QMessageBox.warning(self, 'Offline', \
-            'You just clicked on a "bitcoin:" link, but Armory is offline '
+            'You just clicked on a "digibyte:" link, but DigiArmory is offline '
             'and cannot send transactions.  Please click the link '
-            'again when Armory is online.', \
+            'again when DigiArmory is online.', \
             QMessageBox.Ok)
          return
       elif not TheBDM.getBDMState()=='BlockchainReady':
@@ -2952,7 +2952,7 @@ class ArmoryMainWindow(QMainWindow):
    #############################################################################
    def startRescanBlockchain(self, forceFullScan=False):
       if TheBDM.getBDMState() in ('Offline','Uninitialized'):
-         LOGWARN('Rescan requested but Armory is in offline mode')
+         LOGWARN('Rescan requested but DigiArmory is in offline mode')
          return
 
       if TheBDM.getBDMState()=='Scanning':
@@ -3045,9 +3045,9 @@ class ArmoryMainWindow(QMainWindow):
          if len(vectMissingBlks) > 0:
             LOGINFO('Missing blocks: %d', len(vectMissingBlks))
             QMessageBox.critical(self, tr('Blockdata Error'), tr("""
-               Armory has detected an error in the blockchain database
-               maintained by the third-party Bitcoin software (Bitcoin-Qt
-               or bitcoind).  This error is not fatal, but may lead to
+               DigiArmory has detected an error in the blockchain database
+               maintained by the third-party Digibyte software (Digibyte-Qt
+               or digibyted).  This error is not fatal, but may lead to
                incorrect balances, inability to send coins, or application
                instability.
                <br><br>
@@ -3638,8 +3638,8 @@ class ArmoryMainWindow(QMainWindow):
             #'mode to initiate the sweep operation.')
          nkey = len(self.sweepAfterScanList)
          strPlur = 'addresses' if nkey>1 else 'address'
-         QMessageBox.info(self, 'Armory is Offline', \
-            'You have chosen to sweep %d %s, but Armory is currently '
+         QMessageBox.info(self, 'DigiArmory is Offline', \
+            'You have chosen to sweep %d %s, but DigiArmory is currently '
             'in offline mode.  The sweep will be performed the next time you '
             'go into online mode.  You can initiate online mode (if available) '
             'from the dashboard in the main window.' (nkey,strPlur), QMessageBox.Ok)
@@ -3647,9 +3647,9 @@ class ArmoryMainWindow(QMainWindow):
 
       else:
          msgConfirm = ( \
-            'Armory must scan the global transaction history in order to '
+            'DigiArmory must scan the global transaction history in order to '
             'find any bitcoins associated with the %s you supplied. '
-            'Armory will go into offline mode temporarily while the scan '
+            'DigiArmory will go into offline mode temporarily while the scan '
             'is performed, and you will not have access to balances or be '
             'able to create transactions.  The scan may take several minutes.'
             '<br><br>' % ('keys' if gt1 else 'key'))
@@ -3743,9 +3743,9 @@ class ArmoryMainWindow(QMainWindow):
          if modified and withOldSigWarning:
             reply = QMessageBox.warning(self, 'Old signature format detected', \
                  'The transaction that you are about to execute '
-                 'has been signed with an older version Bitcoin Armory '
+                 'has been signed with an older version Digibyte DigiArmory '
                  'that has added unnecessary padding to the signature. '
-                 'If you are running version Bitcoin 0.8.2 or later the unnecessary '
+                 'If you are running version Digibyte 0.8.2 or later the unnecessary '
                  'the unnecessary signature padding will not be broadcast. '
                  'Note that removing the unnecessary padding will change the hash value '
                  'of the transaction. Do you want to remove the unnecessary padding?', QMessageBox.Yes | QMessageBox.No)
@@ -3784,9 +3784,9 @@ class ArmoryMainWindow(QMainWindow):
 
                QMessageBox.warning(self, tr('Transaction Not Accepted'), tr("""
                   The transaction that you just executed, does not 
-                  appear to have been accepted by the Bitcoin network. 
+                  appear to have been accepted by the Digibyte network. 
                   This can happen for a variety of reasons, but it is 
-                  usually due to a bug in the Armory software.  
+                  usually due to a bug in the DigiArmory software.  
                   <br><br>On some occasions the transaction actually did succeed 
                   and this message is the bug itself!  To confirm whether the 
                   the transaction actually succeeded, you can try this direct link 
@@ -3798,10 +3798,10 @@ class ArmoryMainWindow(QMainWindow):
                   transaction on that webpage within one minute, it failed and you 
                   should attempt to re-send it. 
                   If it <i>does</i> show up, then you do not need to do anything 
-                  else -- it will show up in Armory as soon as it receives one
+                  else -- it will show up in DigiArmory as soon as it receives one
                   confirmation. 
                   <br><br>If the transaction did fail, please consider 
-                  reporting this error the the Armory developers.  
+                  reporting this error the the DigiArmory developers.  
                   From the main window, go to "<i>Help</i>" and select 
                   "<i>Submit Bug Report</i>".  Or use "<i>File</i>" -> 
                   "<i>Export Log File</i>" and then attach it to a support 
@@ -3824,10 +3824,10 @@ class ArmoryMainWindow(QMainWindow):
       if not self.usermode==USERMODE.Standard:
          extraMsg = ('<br><br>'
                      'In the future, you may avoid scanning twice by '
-                     'starting Armory in offline mode (--offline), and '
+                     'starting DigiArmory in offline mode (--offline), and '
                      'perform the import before switching to online mode.')
-      QMessageBox.warning(self, 'Armory is Busy', \
-         'Wallets and addresses cannot be imported while Armory is in '
+      QMessageBox.warning(self, 'DigiArmory is Busy', \
+         'Wallets and addresses cannot be imported while DigiArmory is in '
          'the middle of an existing blockchain scan.  Please wait for '
          'the scan to finish.  ' + extraMsg, QMessageBox.Ok)
 
@@ -3842,7 +3842,7 @@ class ArmoryMainWindow(QMainWindow):
                  'TorrentSynchronizing'] or \
          bdm in ['Scanning']:
          QMessageBox.warning(self, tr('Scanning'), tr("""
-            Armory is currently in the middle of scanning the blockchain for
+            DigiArmory is currently in the middle of scanning the blockchain for
             your existing wallets.  New wallets cannot be imported until this
             operation is finished."""), QMessageBox.Ok)
          return
@@ -3865,7 +3865,7 @@ class ArmoryMainWindow(QMainWindow):
          QMessageBox.warning(self, 'Duplicate Wallet!', \
             'You selected a wallet that has the same ID as one already '
             'in your wallet (%s)!  If you would like to import it anyway, '
-            'please delete the duplicate wallet in Armory, first.'%wltID, \
+            'please delete the duplicate wallet in DigiArmory, first.'%wltID, \
             QMessageBox.Ok)
          return
 
@@ -3894,16 +3894,16 @@ class ArmoryMainWindow(QMainWindow):
             '<br><br>'
             '<b>Would you like to go into offline mode to start this scan now?'
             '</b>  If you click "No" the scan will be aborted, and the wallet '
-            'will not be added to Armory.', \
+            'will not be added to DigiArmory.', \
             QMessageBox.Yes | QMessageBox.No)
       else:
          doRescanNow = QMessageBox.question(self, 'Rescan Needed', \
             'The wallet was imported successfully, but its balance cannot '
-            'be determined until Armory performs a "recovery scan" for the '
+            'be determined until DigiArmory performs a "recovery scan" for the '
             'wallet.  This scan potentially takes much longer than a regular '
             'scan, and must be completed for all imported wallets. '
             '<br><br>'
-            'Armory is already in the middle of a scan and cannot be interrupted. '
+            'DigiArmory is already in the middle of a scan and cannot be interrupted. '
             'Would you like to start the recovery scan when it is done?'
             '<br><br>'
             '</b>  If you click "No," the wallet import will be aborted '
@@ -3960,17 +3960,17 @@ class ArmoryMainWindow(QMainWindow):
             '<br><br>'
             '<b>Would you like to go into offline mode to start this scan now?'
             '</b>  If you click "No" the scan will be aborted, and the wallet '
-            'will not be added to Armory.', \
+            'will not be added to DigiArmory.', \
             QMessageBox.Yes | QMessageBox.No)
          doRescanNow = QMessageBox.question(self, 'Rescan Needed', \
             'The wallet was recovered successfully, but cannot be displayed '
             'until a special kind of rescan is performed to find previous '
-            'transactions.  However, Armory is currently in the middle of '
+            'transactions.  However, DigiArmory is currently in the middle of '
             'a scan.  Would you like to start the recovery scan immediately '
             'afterwards?'
             '<br><br>'
             '</b>  If you click "No" the scan will be aborted, and the wallet '
-            'will not be added to Armory.  Restore the wallet again when you '
+            'will not be added to DigiArmory.  Restore the wallet again when you '
             'are able to wait for the recovery scan.', \
             QMessageBox.Yes | QMessageBox.No)
       """
@@ -3981,7 +3981,7 @@ class ArmoryMainWindow(QMainWindow):
          doRescanNow = QMessageBox.question(self, tr('Rescan Needed'), \
             tr("""The wallet was restored successfully but its balance
             cannot be displayed until the blockchain is rescanned.
-            Armory will need to go into offline mode for 5-20 minutes.
+            DigiArmory will need to go into offline mode for 5-20 minutes.
             <br><br>
             Would you like to do the scan now?  Clicking "No" will
             abort the restore/import operation."""), \
@@ -3990,11 +3990,11 @@ class ArmoryMainWindow(QMainWindow):
          doRescanNow = QMessageBox.question(self, tr('Rescan Needed'), \
             tr("""The wallet was restored successfully but its balance
             cannot be displayed until the blockchain is rescanned.
-            However, Armory is currently in the middle of a rescan
+            However, DigiArmory is currently in the middle of a rescan
             operation right now.  Would you like to start a new scan
             as soon as this one is finished?
             <br><br>
-            Clicking "No" will abort adding the wallet to Armory."""), \
+            Clicking "No" will abort adding the wallet to DigiArmory."""), \
             QMessageBox.Yes | QMessageBox.No)
 
 
@@ -4039,12 +4039,12 @@ class ArmoryMainWindow(QMainWindow):
          QMessageBox.warning(self, 'Blockchain Not Ready', \
             'The address book is created from transaction data available in '
             'the blockchain, which has not finished loading.  The address '
-            'book will become available when Armory is online.', QMessageBox.Ok)
+            'book will become available when DigiArmory is online.', QMessageBox.Ok)
       elif TheBDM.getBDMState() in ('Uninitialized','Offline'):
          QMessageBox.warning(self, 'Blockchain Not Ready', \
             'The address book is created from transaction data available in '
-            'the blockchain, but Armory is currently offline.  The address '
-            'book will become available when Armory is online.', QMessageBox.Ok)
+            'the blockchain, but DigiArmory is currently offline.  The address '
+            'book will become available when DigiArmory is online.', QMessageBox.Ok)
       else:
          if len(self.walletMap)==0:
             QMessageBox.warning(self, 'No wallets!', 'You have no wallets so '
@@ -4102,7 +4102,7 @@ class ArmoryMainWindow(QMainWindow):
       if pytx==None:
          QMessageBox.critical(self, 'Invalid Tx:',
          'The transaction you requested be displayed does not exist in '
-         'in Armory\'s database.  This is unusual...', QMessageBox.Ok)
+         'in DigiArmory\'s database.  This is unusual...', QMessageBox.Ok)
          return
 
       DlgDispTxInfo( pytx, self.walletMap[wltID], self, self, txtime=txtime).exec_()
@@ -4137,7 +4137,7 @@ class ArmoryMainWindow(QMainWindow):
          except:
             LOGEXCEPT('Failed to open webbrowser')
             QMessageBox.critical(self, 'Could not open browser', \
-               'Armory encountered an error opening your web browser.  To view '
+               'DigiArmory encountered an error opening your web browser.  To view '
                'this transaction on blockchain.info, please copy and paste '
                'the following URL into your browser: '
                '<br><br>%s' % (BLOCKEXPLORE_URL_TX % txHash), QMessageBox.Ok)
@@ -4166,7 +4166,7 @@ class ArmoryMainWindow(QMainWindow):
    def clickSendBitcoins(self):
       if TheBDM.getBDMState() in ('Offline', 'Uninitialized'):
          QMessageBox.warning(self, 'Offline Mode', \
-           'Armory is currently running in offline mode, and has no '
+           'DigiArmory is currently running in offline mode, and has no '
            'ability to determine balances or create transactions. '
            '<br><br>'
            'In order to send coins from this wallet you must use a '
@@ -4175,8 +4175,8 @@ class ArmoryMainWindow(QMainWindow):
            'wallet on an online computer.', QMessageBox.Ok)
          return
       elif TheBDM.getBDMState()=='Scanning':
-         QMessageBox.warning(self, 'Armory Not Ready', \
-           'Armory is currently scanning the blockchain to collect '
+         QMessageBox.warning(self, 'DigiArmory Not Ready', \
+           'DigiArmory is currently scanning the blockchain to collect '
            'the information needed to create transactions.  This typically '
            'takes between one and five minutes.  Please wait until your '
            'balance appears on the main window, then try again.', \
@@ -4197,7 +4197,7 @@ class ArmoryMainWindow(QMainWindow):
 
    #############################################################################
    def uriSendBitcoins(self, uriDict):
-      # Because Bitcoin-Qt doesn't store the message= field we have to assume
+      # Because Digibyte-Qt doesn't store the message= field we have to assume
       # that the label field holds the Tx-info.  So we concatenate them for
       # the display message
       uri_has = lambda s: uriDict.has_key(s)
@@ -4214,7 +4214,7 @@ class ArmoryMainWindow(QMainWindow):
          newMsg = uriDict['label']
 
       descrStr = ''
-      descrStr = ('You just clicked on a "bitcoin:" link requesting bitcoins '
+      descrStr = ('You just clicked on a "digibyte:" link requesting bitcoins '
                 'to be sent to the following address:<br> ')
 
       descrStr += '<br>--<b>Address</b>:\t%s ' % uriDict['address']
@@ -4252,7 +4252,7 @@ class ArmoryMainWindow(QMainWindow):
       selectedWalletID = None
       if len(self.walletMap)==0:
          reply = QMessageBox.information(self, 'No Wallets!', \
-            'You just clicked on a "bitcoin:" link to send money, but you '
+            'You just clicked on a "digibyte:" link to send money, but you '
             'currently have no wallets!  Would you like to create a wallet '
             'now?', QMessageBox.Yes | QMessageBox.No)
          if reply==QMessageBox.Yes:
@@ -4314,7 +4314,7 @@ class ArmoryMainWindow(QMainWindow):
 
    #############################################################################
    def minimizeArmory(self):
-      LOGDEBUG('Minimizing Armory')
+      LOGDEBUG('Minimizing DigiArmory')
       self.hide()
       self.sysTray.show()
 
@@ -4332,10 +4332,10 @@ class ArmoryMainWindow(QMainWindow):
    def exportLogFile(self):
       LOGDEBUG('exportLogFile')
       reply = QMessageBox.warning(self, tr('Bug Reporting'), tr("""
-         As of version 0.91, Armory now includes a form for reporting
+         As of version 0.91, DigiArmory now includes a form for reporting
          problems with the software.  Please use
          <i>"Help"</i>\xe2\x86\x92<i>"Submit Bug Report"</i>
-         to send a report directly to the Armory team, which will include
+         to send a report directly to the DigiArmory team, which will include
          your log file automatically."""), QMessageBox.Ok | QMessageBox.Cancel)
 
       if not reply==QMessageBox.Ok:
@@ -4358,7 +4358,7 @@ class ArmoryMainWindow(QMainWindow):
       return MsgBoxCustom(MSGBOX.Warning, tr('Privacy Warning'), tr("""
          <b><u><font size=4>ATI Privacy Policy</font></u></b>
          <br><br>
-         You should review the <a href="%s">Armory Technologies, Inc. privacy 
+         You should review the <a href="%s">DigiArmory Technologies, Inc. privacy 
          policy</a> before sending any data to ATI servers.
          <br><br>
 
@@ -4377,7 +4377,7 @@ class ArmoryMainWindow(QMainWindow):
          <u>privacy</u>-sensitive.  The log files may identify some addresses
          and transactions that are related to your wallets.  It is always 
          recommended you include your log files with any request to the
-         Armory team, unless you are uncomfortable with the privacy 
+         DigiArmory team, unless you are uncomfortable with the privacy 
          implications.
          <br><br>
 
@@ -4388,11 +4388,11 @@ class ArmoryMainWindow(QMainWindow):
          and transaction history of the wallet, but not spend any of the funds.
          <br><br>
          You may be requested to submit a watching-only copy of your wallet
-         to <i>Armory Technologies, Inc.</i> to make sure that there is no 
+         to <i>DigiArmory Technologies, Inc.</i> to make sure that there is no 
          risk to the security of your funds.  You should not even consider 
          sending your
          watching-only wallet unless it was specifically requested by an
-         Armory representative.""") % PRIVACY_URL, yesStr="&Ok")
+         DigiArmory representative.""") % PRIVACY_URL, yesStr="&Ok")
           
 
    #############################################################################
@@ -4400,23 +4400,23 @@ class ArmoryMainWindow(QMainWindow):
       return MsgBoxCustom(MSGBOX.Warning, tr('Privacy Warning'), tr("""
          <b><u><font size=4>ATI Privacy Policy</font></u></b>
          <br>
-         You should review the <a href="%s">Armory Technologies, Inc. privacy 
+         You should review the <a href="%s">DigiArmory Technologies, Inc. privacy 
          policy</a> before sending any data to ATI servers.
          <br><br>
 
-         Armory log files do not contain any <u>security</u>-sensitive
+         DigiArmory log files do not contain any <u>security</u>-sensitive
          information, but some users may consider the information to be
          <u>privacy</u>-sensitive.  The log files may identify some addresses
          and transactions that are related to your wallets.
          <br><br>
 
          <b>No signing-key data is ever written to the log file</b>.
-         Only enough data is there to help the Armory developers
+         Only enough data is there to help the DigiArmory developers
          track down bugs in the software, but it may still be considered
          sensitive information to some users.
          <br><br>
 
-         Please do not send the log file to the Armory developers if you
+         Please do not send the log file to the DigiArmory developers if you
          are not comfortable with the privacy implications!  However, if you
          do not send the log file, it may be very difficult or impossible
          for us to help you with your problem.
@@ -4478,23 +4478,23 @@ class ArmoryMainWindow(QMainWindow):
          bitcoindStat = self.lookForBitcoind()
          if bitcoindStat=='Running':
             result = QMessageBox.warning(self, tr('Already running!'), tr("""
-               The Bitcoin software appears to be installed now, but it
-               needs to be closed for Armory to work.  Would you like Armory
+               The Digibyte software appears to be installed now, but it
+               needs to be closed for DigiArmory to work.  Would you like DigiArmory
                to close it for you?"""), QMessageBox.Yes | QMessageBox.No)
             if result==QMessageBox.Yes:
                self.closeExistingBitcoin()
                self.startBitcoindIfNecessary()
          elif bitcoindStat=='StillMissing':
             QMessageBox.warning(self, tr('Still Missing'), tr("""
-               The Bitcoin software still appears to be missing.  If you
+               The Digibyte software still appears to be missing.  If you
                just installed it, then please adjust your settings to point
                to the installation directory."""), QMessageBox.Ok)
          self.startBitcoindIfNecessary()
       elif self.doAutoBitcoind and not TheSDM.isRunningBitcoind():
          if satoshiIsAvailable():
             result = QMessageBox.warning(self, tr('Still Running'), tr("""
-               'Bitcoin-Qt is still running.  Armory cannot start until
-               'it is closed.  Do you want Armory to close it for you?"""), \
+               'Digibyte-Qt is still running.  DigiArmory cannot start until
+               'it is closed.  Do you want DigiArmory to close it for you?"""), \
                QMessageBox.Yes | QMessageBox.No)
             if result==QMessageBox.Yes:
                self.closeExistingBitcoin()
@@ -4632,21 +4632,21 @@ class ArmoryMainWindow(QMainWindow):
          lbl.setOpenExternalLinks(True)
 
       # Set up an array of buttons in the middle of the dashboard, to be used
-      # to help the user install bitcoind.
+      # to help the user install digibyted.
       self.lblDashBtnDescr = QRichLabel('')
       self.lblDashBtnDescr.setOpenExternalLinks(True)
       BTN,LBL,TTIP = range(3)
       self.dashBtns = [[None]*3 for i in range(5)]
-      self.dashBtns[DASHBTNS.Close   ][BTN] = QPushButton('Close Bitcoin Process')
-      self.dashBtns[DASHBTNS.Install ][BTN] = QPushButton('Download Bitcoin')
-      self.dashBtns[DASHBTNS.Browse  ][BTN] = QPushButton('Open www.bitcoin.org')
+      self.dashBtns[DASHBTNS.Close   ][BTN] = QPushButton('Close Digibyte Process')
+      self.dashBtns[DASHBTNS.Install ][BTN] = QPushButton('Download Digibyte')
+      self.dashBtns[DASHBTNS.Browse  ][BTN] = QPushButton('Open www.digibyte.co')
       self.dashBtns[DASHBTNS.Instruct][BTN] = QPushButton('Installation Instructions')
       self.dashBtns[DASHBTNS.Settings][BTN] = QPushButton('Change Settings')
 
 
       #####
       def openBitcoinOrg():
-         webbrowser.open('http://www.bitcoin.org/en/download')
+         webbrowser.open('http://digibyte.co/content/download-digibyte-wallet')
 
 
       #####
@@ -4675,27 +4675,27 @@ class ArmoryMainWindow(QMainWindow):
                                                      #self.openInstructWindow)
 
       self.dashBtns[DASHBTNS.Close][LBL] = QRichLabel( \
-           'Stop existing Bitcoin processes so that Armory can open its own')
+           'Stop existing Digibyte processes so that DigiArmory can open its own')
       self.dashBtns[DASHBTNS.Browse][LBL]     = QRichLabel( \
-           'Open browser to Bitcoin webpage to download and install Bitcoin software')
+           'Open browser to Digibyte webpage to download and install Digibyte software')
       self.dashBtns[DASHBTNS.Instruct][LBL] = QRichLabel( \
-           'Instructions for manually installing Bitcoin for operating system')
+           'Instructions for manually installing Digibyte for operating system')
       self.dashBtns[DASHBTNS.Settings][LBL]  = QRichLabel( \
-           'Open Armory settings window to change Bitcoin software management')
+           'Open DigiArmory settings window to change Digibyte software management')
 
 
       self.dashBtns[DASHBTNS.Browse][TTIP] = self.createToolTipWidget( \
            'Will open your default browser to http://www.bitcoin.org where you can '
-           'download the latest version of Bitcoin-Qt, and get other information '
-           'and links about Bitcoin, in general.')
+           'download the latest version of Digibyte-Qt, and get other information '
+           'and links about Digibyte, in general.')
       self.dashBtns[DASHBTNS.Instruct][TTIP] = self.createToolTipWidget( \
            'Instructions are specific to your operating system and include '
            'information to help you verify you are installing the correct software')
       self.dashBtns[DASHBTNS.Settings][TTIP] = self.createToolTipWidget(
-           'Change Bitcoin-Qt/bitcoind management settings or point Armory to '
-           'a non-standard Bitcoin installation')
+           'Change Digibyte-Qt/digibyted management settings or point DigiArmory to '
+           'a non-standard Digibyte installation')
       self.dashBtns[DASHBTNS.Close][TTIP] = self.createToolTipWidget( \
-           'Armory has detected a running Bitcoin-Qt or bitcoind instance and '
+           'DigiArmory has detected a running Digibyte-Qt or digibyted instance and '
            'will force it to exit')
 
       self.dashBtns[DASHBTNS.Install][BTN].setEnabled(False)
@@ -4709,16 +4709,16 @@ class ArmoryMainWindow(QMainWindow):
          self.dashBtns[DASHBTNS.Install][BTN].setEnabled(True)
          self.dashBtns[DASHBTNS.Install][LBL] = QRichLabel('')
          self.dashBtns[DASHBTNS.Install][LBL].setText( \
-            'Securely download Bitcoin software for Windows %s' % OS_VARIANT[0])
+            'Securely download Digibyte software for Windows %s' % OS_VARIANT[0])
          self.dashBtns[DASHBTNS.Install][TTIP] = self.createToolTipWidget( \
             'The downloaded files are cryptographically verified.  '
             'Using this option will start the installer, you will '
             'have to click through it to complete installation.')
 
          #self.lblDashInstallForMe = QRichLabel( \
-           #'Armory will download, verify, and start the Bitcoin installer for you')
+           #'Armory will download, verify, and start the Digibyte installer for you')
          #self.ttipInstallForMe = self.createToolTipWidget( \
-           #'Armory will download the latest version of the Bitcoin software '
+           #'Armory will download the latest version of the Digibyte software '
            #'for Windows and verify its digital signatures.  You will have to '
            #'click through the installation options.<u></u>')
       elif OS_LINUX:
@@ -4727,9 +4727,9 @@ class ArmoryMainWindow(QMainWindow):
          if dist[0] in ['Ubuntu','LinuxMint'] or 'debian' in dist:
             self.dashBtns[DASHBTNS.Install][BTN].setEnabled(True)
             self.dashBtns[DASHBTNS.Install][LBL] = QRichLabel( tr("""
-               Download and Install Bitcoin Core for Ubuntu/Debian"""))
+               Download and Install Digibyte Core for Ubuntu/Debian"""))
             self.dashBtns[DASHBTNS.Install][TTIP] = self.createToolTipWidget( tr("""
-               'Will download and Bitcoin software and cryptographically verify it"""))
+               'Will download and Digibyte software and cryptographically verify it"""))
       elif OS_MACOSX:
          pass
       else:
@@ -4773,7 +4773,7 @@ class ArmoryMainWindow(QMainWindow):
    def setupAnnounceTab(self):
 
       self.lblAlertStr = QRichLabel(tr("""
-         <font size=4><b>Announcements and alerts from <i>Armory Technologies,
+         <font size=4><b>Announcements and alerts from <i>DigiArmory Technologies,
          Inc.</i></b></font>"""), doWrap=False, hAlign=Qt.AlignHCenter)
 
       def checkUpd():
@@ -4782,7 +4782,7 @@ class ArmoryMainWindow(QMainWindow):
          lastUpdate2 = self.announceFetcher.getLastSuccessfulFetchTime()
          if lastUpdate==lastUpdate2:
             QMessageBox.warning(self, tr('Not Available'), tr("""
-               Could not access the <font color="%s"><b>Armory
+               Could not access the <font color="%s"><b>DigiArmory
                Technologies, Inc.</b></font> announcement feeder.
                Try again in a couple minutes.""") % \
                htmlColor('TextGreen'), QMessageBox.Ok)
@@ -4930,7 +4930,7 @@ class ArmoryMainWindow(QMainWindow):
       if dlObj is None or clObj is None:
          QMessageBox.warning(self, tr('No Data'), tr("""
             The secure downloader has not received any download
-            data to display.  Either the <font color="%s"><b>Armory
+            data to display.  Either the <font color="%s"><b>DigiArmory
             Technologies, Inc.</b></font> announcement feeder is
             down, or this computer cannot access the server.""") % \
             htmlColor('TextGreen'), QMessageBox.Ok)
@@ -4940,7 +4940,7 @@ class ArmoryMainWindow(QMainWindow):
       sinceLastUpd = RightNow() - lastUpdate
       if lastUpdate < RightNow()-1*WEEK:
          QMessageBox.warning(self, tr('Old Data'), tr("""
-            The last update retrieved from the <font color="%s"><b>Armory
+            The last update retrieved from the <font color="%s"><b>DigiArmory
             Technologies, Inc.</b></font> announcement feeder was <b>%s</b>
             ago.  The following downloads may not be the latest
             available.""") % (htmlColor("TextGreen"), \
@@ -4973,7 +4973,7 @@ class ArmoryMainWindow(QMainWindow):
          self.lblLastUpdated.setText(tr("No announcement data was found!"))
          self.btnSecureDLArmory.setVisible(False)
          self.icoArmorySWVersion.setVisible(True)
-         self.lblArmorySWVersion.setText(tr(""" You are running Armory
+         self.lblArmorySWVersion.setText(tr(""" You are running DigiArmory
             version %s""") % getVersionString(BTCARMORY_VERSION))
       else:
          updTimeStr = unixTimeToFormatStr(lastUpdate)
@@ -4994,18 +4994,18 @@ class ArmoryMainWindow(QMainWindow):
             self.icoArmorySWVersion.setPixmap(dispIcon)
             self.btnSecureDLArmory.setVisible(False)
             self.lblArmorySWVersion.setText(tr("""
-               You are using the latest version of Armory"""))
+               You are using the latest version of DigiArmory"""))
          else:
             dispIcon = QPixmap(iconWarnFile).scaled(24,24)
             self.icoArmorySWVersion.setPixmap(dispIcon)
             self.btnSecureDLArmory.setVisible(True)
             self.lblArmorySWVersion.setText(tr("""
-               <b>There is a newer version of Armory available!</b>"""))
+               <b>There is a newer version of DigiArmory available!</b>"""))
          self.btnSecureDLArmory.setVisible(True)
          self.icoArmorySWVersion.setVisible(True)
       except:
          self.btnSecureDLArmory.setVisible(False)
-         self.lblArmorySWVersion.setText(tr(""" You are running Armory
+         self.lblArmorySWVersion.setText(tr(""" You are running DigiArmory
             version %s""") % getVersionString(BTCARMORY_VERSION))
 
 
@@ -5021,13 +5021,13 @@ class ArmoryMainWindow(QMainWindow):
                self.btnSecureDLSatoshi.setVisible(False)
                self.icoSatoshiSWVersion.setPixmap(dispIcon)
                self.lblSatoshiSWVersion.setText(tr(""" You are using
-                  the latest version of core Bitcoin (%s)""") % satCurrStr)
+                  the latest version of core Digibyte (%s)""") % satCurrStr)
             else:
                dispIcon = QPixmap(iconWarnFile).scaled(24,24)
                self.btnSecureDLSatoshi.setVisible(True)
                self.icoSatoshiSWVersion.setPixmap(dispIcon)
                self.lblSatoshiSWVersion.setText(tr("""
-                  <b>There is a newer version of the core Bitcoin software
+                  <b>There is a newer version of the core Digibyte software
                   available!</b>"""))
          elif satCurrent:
             # satLatest is not available
@@ -5035,13 +5035,13 @@ class ArmoryMainWindow(QMainWindow):
             self.btnSecureDLSatoshi.setVisible(False)
             self.icoSatoshiSWVersion.setPixmap(None)
             self.lblSatoshiSWVersion.setText(tr(""" You are using
-               core Bitcoin version %s""") % satCurrStr)
+               core Digibyte version %s""") % satCurrStr)
          elif satLatest:
             # only satLatest is avail (maybe offline)
             dispIcon = QPixmap(iconSatoshi).scaled(24,24)
             self.btnSecureDLSatoshi.setVisible(True)
             self.icoSatoshiSWVersion.setPixmap(dispIcon)
-            self.lblSatoshiSWVersion.setText(tr("""Core Bitcoin version
+            self.lblSatoshiSWVersion.setText(tr("""Core Digibyte version
                %s is available.""") % satLastStr)
          else:
             # only satLatest is avail (maybe offline)
@@ -5049,7 +5049,7 @@ class ArmoryMainWindow(QMainWindow):
             self.btnSecureDLSatoshi.setVisible(False)
             self.icoSatoshiSWVersion.setPixmap(dispIcon)
             self.lblSatoshiSWVersion.setText(tr("""No version information
-               is available for core Bitcoin""") )
+               is available for core Digibyte""") )
 
 
 
@@ -5057,10 +5057,10 @@ class ArmoryMainWindow(QMainWindow):
          #self.btnSecureDLSatoshi.setVisible(False)
          #if self.satoshiVersions[0]:
             #self.lblSatoshiSWVersion.setText(tr(""" You are running
-               #core Bitcoin software version %s""") % self.satoshiVersions[0])
+               #core Digibyte software version %s""") % self.satoshiVersions[0])
          #else:
             #self.lblSatoshiSWVersion.setText(tr("""No information is
-            #available for the core Bitcoin software"""))
+            #available for the core Digibyte software"""))
       except:
          LOGEXCEPT('Failed to process satoshi versions')
 
@@ -5125,15 +5125,15 @@ class ArmoryMainWindow(QMainWindow):
    #############################################################################
    def closeExistingBitcoin(self):
       for proc in psutil.process_iter():
-         if proc.name.lower() in ['bitcoind.exe','bitcoin-qt.exe',\
-                                     'bitcoind','bitcoin-qt']:
+         if proc.name.lower() in ['digibyted.exe','Digibyte-Qt.exe',\
+                                     'digibyted','Digibyte-Qt']:
             killProcess(proc.pid)
             time.sleep(2)
             return
 
       # If got here, never found it
       QMessageBox.warning(self, 'Not Found', \
-         'Attempted to kill the running Bitcoin-Qt/bitcoind instance, '
+         'Attempted to kill the running Digibyte-Qt/digibyted instance, '
          'but it was not found.  ', QMessageBox.Ok)
 
    #############################################################################
@@ -5187,7 +5187,7 @@ class ArmoryMainWindow(QMainWindow):
 
             self.lblTorrentStats.setVisible(False)
          else:
-            self.lblDashModeTorrent.setText(tr('Downloading via Armory CDN'), \
+            self.lblDashModeTorrent.setText(tr('Downloading via DigiArmory CDN'), \
                                           size=4, bold=True, color='Foreground')
 
             if fracDone:
@@ -5381,7 +5381,7 @@ class ArmoryMainWindow(QMainWindow):
       Outsourcing all the verbose dashboard text to here, to de-clutter the
       logic paths in the setDashboardDetails function
       """
-      LOGINFO('Switching Armory functional mode to "%s"', func)
+      LOGINFO('Switching DigiArmory functional mode to "%s"', func)
       if func.lower() == 'scanning':
          return ( \
          'The following functionality is available while scanning in offline mode:'
@@ -5393,11 +5393,11 @@ class ArmoryMainWindow(QMainWindow):
          '<li>Sign transactions created from an online system</li>'
          '<li>Sign messages</li>'
          '</ul>'
-         '<br><br><b>NOTE:</b>  The Bitcoin network <u>will</u> process transactions '
+         '<br><br><b>NOTE:</b>  The Digibyte network <u>will</u> process transactions '
          'to your addresses, even if you are offline.  It is perfectly '
-         'okay to create and distribute payment addresses while Armory is offline, '
+         'okay to create and distribute payment addresses while DigiArmory is offline, '
          'you just won\'t be able to verify those payments until the next time '
-         'Armory is online.')
+         'DigiArmory is online.')
       elif func.lower() == 'offline':
          return ( \
          'The following functionality is available in offline mode:'
@@ -5410,19 +5410,19 @@ class ArmoryMainWindow(QMainWindow):
          '<li>Sign messages</li>'
          '<li><b>Sign transactions created from an online system</b></li>'
          '</ul>'
-         '<br><br><b>NOTE:</b>  The Bitcoin network <u>will</u> process transactions '
+         '<br><br><b>NOTE:</b>  The Digibyte network <u>will</u> process transactions '
          'to your addresses, regardless of whether you are online.  It is perfectly '
-         'okay to create and distribute payment addresses while Armory is offline, '
+         'okay to create and distribute payment addresses while DigiArmory is offline, '
          'you just won\'t be able to verify those payments until the next time '
-         'Armory is online.')
+         'DigiArmory is online.')
       elif func.lower() == 'online':
          return ( \
          '<ul>'
-         '<li>Create, import or recover Armory wallets</li>'
+         '<li>Create, import or recover DigiArmory wallets</li>'
          '<li>Generate new addresses to receive coins</li>'
          '<li>Send bitcoins to other people</li>'
          '<li>Create one-time backups of your wallets (in printed or digital form)</li>'
-         '<li>Click on "bitcoin:" links in your web browser '
+         '<li>Click on "digibyte:" links in your web browser '
             '(not supported on all operating systems)</li>'
          '<li>Import private keys to wallets</li>'
          '<li>Monitor payments to watching-only wallets and create '
@@ -5439,16 +5439,16 @@ class ArmoryMainWindow(QMainWindow):
       Outsourcing all the verbose dashboard text to here, to de-clutter the
       logic paths in the setDashboardDetails function
       """
-      LOGINFO('Switching Armory state text to Mgmt:%s, State:%s', mgmtMode, state)
+      LOGINFO('Switching DigiArmory state text to Mgmt:%s, State:%s', mgmtMode, state)
 
       # A few states don't care which mgmtMode you are in...
       if state == 'NewUserInfo':
          return tr("""
-         For more information about Armory, and even Bitcoin itself, you should
+         For more information about DigiArmory, and even Digibyte itself, you should
          visit the <a href="https://bitcoinarmory.com/faqs/">frequently
          asked questions page</a>.  If
          you are experiencing problems using this software, please visit the
-         <a href="https://bitcoinarmory.com/troubleshooting/">Armory
+         <a href="https://bitcoinarmory.com/troubleshooting/">DigiArmory
          troubleshooting webpage</a>.  It will be updated frequently with
          solutions to common problems.
          <br><br>
@@ -5458,77 +5458,77 @@ class ArmoryMainWindow(QMainWindow):
          your funds if something terrible happens to you.  <i>Each wallet
          only needs to be backed up once, ever!</i>  Without it, you are at
          risk of losing all of your Bitcoins!  For more information,
-         visit the <a href="https://bitcoinarmory.com/armory-backups-are-forever/">Armory
+         visit the <a href="https://bitcoinarmory.com/armory-backups-are-forever/">DigiArmory
          Backups page</a>.
          <br><br>
          To learn about improving your security through the use of offline
          wallets, visit the
-         <a href="https://bitcoinarmory.com/using-our-wallet">Armory
+         <a href="https://bitcoinarmory.com/using-our-wallet">DigiArmory
          Quick Start Guide</a>, and the
          <a href="https://bitcoinarmory.com/using-our-wallet/#offlinewallet">Offline
          Wallet Tutorial</a>.<br><br> """)
       elif state == 'OnlineFull1':
          return ( \
-         '<p><b>You now have access to all the features Armory has to offer!</b><br>'
+         '<p><b>You now have access to all the features DigiArmory has to offer!</b><br>'
          'To see your balances and transaction history, please click '
          'on the "Transactions" tab above this text.  <br>'
-         'Here\'s some things you can do with Armory Bitcoin Client:'
+         'Here\'s some things you can do with DigiArmory Digibyte Client:'
          '<br>')
       elif state == 'OnlineFull2':
          return ( \
-         ('If you experience any performance issues with Armory, '
-         'please confirm that Bitcoin-Qt is running and <i>fully '
-         'synchronized with the Bitcoin network</i>.  You will see '
+         ('If you experience any performance issues with DigiArmory, '
+         'please confirm that Digibyte-Qt is running and <i>fully '
+         'synchronized with the Digibyte network</i>.  You will see '
          'a green checkmark in the bottom right corner of the '
-         'Bitcoin-Qt window if it is synchronized.  If not, it is '
-         'recommended you close Armory and restart it only when you '
+         'Digibyte-Qt window if it is synchronized.  If not, it is '
+         'recommended you close DigiArmory and restart it only when you '
          'see that checkmark.'
          '<br><br>'  if not self.doAutoBitcoind else '') + (
-         '<b>Please backup your wallets!</b>  Armory wallets are '
+         '<b>Please backup your wallets!</b>  DigiArmory wallets are '
          '"deterministic", meaning they only need to be backed up '
          'one time (unless you have imported external addresses/keys). '
          'Make a backup and keep it in a safe place!  All funds from '
-         'Armory-generated addresses will always be recoverable with '
+         'DigiArmory-generated addresses will always be recoverable with '
          'a paper backup, any time in the future.  Use the "Backup '
          'Individual Keys" option for each wallet to backup imported '
          'keys.</p>'))
       elif state == 'OnlineNeedSweep':
          return ( \
-         'Armory is currently online, but you have requested a sweep operation '
+         'DigiArmory is currently online, but you have requested a sweep operation '
          'on one or more private keys.  This requires searching the global '
          'transaction history for the available balance of the keys to be '
          'swept. '
          '<br><br>'
          'Press the button to start the blockchain scan, which '
-         'will also put Armory into offline mode for a few minutes '
+         'will also put DigiArmory into offline mode for a few minutes '
          'until the scan operation is complete')
       elif state == 'OnlineDirty':
          return ( \
          '<b>Wallet balances may '
          'be incorrect until the rescan operation is performed!</b>'
          '<br><br>'
-         'Armory is currently online, but addresses/keys have been added '
+         'DigiArmory is currently online, but addresses/keys have been added '
          'without rescanning the blockchain.  You may continue using '
-         'Armory in online mode, but any transactions associated with the '
+         'DigiArmory in online mode, but any transactions associated with the '
          'new addresses will not appear in the ledger. '
          '<br><br>'
-         'Pressing the button above will put Armory into offline mode '
+         'Pressing the button above will put DigiArmory into offline mode '
          'for a few minutes until the scan operation is complete.')
       elif state == 'OfflineNoSatoshiNoInternet':
          return ( \
          'There is no connection to the internet, and there is no other '
-         'Bitcoin software running.  Most likely '
+         'Digibyte software running.  Most likely '
          'you are here because this is a system dedicated '
          'to manage offline wallets! '
          '<br><br>'
-         '<b>If you expected Armory to be in online mode</b>, '
+         '<b>If you expected DigiArmory to be in online mode</b>, '
          'please verify your internet connection is active, '
-         'then restart Armory.  If you think the lack of internet '
+         'then restart DigiArmory.  If you think the lack of internet '
          'connection is in error (such as if you are using Tor), '
-         'then you can restart Armory with the "--skip-online-check" '
-         'option, or change it in the Armory settings.'
+         'then you can restart DigiArmory with the "--skip-online-check" '
+         'option, or change it in the DigiArmory settings.'
          '<br><br>'
-         'If you do not have Bitcoin-Qt installed, you can '
+         'If you do not have Digibyte-Qt installed, you can '
          'download it from <a href="http://www.bitcoin.org">'
          'http://www.bitcoin.org</a>.')
 
@@ -5542,80 +5542,80 @@ class ArmoryMainWindow(QMainWindow):
             'You are currently in offline mode, but can '
             'switch to online mode by pressing the button above.  However, '
             'it is not recommended that you switch until '
-            'Bitcoin-Qt/bitcoind is fully synchronized with the bitcoin network.  '
+            'Digibyte-Qt/digibyted is fully synchronized with the bitcoin network.  '
             'You will see a green checkmark in the bottom-right corner of '
-            'the Bitcoin-Qt window when it is finished.'
+            'the Digibyte-Qt window when it is finished.'
             '<br><br>'
             'Switching to online mode will give you access '
-            'to more Armory functionality, including sending and receiving '
+            'to more DigiArmory functionality, including sending and receiving '
             'bitcoins and viewing the balances and transaction histories '
             'of each of your wallets.<br><br>')
          elif state == 'OfflineNoSatoshi':
             bitconf = os.path.join(BTC_HOME_DIR, 'bitcoin.conf')
             return ( \
             'You are currently in offline mode because '
-            'Bitcoin-Qt is not running.  To switch to online '
-            'mode, start Bitcoin-Qt and let it synchronize with the network '
+            'Digibyte-Qt is not running.  To switch to online '
+            'mode, start Digibyte-Qt and let it synchronize with the network '
             '-- you will see a green checkmark in the bottom-right corner when '
-            'it is complete.  If Bitcoin-Qt is already running and you believe '
+            'it is complete.  If Digibyte-Qt is already running and you believe '
             'the lack of connection is an error (especially if using proxies), '
             'please see <a href="'
             'https://bitcointalk.org/index.php?topic=155717.msg1719077#msg1719077">'
             'this link</a> for options.'
             '<br><br>'
-            '<b>If you prefer to have Armory do this for you</b>, '
-            'then please check "Let Armory run '
-            'Bitcoin-Qt in the background" under "File"->"Settings."'
+            '<b>If you prefer to have DigiArmory do this for you</b>, '
+            'then please check "Let DigiArmory run '
+            'Digibyte-Qt in the background" under "File"->"Settings."'
             '<br><br>'
-            'If you are new to Armory and/or Bitcoin-Qt, '
-            'please visit the Armory '
+            'If you are new to DigiArmory and/or Digibyte-Qt, '
+            'please visit the DigiArmory '
             'webpage for more information.  Start at '
-            '<a href="https://bitcoinarmory.com/armory-and-bitcoin-qt">'
-            'Why Armory needs Bitcoin-Qt</a> or go straight to our <a '
+            '<a href="https://bitcoinarmory.com/armory-and-Digibyte-Qt">'
+            'Why DigiArmory needs Digibyte-Qt</a> or go straight to our <a '
             'href="https://bitcoinarmory.com/faqs/">'
             'frequently asked questions</a> page for more general information.  '
             'If you already know what you\'re doing and simply need '
-            'to fetch the latest version of Bitcoin-Qt, you can download it from '
+            'to fetch the latest version of Digibyte-Qt, you can download it from '
             '<a href="http://www.bitcoin.org">http://www.bitcoin.org</a>.')
          elif state == 'OfflineNoInternet':
             return ( \
             'You are currently in offline mode because '
-            'Armory could not detect an internet connection.  '
+            'DigiArmory could not detect an internet connection.  '
             'If you think this is in error, then '
-            'restart Armory using the " --skip-online-check" option, '
-            'or adjust the Armory settings.  Then restart Armory.'
+            'restart DigiArmory using the " --skip-online-check" option, '
+            'or adjust the DigiArmory settings.  Then restart DigiArmory.'
             '<br><br>'
             'If this is intended to be an offline computer, note '
-            'that it is not necessary to have Bitcoin-Qt or bitcoind '
+            'that it is not necessary to have Digibyte-Qt or digibyted '
             'running.' )
          elif state == 'OfflineNoBlkFiles':
             return ( \
             'You are currently in offline mode because '
-            'Armory could not find the blockchain files produced '
-            'by Bitcoin-Qt.  Do you run Bitcoin-Qt (or bitcoind) '
-            'from a non-standard directory?   Armory expects to '
+            'DigiArmory could not find the blockchain files produced '
+            'by Digibyte-Qt.  Do you run Digibyte-Qt (or digibyted) '
+            'from a non-standard directory?   DigiArmory expects to '
             'find the blkXXXX.dat files in <br><br>%s<br><br> '
             'If you know where they are located, please restart '
-            'Armory using the " --satoshi-datadir=[path]" '
-            'to notify Armory where to find them.') % BLKFILE_DIR
+            'DigiArmory using the " --satoshi-datadir=[path]" '
+            'to notify DigiArmory where to find them.') % BLKFILE_DIR
          elif state == 'Disconnected':
             return ( \
-            'Armory was previously online, but the connection to Bitcoin-Qt/'
-            'bitcoind was interrupted.  You will not be able to send bitcoins '
+            'DigiArmory was previously online, but the connection to Digibyte-Qt/'
+            'digibyted was interrupted.  You will not be able to send bitcoins '
             'or confirm receipt of bitcoins until the connection is '
-            'reestablished.  br><br>Please check that Bitcoin-Qt is open '
-            'and synchronized with the network.  Armory will <i>try to '
+            'reestablished.  br><br>Please check that Digibyte-Qt is open '
+            'and synchronized with the network.  DigiArmory will <i>try to '
             'reconnect</i> automatically when the connection is available '
-            'again.  If Bitcoin-Qt is available again, and reconnection does '
-            'not happen, please restart Armory.<br><br>')
+            'again.  If Digibyte-Qt is available again, and reconnection does '
+            'not happen, please restart DigiArmory.<br><br>')
          elif state == 'ScanNoWallets':
             return ( \
             'Please wait while the global transaction history is scanned. '
-            'Armory will go into online mode automatically, as soon as '
+            'DigiArmory will go into online mode automatically, as soon as '
             'the scan is complete.')
          elif state == 'ScanWithWallets':
             return ( \
-            'Armory is scanning the global transaction history to retrieve '
+            'DigiArmory is scanning the global transaction history to retrieve '
             'information about your wallets.  The "Transactions" tab will '
             'be updated with wallet balance and history as soon as the scan is '
             'complete.  You may manage your wallets while you wait.<br><br>')
@@ -5626,41 +5626,41 @@ class ArmoryMainWindow(QMainWindow):
       elif mgmtMode.lower()=='auto':
          if state == 'OfflineBitcoindRunning':
             return ( \
-            'It appears you are already running Bitcoin software '
-            '(Bitcoin-Qt or bitcoind). '
-            'Unlike previous versions of Armory, you should <u>not</u> run '
-            'this software yourself --  Armory '
+            'It appears you are already running Digibyte software '
+            '(Digibyte-Qt or digibyted). '
+            'Unlike previous versions of DigiArmory, you should <u>not</u> run '
+            'this software yourself --  DigiArmory '
             'will run it in the background for you.  Either close the '
-            'Bitcoin application or adjust your settings.  If you change '
-            'your settings, then please restart Armory.')
+            'Digibyte application or adjust your settings.  If you change '
+            'your settings, then please restart DigiArmory.')
          if state == 'OfflineNeedBitcoinInst':
             return ( \
-            '<b>Only one more step to getting online with Armory!</b>   You '
-            'must install the Bitcoin software from www.bitcoin.org in order '
-            'for Armory to communicate with the Bitcoin network.  If the '
-            'Bitcoin software is already installed and/or you would prefer '
+            '<b>Only one more step to getting online with DigiArmory!</b>   You '
+            'must install the Digibyte software from www.bitcoin.org in order '
+            'for DigiArmory to communicate with the Digibyte network.  If the '
+            'Digibyte software is already installed and/or you would prefer '
             'to manage it yourself, please adjust your settings and '
-            'restart Armory.')
+            'restart DigiArmory.')
          if state == 'InitializingLongTime':
             return tr("""
-            <b>To maximize your security, the Bitcoin engine is downloading
+            <b>To maximize your security, the Digibyte engine is downloading
             and verifying the global transaction ledger.  <u>This will take
             several hours, but only needs to be done once</u>!</b>  It is
             usually best to leave it running over night for this
             initialization process.  Subsequent loads will only take a few
             minutes.
             <br><br>
-            <b>Please Note:</b> Between Armory and the underlying Bitcoin
+            <b>Please Note:</b> Between DigiArmory and the underlying Digibyte
             engine, you need to have 40-50 GB of spare disk space available
             to hold the global transaction history.
             <br><br>
             While you wait, you can manage your wallets.  Make new wallets,
-            make digital or paper backups, create Bitcoin addresses to receive
+            make digital or paper backups, create Digibyte addresses to receive
             payments,
             sign messages, and/or import private keys.  You will always
-            receive Bitcoin payments regardless of whether you are online,
+            receive Digibyte payments regardless of whether you are online,
             but you will have to verify that payment through another service
-            until Armory is finished this initialization.""")
+            until DigiArmory is finished this initialization.""")
          if state == 'InitializingDoneSoon':
             return ( \
             'The software is downloading and processing the latest activity '
@@ -5672,24 +5672,24 @@ class ArmoryMainWindow(QMainWindow):
             '<i>forever</i> from hard-drive loss, or forgetting you password. '
             'If you do not have a backup, you could lose all of your '
             'Bitcoins forever!  See the <a href="https://bitcoinarmory.com/">'
-            'Armory Backups page</a> for more info.' % \
+            'DigiArmory Backups page</a> for more info.' % \
             (('' if len(self.walletMap)==1 else 's',)*2))
          if state == 'OnlineDisconnected':
             return ( \
-            'Armory\'s communication with the Bitcoin network was interrupted. '
+            'DigiArmory\'s communication with the Digibyte network was interrupted. '
             'This usually does not happen unless you closed the process that '
-            'Armory was using to communicate with the network. Armory requires '
+            'DigiArmory was using to communicate with the network. DigiArmory requires '
             '%s to be running in the background, and this error pops up if it '
             'disappears.'
             '<br><br>You may continue in offline mode, or you can close '
-            'all Bitcoin processes and restart Armory.' \
+            'all Digibyte processes and restart DigiArmory.' \
             % os.path.basename(TheSDM.executable))
          if state == 'OfflineBadConnection':
             return ( \
-            'Armory has experienced an issue trying to communicate with the '
-            'Bitcoin software.  The software is running in the background, '
-            'but Armory cannot communicate with it through RPC as it expects '
-            'to be able to.  If you changed any settings in the Bitcoin home '
+            'DigiArmory has experienced an issue trying to communicate with the '
+            'Digibyte software.  The software is running in the background, '
+            'but DigiArmory cannot communicate with it through RPC as it expects '
+            'to be able to.  If you changed any settings in the Digibyte home '
             'directory, please make sure that RPC is enabled and that it is '
             'accepting connections from localhost.  '
             '<br><br>'
@@ -5697,35 +5697,35 @@ class ArmoryMainWindow(QMainWindow):
             '(from the "File" menu) and send it to support@bitcoinarmory.com')
          if state == 'OfflineSatoshiAvail':
             return ( \
-            'Armory does not detect internet access, but it does detect '
-            'running Bitcoin software.  Armory is in offline-mode. <br><br>'
+            'DigiArmory does not detect internet access, but it does detect '
+            'running Digibyte software.  DigiArmory is in offline-mode. <br><br>'
             'If you are intending to run an offline system, you will not '
-            'need to have the Bitcoin software installed on the offline '
+            'need to have the Digibyte software installed on the offline '
             'computer.  It is only needed for the online computer. '
             'If you expected to be online and '
-            'the absence of internet is an error, please restart Armory '
+            'the absence of internet is an error, please restart DigiArmory '
             'using the "--skip-online-check" option.  ')
          if state == 'OfflineForcedButSatoshiAvail':
             return ( \
-            'Armory was started in offline-mode, but detected you are '
-            'running Bitcoin software.  If you are intending to run an '
-            'offline system, you will <u>not</u> need to have the Bitcoin '
+            'DigiArmory was started in offline-mode, but detected you are '
+            'running Digibyte software.  If you are intending to run an '
+            'offline system, you will <u>not</u> need to have the Digibyte '
             'software installed or running on the offline '
             'computer.  It is only required for being online. ')
          if state == 'OfflineBadDBEnv':
             return ( \
-            'The Bitcoin software indicates there '
+            'The Digibyte software indicates there '
             'is a problem with its databases.  This can occur when '
-            'Bitcoin-Qt/bitcoind is upgraded or downgraded, or sometimes '
+            'Digibyte-Qt/digibyted is upgraded or downgraded, or sometimes '
             'just by chance after an unclean shutdown.'
             '<br><br>'
-            'You can either revert your installed Bitcoin software to the '
+            'You can either revert your installed Digibyte software to the '
             'last known working version (but not earlier than version 0.8.1) '
-            'or delete everything <b>except</b> "wallet.dat" from the your Bitcoin '
+            'or delete everything <b>except</b> "wallet.dat" from the your Digibyte '
             'home directory:<br><br>'
             '<font face="courier"><b>%s</b></font>'
             '<br><br>'
-            'If you choose to delete the contents of the Bitcoin home '
+            'If you choose to delete the contents of the Digibyte home '
             'directory, you will have to do a fresh download of the blockchain '
             'again, which will require a few hours the first '
             'time.' % self.satoshiHomePath)
@@ -5738,24 +5738,24 @@ class ArmoryMainWindow(QMainWindow):
             serrDisp = '<b><font face="courier">StdErr: %s</font></b>' % serrHtml
             if len(sout)>0 or len(serr)>0:
                return  (tr("""
-               There was an error starting the underlying Bitcoin engine.
+               There was an error starting the underlying Digibyte engine.
                This should not normally happen.  Usually it occurs when you
-               have been using Bitcoin-Qt prior to using Armory, especially
-               if you have upgraded or downgraded Bitcoin-Qt recently.
-               Output from bitcoind:<br>""") + \
+               have been using Digibyte-Qt prior to using DigiArmory, especially
+               if you have upgraded or downgraded Digibyte-Qt recently.
+               Output from digibyted:<br>""") + \
                (soutDisp if len(sout)>0 else '') + \
                (serrDisp if len(serr)>0 else '') )
             else:
                return ( tr("""
-                  There was an error starting the underlying Bitcoin engine.
+                  There was an error starting the underlying Digibyte engine.
                   This should not normally happen.  Usually it occurs when you
-                  have been using Bitcoin-Qt prior to using Armory, especially
-                  if you have upgraded or downgraded Bitcoin-Qt recently.
+                  have been using Digibyte-Qt prior to using DigiArmory, especially
+                  if you have upgraded or downgraded Digibyte-Qt recently.
                   <br><br>
-                  Unfortunately, this error is so strange, Armory does not
+                  Unfortunately, this error is so strange, DigiArmory does not
                   recognize it.  Please go to "Export Log File" from the "File"
                   menu and email at as an attachment to <a href="mailto:
-                  support@bitcoinarmory.com?Subject=Bitcoind%20Crash">
+                  support@bitcoinarmory.com?Subject=digibyted%20Crash">
                   support@bitcoinarmory.com</a>.  We apologize for the
                   inconvenience!"""))
 
@@ -5851,13 +5851,13 @@ class ArmoryMainWindow(QMainWindow):
             if not (self.forceOnline or self.internetAvail) or CLI_OPTIONS.offline:
                self.mainDisplayTabs.setTabEnabled(self.MAINTABS.Ledger, False)
                setOnlyDashModeVisible()
-               self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+               self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                             size=4, color='TextWarn', bold=True)
                if satoshiIsAvailable():
                   self.frmDashMidButtons.setVisible(True)
                   setBtnRowVisible(DASHBTNS.Close, True)
                   if CLI_OPTIONS.offline:
-                     # Forced offline but bitcoind is running
+                     # Forced offline but digibyted is running
                      LOGINFO('Dashboard switched to auto-OfflineForcedButSatoshiAvail')
                      descr1 += self.GetDashStateText('Auto', 'OfflineForcedButSatoshiAvail')
                      descr2 += self.GetDashFunctionalityText('Offline')
@@ -5873,7 +5873,7 @@ class ArmoryMainWindow(QMainWindow):
                   LOGINFO('Dashboard switched to auto-OfflineNoSatoshiNoInternet')
                   setBtnFrameVisible(True, \
                      'In case you actually do have internet access, use can use '
-                     'the following links to get Armory installed.  Or change '
+                     'the following links to get DigiArmory installed.  Or change '
                      'your settings.')
                   setBtnRowVisible(DASHBTNS.Browse, True)
                   setBtnRowVisible(DASHBTNS.Install, True)
@@ -5886,13 +5886,13 @@ class ArmoryMainWindow(QMainWindow):
             elif not TheSDM.isRunningBitcoind() and not TheTDM.isRunning():
                setOnlyDashModeVisible()
                self.mainDisplayTabs.setTabEnabled(self.MAINTABS.Ledger, False)
-               self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+               self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                             size=4, color='TextWarn', bold=True)
-               # Bitcoind is not being managed, but we want it to be
+               # digibyted is not being managed, but we want it to be
                if satoshiIsAvailable() or sdmState=='BitcoindAlreadyRunning':
-                  # But bitcoind/-qt is already running
+                  # But digibyted/-qt is already running
                   LOGINFO('Dashboard switched to auto-butSatoshiRunning')
-                  self.lblDashModeSync.setText(' Please close Bitcoin-Qt', \
+                  self.lblDashModeSync.setText(' Please close Digibyte-Qt', \
                                                          size=4, bold=True)
                   setBtnFrameVisible(True, '')
                   setBtnRowVisible(DASHBTNS.Close, True)
@@ -5908,10 +5908,10 @@ class ArmoryMainWindow(QMainWindow):
                elif sdmState in ['BitcoindExeMissing', 'BitcoindHomeMissing']:
                   LOGINFO('Dashboard switched to auto-cannotFindExeHome')
                   if sdmState=='BitcoindExeMissing':
-                     self.lblDashModeSync.setText('Cannot find Bitcoin Installation', \
+                     self.lblDashModeSync.setText('Cannot find Digibyte Installation', \
                                                          size=4, bold=True)
                   else:
-                     self.lblDashModeSync.setText('Cannot find Bitcoin Home Directory', \
+                     self.lblDashModeSync.setText('Cannot find Digibyte Home Directory', \
                                                          size=4, bold=True)
                   setBtnRowVisible(DASHBTNS.Close, satoshiIsAvailable())
                   setBtnRowVisible(DASHBTNS.Install, True)
@@ -5932,7 +5932,7 @@ class ArmoryMainWindow(QMainWindow):
                   setBtnRowVisible(DASHBTNS.Install, True)
                   #setBtnRowVisible(DASHBTNS.Instruct, not OS_WINDOWS)
                   setBtnRowVisible(DASHBTNS.Settings, True)
-                  self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+                  self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                             size=4, color='TextWarn', bold=True)
                   descr1 += self.GetDashStateText('Auto', 'OfflineBadDBEnv')
                   descr2 += self.GetDashFunctionalityText('Offline')
@@ -5943,15 +5943,15 @@ class ArmoryMainWindow(QMainWindow):
                   LOGERROR('Should not usually get here')
                   setOnlyDashModeVisible()
                   setBtnFrameVisible(True, \
-                     'Try reinstalling the Bitcoin '
-                     'software then restart Armory.  If you continue to have '
-                     'problems, please contact Armory\'s core developer at '
-                     '<a href="mailto:support@bitcoinarmory.com?Subject=Bitcoind%20Crash"'
+                     'Try reinstalling the Digibyte '
+                     'software then restart DigiArmory.  If you continue to have '
+                     'problems, please contact DigiArmory\'s core developer at '
+                     '<a href="mailto:support@bitcoinarmory.com?Subject=digibyted%20Crash"'
                      '>support@bitcoinarmory.com</a>.')
                   setBtnRowVisible(DASHBTNS.Settings, True)
                   setBtnRowVisible(DASHBTNS.Install, True)
                   LOGINFO('Dashboard switched to auto-BtcdCrashed')
-                  self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+                  self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                             size=4, color='TextWarn', bold=True)
                   descr1 += self.GetDashStateText('Auto', 'OfflineBtcdCrashed')
                   descr2 += self.GetDashFunctionalityText('Offline')
@@ -5984,9 +5984,9 @@ class ArmoryMainWindow(QMainWindow):
                      setOnlyDashModeVisible()
                   else:
                      extraTxt = tr("""
-                        <b>Armory has lost connection to the
-                        core Bitcoin software.  If you did not do anything
-                        that affects your network connection or the bitcoind
+                        <b>DigiArmory has lost connection to the
+                        core Digibyte software.  If you did not do anything
+                        that affects your network connection or the digibyted
                         process, it will probably recover on its own in a
                         couple minutes</b><br><br>""")
                      self.lblTimeLeftSync.setVisible(False)
@@ -5995,7 +5995,7 @@ class ArmoryMainWindow(QMainWindow):
 
                   self.mainDisplayTabs.setTabEnabled(self.MAINTABS.Ledger, False)
                   LOGINFO('Dashboard switched to auto-BadConnection')
-                  self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+                  self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                             size=4, color='TextWarn', bold=True)
                   descr1 += self.GetDashStateText('Auto', 'OfflineBadConnection')
                   descr2 += self.GetDashFunctionalityText('Offline')
@@ -6017,19 +6017,19 @@ class ArmoryMainWindow(QMainWindow):
                   setTorrentRowVisible(TheTDM.isStarted())
 
                   if TheTDM.isRunning():
-                     self.lblDashModeTorrent.setText('Downloading via Armory CDN', \
+                     self.lblDashModeTorrent.setText('Downloading via DigiArmory CDN', \
                                           size=4, bold=True, color='Foreground')
                      self.lblDashModeSync.setText( 'Synchronizing with Network', \
                                           size=4, bold=True, color='DisableFG')
                      self.lblTorrentStats.setVisible(True)
                   elif sdmState=='BitcoindInitializing':
-                     self.lblDashModeTorrent.setText('Download via Armory CDN', \
+                     self.lblDashModeTorrent.setText('Download via DigiArmory CDN', \
                                           size=4, bold=True, color='DisableFG')
-                     self.lblDashModeSync.setText( 'Initializing Bitcoin Engine', \
+                     self.lblDashModeSync.setText( 'Initializing Digibyte Engine', \
                                               size=4, bold=True, color='Foreground')
                      self.lblTorrentStats.setVisible(False)
                   else:
-                     self.lblDashModeTorrent.setText('Download via Armory CDN', \
+                     self.lblDashModeTorrent.setText('Download via DigiArmory CDN', \
                                           size=4, bold=True, color='DisableFG')
                      self.lblDashModeSync.setText( 'Synchronizing with Network', \
                                               size=4, bold=True, color='Foreground')
@@ -6051,7 +6051,7 @@ class ArmoryMainWindow(QMainWindow):
 
                   setBtnRowVisible(DASHBTNS.Settings, True)
                   setBtnFrameVisible(True, \
-                     'Since version 0.88, Armory runs bitcoind in the '
+                     'Since version 0.88, DigiArmory runs digibyted in the '
                      'background.  You can switch back to '
                      'the old way in the Settings dialog. ')
 
@@ -6059,7 +6059,7 @@ class ArmoryMainWindow(QMainWindow):
                   self.lblDashDescr1.setText(descr1)
                   self.lblDashDescr2.setText(descr2)
       else:
-         # User is managing satoshi client, or bitcoind is already sync'd
+         # User is managing satoshi client, or digibyted is already sync'd
          self.frmDashMidButtons.setVisible(False)
          if bdmState in ('Offline', 'Uninitialized'):
             if onlineAvail and not self.lastBDMState[1]==onlineAvail:
@@ -6070,7 +6070,7 @@ class ArmoryMainWindow(QMainWindow):
                self.btnModeSwitch.setVisible(True)
                self.btnModeSwitch.setEnabled(True)
                self.btnModeSwitch.setText('Go Online!')
-               self.lblDashModeSync.setText('Armory is <u>offline</u>', size=4, bold=True)
+               self.lblDashModeSync.setText('DigiArmory is <u>offline</u>', size=4, bold=True)
                descr  = self.GetDashStateText('User', 'OfflineButOnlinePossible')
                descr += self.GetDashFunctionalityText('Offline')
                self.lblDashDescr1.setText(descr)
@@ -6080,7 +6080,7 @@ class ArmoryMainWindow(QMainWindow):
                self.lblBusy.setVisible(False)
                self.btnModeSwitch.setVisible(False)
                self.btnModeSwitch.setEnabled(False)
-               self.lblDashModeSync.setText( 'Armory is <u>offline</u>', \
+               self.lblDashModeSync.setText( 'DigiArmory is <u>offline</u>', \
                                          size=4, color='TextWarn', bold=True)
 
                if not satoshiIsAvailable():
@@ -6088,9 +6088,9 @@ class ArmoryMainWindow(QMainWindow):
                      descr = self.GetDashStateText('User','OfflineNoSatoshi')
                      setBtnRowVisible(DASHBTNS.Settings, True)
                      setBtnFrameVisible(True, \
-                        'If you would like Armory to manage the Bitcoin software '
-                        'for you (Bitcoin-Qt or bitcoind), then adjust your '
-                        'Armory settings, then restart Armory.')
+                        'If you would like DigiArmory to manage the Digibyte software '
+                        'for you (Digibyte-Qt or digibyted), then adjust your '
+                        'DigiArmory settings, then restart DigiArmory.')
                   else:
                      descr = self.GetDashStateText('User','OfflineNoSatoshiNoInternet')
                elif not self.internetAvail:
@@ -6108,7 +6108,7 @@ class ArmoryMainWindow(QMainWindow):
             self.lblBusy.setVisible(False)
             if self.netMode == NETWORKMODE.Disconnected:
                self.btnModeSwitch.setVisible(False)
-               self.lblDashModeSync.setText( 'Armory is disconnected', size=4, color='TextWarn', bold=True)
+               self.lblDashModeSync.setText( 'DigiArmory is disconnected', size=4, color='TextWarn', bold=True)
                descr  = self.GetDashStateText('User','Disconnected')
                descr += self.GetDashFunctionalityText('Offline')
                self.lblDashDescr1.setText(descr)
@@ -6117,7 +6117,7 @@ class ArmoryMainWindow(QMainWindow):
                self.btnModeSwitch.setVisible(True)
                self.btnModeSwitch.setText('Rescan Now')
                self.mainDisplayTabs.setCurrentIndex(self.MAINTABS.Dash)
-               self.lblDashModeSync.setText( 'Armory is online, but needs to rescan ' \
+               self.lblDashModeSync.setText( 'DigiArmory is online, but needs to rescan ' \
                               'the blockchain</b>', size=4, color='TextWarn', bold=True)
                if len(self.sweepAfterScanList) > 0:
                   self.lblDashDescr1.setText( self.GetDashStateText('User', 'OnlineNeedSweep'))
@@ -6127,7 +6127,7 @@ class ArmoryMainWindow(QMainWindow):
                # Fully online mode
                LOGINFO('Dashboard switched to fully-online mode')
                self.btnModeSwitch.setVisible(False)
-               self.lblDashModeSync.setText( 'Armory is online!', color='TextGreen', size=4, bold=True)
+               self.lblDashModeSync.setText( 'DigiArmory is online!', color='TextGreen', size=4, bold=True)
                self.mainDisplayTabs.setTabEnabled(self.MAINTABS.Ledger, True)
                descr  = self.GetDashStateText('User', 'OnlineFull1')
                descr += self.GetDashFunctionalityText('Online')
@@ -6317,7 +6317,7 @@ class ArmoryMainWindow(QMainWindow):
    def checkNewZeroConf(self):
       '''
       Function that looks at an incoming zero-confirmation transaction queue and
-      determines if any incoming transactions were created by Armory. If so, the
+      determines if any incoming transactions were created by DigiArmory. If so, the
       transaction will be passed along to a user notification queue.
       '''
       while len(self.newZeroConfSinceLastUpdate)>0:
@@ -6440,7 +6440,7 @@ class ArmoryMainWindow(QMainWindow):
                      if (RightNow() - self.lastAskedUserStopTorrent) > 5*MINUTE:
                         self.lastAskedUserStopTorrent = RightNow()
                         reply = QMessageBox.warning(self, tr('Torrent'), tr("""
-                           Armory is attempting to use BitTorrent to speed up
+                           DigiArmory is attempting to use BitTorrent to speed up
                            the initial synchronization, but it appears to be
                            downloading slowly or not at all.  
                            <br><br>
@@ -6449,7 +6449,7 @@ class ArmoryMainWindow(QMainWindow):
                            at a reasonable speed for your internet connection, 
                            you should disable it in
                            <i>File\xe2\x86\x92Settings</i> and then
-                           restart Armory."""), QMessageBox.Ok)
+                           restart DigiArmory."""), QMessageBox.Ok)
 
                         # For now, just show once then disable
                         self.lastAskedUserStopTorrent = UINT64_MAX
@@ -6461,7 +6461,7 @@ class ArmoryMainWindow(QMainWindow):
                   LOGINFO('Starting load blockchain')
                   self.loadBlockchainIfNecessary()
                elif bdmState == 'Offline':
-                  LOGERROR('Bitcoind is ready, but we are offline... ?')
+                  LOGERROR('digibyted is ready, but we are offline... ?')
                elif bdmState=='Scanning':
                   self.updateSyncProgress()
 
@@ -6471,7 +6471,7 @@ class ArmoryMainWindow(QMainWindow):
          else:
             if bdmState in ('Offline','Uninitialized'):
                # This call seems out of place, but it's because if you are in offline
-               # mode, it needs to check periodically for the existence of Bitcoin-Qt
+               # mode, it needs to check periodically for the existence of Digibyte-Qt
                # so that it can enable the "Go Online" button
                self.setDashboardDetails()
                return
@@ -6778,7 +6778,7 @@ class ArmoryMainWindow(QMainWindow):
       doClose, doMinimize = False, False
       if moc=='DontKnow':
          reply,remember = MsgBoxWithDNAA(MSGBOX.Question, 'Minimize or Close', \
-            'Would you like to minimize Armory to the system tray instead '
+            'Would you like to minimize DigiArmory to the system tray instead '
             'of closing it?', dnaaMsg='Remember my answer', \
             yesStr='Minimize', noStr='Close')
          if reply==True:
@@ -6837,7 +6837,7 @@ class ArmoryMainWindow(QMainWindow):
          return None
 
       finalDir = os.path.abspath(unpackDirChild)
-      LOGWARN('Bitcoin Core unpacked into: %s', finalDir)
+      LOGWARN('Digibyte Core unpacked into: %s', finalDir)
 
       if changeSettings:
          self.settings.set('SatoshiExe', finalDir)
@@ -6850,7 +6850,7 @@ class ArmoryMainWindow(QMainWindow):
    def closeForReal(self, event=None):
       '''
       Unlike File->Quit or clicking the X on the window, which may actually
-      minimize Armory, this method is for *really* closing Armory
+      minimize DigiArmory, this method is for *really* closing DigiArmory
       '''
       try:
          # Save the main window geometry in the settings file
@@ -6865,7 +6865,7 @@ class ArmoryMainWindow(QMainWindow):
             LOGINFO('BDM is safe for clean shutdown')
             TheBDM.execCleanShutdown(wait=True)
 
-         # This will do nothing if bitcoind isn't running.
+         # This will do nothing if digibyted isn't running.
          TheSDM.stopBitcoind()
       except:
          # Don't want a strange error here interrupt shutdown
@@ -7000,7 +7000,7 @@ class ArmoryMainWindow(QMainWindow):
          if TheBDM.getBDMState() == 'Scanning':
             canFix = tr("""
                The wallet analysis tool will become available
-               as soon as Armory is done loading.   You can close this 
+               as soon as DigiArmory is done loading.   You can close this 
                window and it will reappear when ready.""")
             self.dlgCptWlt.UpdateCanFix([canFix])
             time.sleep(1)
@@ -7103,11 +7103,11 @@ class ArmoryMainWindow(QMainWindow):
 ############################################
 class ArmoryInstanceListener(Protocol):
    def connectionMade(self):
-      LOGINFO('Another Armory instance just tried to open.')
+      LOGINFO('Another DigiArmory instance just tried to open.')
       self.factory.func_conn_made()
 
    def dataReceived(self, data):
-      LOGINFO('Received data from alternate Armory instance')
+      LOGINFO('Received data from alternate DigiArmory instance')
       self.factory.func_recv_data(data)
       self.transport.loseConnection()
 
@@ -7153,23 +7153,23 @@ def checkForAlreadyOpenError():
    armoryExists = []
    bitcoindExists = []
    aexe = os.path.basename(sys.argv[0])
-   bexe = 'bitcoind.exe' if OS_WINDOWS else 'bitcoind'
+   bexe = 'digibyted.exe' if OS_WINDOWS else 'digibyted'
    for proc in psutil.process_iter():
       if aexe in proc.name:
-         LOGINFO('Found armory PID: %d', proc.pid)
+         LOGINFO('Found digiarmory PID: %d', proc.pid)
          armoryExists.append(proc.pid)
       if bexe in proc.name:
-         LOGINFO('Found bitcoind PID: %d', proc.pid)
+         LOGINFO('Found digibyted PID: %d', proc.pid)
          if ('testnet' in proc.name) == USE_TESTNET:
             bitcoindExists.append(proc.pid)
 
    if len(armoryExists)>0:
-      LOGINFO('Not an error!  Armory really is open')
+      LOGINFO('Not an error!  DigiArmory really is open')
       return
    elif len(bitcoindExists)>0:
-      # Strange condition where bitcoind doesn't get killed by Armory/guardian
+      # Strange condition where digibyted doesn't get killed by Armory/guardian
       # (I've only seen this happen on windows, though)
-      LOGERROR('Found zombie bitcoind process...killing it')
+      LOGERROR('Found zombie digibyted process...killing it')
       for pid in bitcoindExists:
          killProcess(pid)
       time.sleep(0.5)
@@ -7216,3 +7216,4 @@ if 1:
    QAPP.setQuitOnLastWindowClosed(True)
    reactor.runReturn()
    os._exit(QAPP.exec_())
+

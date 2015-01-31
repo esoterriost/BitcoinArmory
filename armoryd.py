@@ -22,7 +22,7 @@
 #
 # Where possible this follows conventions established by the Satoshi client.
 # Does not require armory to be installed or running, this is a standalone
-# application. Requires bitcoind process to be running before starting armoryd.
+# application. Requires digibyted process to be running before starting armoryd.
 # Requires an armory wallet (can be watching only) to be in the same folder as
 # the armoryd script. Works with testnet, use --testnet flag when starting the
 # script.
@@ -117,7 +117,7 @@ class UniversalEncoder(json.JSONEncoder):
          return float(obj)
       return json.JSONEncoder.default(self, obj)
 
-ARMORYD_CONF_FILE = os.path.join(ARMORY_HOME_DIR, 'armoryd.conf')
+ARMORYD_CONF_FILE = os.path.join(ARMORY_HOME_DIR, 'digiarmoryd.conf')
 
 
 # Define some specific errors that can be thrown and caught
@@ -143,11 +143,11 @@ NOT_IMPLEMENTED = '--Not Implemented--'
 # Copied from ArmoryQt. Remove in 0.93.
 class armorydInstanceListener(Protocol):
    def connectionMade(self):
-      LOGINFO('Another armoryd instance just tried to open.')
+      LOGINFO('Another digiarmoryd instance just tried to open.')
       self.factory.func_conn_made()
 
    def dataReceived(self, data):
-      LOGINFO('Received data from alternate armoryd instance')
+      LOGINFO('Received data from alternate digiarmoryd instance')
       self.factory.func_recv_data(data)
       self.transport.loseConnection()
 
@@ -172,7 +172,7 @@ def onlineModeIsPossible(internetAvail, forceOnline):
       canGoOnline = internetAvail and satoshiIsAvailableResult and hasBlockFiles
       
       LOGINFO('Internet connection is Available: %s', str(internetAvail))
-      LOGINFO('Bitcoin-Qt/bitcoind is Available: %s', satoshiIsAvailableResult)
+      LOGINFO('Digibyte-Qt/digibyted is Available: %s', satoshiIsAvailableResult)
       LOGINFO('The first blk*.dat was Available: %s', str(hasBlockFiles))
       LOGINFO('Online mode currently possible:   %s', canGoOnline)
    return canGoOnline
@@ -233,7 +233,7 @@ def setupNetworking():
 # key and the wallet as the value), along with adding the wallet ID to a
 # separate set.
 def addMultWallets(inWltPaths, inWltMap, inWltIDSet):
-   '''Function that adds multiple wallets to an armoryd server.'''
+   '''Function that adds multiple wallets to an digiarmoryd server.'''
    newWltList = []
 
    for aWlt in inWltPaths:
@@ -281,7 +281,7 @@ def addMultWallets(inWltPaths, inWltMap, inWltIDSet):
 # the key and the lockbox as the value), along with adding the lockboxy ID to a
 # separate set.
 def addMultLockboxes(inLBPaths, inLboxMap, inLBIDSet):
-   '''Function that adds multiple lockboxes to an armoryd server.'''
+   '''Function that adds multiple lockboxes to an digiarmoryd server.'''
    newLBList = []
 
    for curLBFile in inLBPaths:
@@ -351,7 +351,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       """
       DESCRIPTION:
       Verify that a message (RFC 2440: clearsign or Base64) has been signed by
-      a Bitcoin address and get the amount of coins sent to the current wallet
+      a Digibyte address and get the amount of coins sent to the current wallet
       by the message's signer.
       PARAMETERS:
       sigBlock - Message with the RFC 2440 message to be verified. The message
@@ -383,7 +383,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_verifysignature(self, *sigBlock):
       """
       DESCRIPTION:
-      Take a message (RFC 2440: clearsign or Base64) signed by a Bitcoin address
+      Take a message (RFC 2440: clearsign or Base64) signed by a Digibyte address
       and verify the message.
       PARAMETERS:
       sigBlock - Message with the RFC 2440 message to be verified. The message
@@ -419,7 +419,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       PARAMETERS:
       sender - Base58 address of the sender to the current wallet.
       RETURN:
-      Number of Bitcoins sent by the sender to the current wallet.
+      Number of Digibyte sent by the sender to the current wallet.
       """
       totalReceived = 0.0
       ledgerEntries = self.curWlt.getTxLedger('blk')
@@ -472,7 +472,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
           if not self.curWlt.backupWalletFile(backupFilePath):
              # If we have a failure here, we probably won't know why. Not much
              # to do other than ask the user to check the armoryd server.
-             retVal['Error'] = "Backup failed. Check the armoryd server logs."
+             retVal['Error'] = "Backup failed. Check the digiarmoryd server logs."
           else:
              retVal['Result'] = "Backup succeeded."
 
@@ -491,7 +491,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       None
       RETURN:
       A dictionary listing information about each UTXO in the currently loaded
-      wallet. The dictionary is similar to the one returned by the bitcoind
+      wallet. The dictionary is similar to the one returned by the digibyted
       call of the same name.
       """
 
@@ -649,8 +649,8 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       DESCRIPTION:
       Import a private key into the current wallet.
       PARAMETERS:
-      privKey - A private key in any format supported by Armory, including
-                Base58 private keys supported by bitcoind (uncompressed public
+      privKey - A private key in any format supported by DigiArmory, including
+                Base58 private keys supported by digibyted (uncompressed public
                 key support only).
       RETURN:
       A string of the private key's accompanying hexadecimal public key.
@@ -731,7 +731,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       binary - (Default=0) Indicates whether or not the resultant binary script
                should be in binary form or converted to a hex string.
       RETURN:
-      A dictionary with the Bitcoin amount for the TxOut and the TxOut script in
+      A dictionary with the Digibyte amount for the TxOut and the TxOut script in
       hex string form (default) or binary form.
       """
 
@@ -962,7 +962,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       DESCRIPTION:
       Get information on the currently loaded wallet.
       PARAMETERS:
-      inWltID - (Default=None) If used, armoryd will get info for the wallet for
+      inWltID - (Default=None) If used, digiarmoryd will get info for the wallet for
                 the provided Base58 wallet ID instead of the current wallet.
       RETURN:
       A dictionary with information on the current wallet.
@@ -993,7 +993,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       baltype - (Default=spendable) A string indicating the balance type to
                 retrieve from the current wallet.
       RETURN:
-      The current wallet balance (BTC), or -1 if an error occurred.
+      The current wallet balance (DGB), or -1 if an error occurred.
       """
 
       retVal = -1
@@ -1024,7 +1024,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       baltype - (Default=spendable) A string indicating the balance type to
                 retrieve from the current wallet.
       RETURN:
-      The current wallet balance (BTC), or -1 if an error occurred.
+      The current wallet balance (DGB), or -1 if an error occurred.
       """
 
       retVal = -1
@@ -1073,7 +1073,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       PARAMETERS:
       address - The Base58 address associated with the current wallet.
       RETURN:
-      The balance received from the incoming address (BTC).
+      The balance received from the incoming address (DGB).
       """
 
       if CLI_OPTIONS.offline:
@@ -1097,10 +1097,10 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       recAddr - The recipient. This can be an address, a P2SH script address, a
                 lockbox (e.g., "Lockbox[83jcAqz9]" or "Lockbox[Bare:83jcAqz9]"),
                 or a public key (compressed or uncompressed) string.
-      amount - The number of Bitcoins to send to the recipient.
+      amount - The number of Digibyte to send to the recipient.
       RETURN:
       An ASCII-formatted unsigned transaction, similar to the one output by
-      Armory for offline signing.
+      DigiArmory for offline signing.
       """
 
       if CLI_OPTIONS.offline:
@@ -1115,7 +1115,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    #############################################################################
    # Create an unsigned Tx to be sent from the currently loaded wallet.
    #
-   # Example: We wish to send 1 BTC to a lockbox and 0.12 BTC to a standard
+   # Example: We wish to send 1 DGB to a lockbox and 0.12 DGB to a standard
    # Bitcoin address. (Publick keys and P2SH scripts can also be specified as
    # recipients but we don't use either one in this example.)
    # armoryd createustxformany Lockbox[83jcAqz9],1.0 mwpw68XWmvQKfsCJXETkDX2CWHPdchY6fi,0.12
@@ -1127,13 +1127,13 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       the currently loaded wallet.
       PARAMETERS:
       args - An indefinite number of comma-separated sets of recipients and the
-             number of Bitcoins to send to the recipients. The recipients can be
+             number of Digibyte to send to the recipients. The recipients can be
              an address, a P2SH script address, a lockbox (e.g.,
              "Lockbox[83jcAqz9]" or "Lockbox[Bare:83jcAqz9]"), or a public key
              (compressed or uncompressed) string.
       RETURN:
       An ASCII-formatted unsigned transaction, similar to the one output by
-      Armory for offline signing.
+      DigiArmory for offline signing.
       """
 
       if CLI_OPTIONS.offline:
@@ -1240,7 +1240,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
                headtime    = cppHead.getTimestamp()
 
             # Get some more data.
-            # amtCoins: amt of BTC transacted, always positive (how big are
+            # amtCoins: amt of DGB transacted, always positive (how big are
             #           outputs minus change?)
             # netCoins: net effect on wallet (positive or negative)
             # feeCoins: how much fee was paid for this tx 
@@ -1520,26 +1520,26 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
 
 
    #############################################################################
-   # A semi-analogue to bitcoind's getinfo().
+   # A semi-analogue to digibyted's getinfo().
    @catchErrsForJSON
    def jsonrpc_getarmorydinfo(self):
       """
       DESCRIPTION:
-      Get information on the version of armoryd running on the server.
+      Get information on the version of digiarmoryd running on the server.
       PARAMETERS:
       None
       RETURN:
-      A dictionary listing version of armoryd running on the server.
+      A dictionary listing version of digiarmoryd running on the server.
       """
 
       isReady = TheBDM.getBDMState() == 'BlockchainReady'
 
       info = { \
-               'versionstr':        getVersionString(BTCARMORY_VERSION),
-               'version':           getVersionInt(BTCARMORY_VERSION),
+               'versionstr':        getVersionString(DGBARMORY_VERSION),
+               'version':           getVersionInt(DGBARMORY_VERSION),
                #'protocolversion':   0,
-               'walletversionstr':  getVersionString(PYBTCWALLET_VERSION),
-               'walletversion':     getVersionInt(PYBTCWALLET_VERSION),
+               'walletversionstr':  getVersionString(PYDGBWALLET_VERSION),
+               'walletversion':     getVersionInt(PYDGBWALLET_VERSION),
                'bdmstate':          TheBDM.getBDMState(),
                'balance':           AmountToJSON(self.curWlt.getBalance()) \
                                     if isReady else -1,
@@ -1569,7 +1569,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       """
 
       if TheBDM.getBDMState() in ['Uninitialized', 'Offline']:
-         return {'error': 'armoryd is offline'}
+         return {'error': 'digiarmoryd is offline'}
 
       head = TheBDM.getHeaderByHash(hex_to_binary(blkhash, BIGENDIAN))
 
@@ -1616,7 +1616,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       """
 
       if TheBDM.getBDMState() in ['Uninitialized', 'Offline']:
-         return {'Error': 'armoryd is offline'}
+         return {'Error': 'digiarmoryd is offline'}
 
       binhash = hex_to_binary(txHash, BIGENDIAN)
       tx = TheBDM.getTxByHash(binhash)
@@ -1810,7 +1810,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       """
       DESCRIPTION:
       Create an m-of-n lockbox associated with wallets loaded onto the
-      armoryd server.
+      digiarmoryd server.
       PARAMETERS:
       numM - The number of signatures required to spend lockbox funds.
       numN - The total number of signatures associated with a lockbox.
@@ -1933,7 +1933,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
             lbID = calcLockboxID(pkListScript)
             lbCreateDate = long(RightNow())
             lbName = 'Lockbox %s' % lbID
-            lbDescrip = '%s - %d-of-%d - Created by armoryd' % (lbID, m, n)
+            lbDescrip = '%s - %d-of-%d - Created by digiarmoryd' % (lbID, m, n)
             lockbox = MultiSigLockbox(lbName, lbDescrip, m, n,
                                       lockboxPubKeyList, lbCreateDate)
 
@@ -1967,12 +1967,12 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       """
       DESCRIPTION:
       Get information on the lockbox associated with a lockbox ID string or, if
-      it exists, the currently active armoryd lockbox.
+      it exists, the currently active digiarmoryd lockbox.
       PARAMETERS:
-      inLBID - (Default=None) If used, armoryd will get information on the
+      inLBID - (Default=None) If used, digiarmoryd will get information on the
                lockbox with the provided Base58 ID instead of the currently
-               active armoryd lockbox.
-      outForm - (Default=JSON) If used, armoryd will return the lockbox in a
+               active digiarmoryd lockbox.
+      outForm - (Default=JSON) If used, digiarmoryd will return the lockbox in a
                 particular format. Choices are "JSON", "Hex", and "Base64".
       RETURN:
       If the lockbox is found, a dictionary with information on the lockbox will
@@ -2097,7 +2097,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    # home directory will be searched.
    @catchErrsForJSON
    def jsonrpc_sendlockbox(self, lbIDs, sender, server, pwd, recips,
-                           msgSubj='Armory Lockbox'):
+                           msgSubj='DigiArmory Lockbox'):
       """
       DESCRIPTION:
       E-mail ASCII-encoded lockboxes to recipients.
@@ -2109,7 +2109,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       pwd - The email account password.
       recips - The recipient or, if the string is delineated by a colon, a list
                of recipients.
-      msgSubj - (Default=Armory Lockbox) The email subject.
+      msgSubj - (Default=DigiArmory Lockbox) The email subject.
       RETURN:
       A string indicating whether or not the attempt to send was successful.
       """
@@ -2117,13 +2117,13 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       # Initial setup
       retStr = 'sendlockbox command succeeded.'
       if msgSubj == None:
-         msgSubj = 'Armory Lockboxes'
+         msgSubj = 'DigiArmory Lockboxes'
       lbIDs = lbIDs.split(":")
 
       # Write the decorated function that will send the e-mail out.
       @EmailOutput(sender, server, pwd, recips, msgSubj)
       def sendLockboxes(lockboxes):
-         emailText = '%s has sent you lockboxes used by Armory.' % sender
+         emailText = '%s has sent you lockboxes used by DigiArmory.' % sender
          emailText += ' The lockboxes can be found printed below.\n\n'
          emailText += 'TOTAL LOCKBOXES: %d\n\n' % len(lockboxes)
          for curLB in lockboxes:
@@ -2156,7 +2156,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_setaddressmetadata(self, newAddressMetaData):
       """
       DESCRIPTION:
-      Set armoryd-specific metadata associated with Base58 addresses.
+      Set digiarmoryd-specific metadata associated with Base58 addresses.
       PARAMETERS:
       newAddressMetaData - A dictionary containing arbitrary metadata to attach
                            to Base58 addresses listed with the metadata.
@@ -2180,7 +2180,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_clearaddressmetadata(self):
       """
       DESCRIPTION:
-      Clear all armoryd-specific metadata for the currently loaded wallet.
+      Clear all digiarmoryd-specific metadata for the currently loaded wallet.
       PARAMETERS:
       None
       RETURN:
@@ -2196,11 +2196,11 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_getaddressmetadata(self):
       """
       DESCRIPTION:
-      Get all armoryd-specific metadata for the currently loaded wallet.
+      Get all digiarmoryd-specific metadata for the currently loaded wallet.
       PARAMETERS:
       None
       RETURN:
-      A dictionary with all metadata sent to armoryd.
+      A dictionary with all metadata sent to digiarmoryd.
       """
 
       return self.addressMetaData
@@ -2246,7 +2246,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_setactivewallet(self, newIDB58):
       """
       DESCRIPTION:
-      Set the currently active wallet to one already loaded on the armoryd
+      Set the currently active wallet to one already loaded on the digiarmoryd
       server.
       PARAMETERS:
       newIDB58 - The Base58 ID of the wallet to be made active.
@@ -2276,7 +2276,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_setactivelockbox(self, newIDB58):
       """
       DESCRIPTION:
-      Set the currently active lockbox to one already loaded on the armoryd
+      Set the currently active lockbox to one already loaded on the digiarmoryd
       server.
       PARAMETERS:
       newIDB58 - The Base58 ID of the lockbox to be made active.
@@ -2303,11 +2303,11 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_listloadedwallets(self):
       """
       DESCRIPTION:
-      List all wallets loaded onto the armoryd server.
+      List all wallets loaded onto the digiarmoryd server.
       PARAMETERS:
       None
       RETURN:
-      A dictionary with the Base58 values of all wallets loaded in armoryd.
+      A dictionary with the Base58 values of all wallets loaded in digiarmoryd.
       """
 
       # Return a dictionary with a string as the key and a wallet B58 value as
@@ -2327,11 +2327,11 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_listloadedlockboxes(self):
       """
       DESCRIPTION:
-      List all lockboxes loaded onto the armoryd server.
+      List all lockboxes loaded onto the digiarmoryd server.
       PARAMETERS:
       None
       RETURN:
-      A dictionary with the Base58 values of all lockboxes loaded in armoryd.
+      A dictionary with the Base58 values of all lockboxes loaded in digiarmoryd.
       """
 
       # Return a dictionary with a string as the key and a wallet B58 value as
@@ -2434,7 +2434,7 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
       Sign an unsigned transaction and get the signed ASCII data.
       PARAMETERS:
       unsignedTxASCII - An ASCII-formatted unsigned transaction, like the one
-                        used by Armory for offline transactions.
+                        used by DigiArmory for offline transactions.
       wltPasswd - (Default=None) If needed, the current wallet's password.
       RETURN:
       A dictionary containing a string with the ASCII-formatted signed
@@ -2533,11 +2533,11 @@ class Armory_Json_Rpc_Server(jsonrpc.JSONRPC):
    def jsonrpc_help(self):
       """
       DESCRIPTION:
-      Get a directionary with all functions the armoryd server can run.
+      Get a directionary with all functions the digiarmoryd server can run.
       PARAMETERS:
       None
       RETURN:
-      A dictionary with all functions available on the armoryd server, along
+      A dictionary with all functions available on the digiarmoryd server, along
       with the function parameters and function return value.
       """
 
@@ -2684,23 +2684,23 @@ class Armory_Daemon(object):
             # armoryd is still somewhat immature. We'll print a warning to let people know
             # that armoryd is still beta software and that the API may change.
             LOGWARN('************************************************************************')
-            LOGWARN('* Please note that armoryd v%s is beta software and is still in ' % \
-                  getVersionString(BTCARMORY_VERSION))
+            LOGWARN('* Please note that digiarmoryd v%s is beta software and is still in ' % \
+                  getVersionString(DGBARMORY_VERSION))
             LOGWARN('* development. Whenever applicable, the interface is designed to match ')
-            LOGWARN('* that of bitcoind, with function parameters and return values closely ')
-            LOGWARN('* matching those of bitcoind. Despite this, the function parameters and ')
-            LOGWARN('* return values may change, both for ported bitcoind function and ')
-            LOGWARN('* Armory-specific functions.')
+            LOGWARN('* that of digibyted, with function parameters and return values closely ')
+            LOGWARN('* matching those of digibyted. Despite this, the function parameters and ')
+            LOGWARN('* return values may change, both for ported digibyted function and ')
+            LOGWARN('* DigiArmory-specific functions.')
             LOGWARN('************************************************************************')
             LOGWARN('')
             LOGWARN('*'*80)
 
             LOGWARN('* WARNING!  WALLET FILE ACCESS IS NOT INTERPROCESS-SAFE!')
-            LOGWARN('*           DO NOT run armoryd at the same time as ArmoryQt if ')
+            LOGWARN('*           DO NOT run digiarmoryd at the same time as DigiArmoryQt if ')
             LOGWARN('*           they are managing the same wallet file.  If you want ')
             LOGWARN('*           to manage the same wallet with both applications ')
             LOGWARN('*           you must make a digital copy/backup of the wallet file ')
-            LOGWARN('*           into another directory and point armoryd at that one.  ')
+            LOGWARN('*           into another directory and point digiarmoryd at that one.  ')
             LOGWARN('*           ')
             LOGWARN('*           As long as the two processes do not share the same ')
             LOGWARN('*           actual file, there is no risk of wallet corruption. ')
@@ -2760,7 +2760,7 @@ class Armory_Daemon(object):
                   self.WltMap[self.curWlt.uniqueIDB58] = self.curWlt
                   self.wltIDSet.add(self.curWlt.uniqueIDB58)
                else:
-                  LOGERROR('No wallets could be loaded! armoryd will exit.')
+                  LOGERROR('No wallets could be loaded! digiarmoryd will exit.')
 
             # Log info on the wallets we've loaded.
             numWallets = len(self.WltMap)
@@ -2805,8 +2805,8 @@ class Armory_Daemon(object):
             # Setup the heartbeat function to run every 
             reactor.callLater(3, self.Heartbeat)
          else:
-            errStr = 'armoryd is not ready to run! Please check to see if ' \
-                     'bitcoind is running and the Blockchain files ' \
+            errStr = 'digiarmoryd is not ready to run! Please check to see if ' \
+                     'digibyted is running and the Blockchain files ' \
                      '(blk*.dat) are available.'
             LOGERROR(errStr)
             os._exit(0)
@@ -2828,7 +2828,7 @@ class Armory_Daemon(object):
                genVal.destroy()
 
       checker = FilePasswordDB(passwordfile)
-      realmName = "Armory JSON-RPC App"
+      realmName = "DigiArmory JSON-RPC App"
       wrapper = wrapResource(resource, [checker], realmName=realmName)
       return wrapper
 
@@ -2872,22 +2872,22 @@ class Armory_Daemon(object):
          LOGINFO('Blockfile corruption check: Missing blocks: %d', \
                  len(vectMissingBlks))
          if len(vectMissingBlks) > 0:
-            LOGERROR('Armory has detected an error in the blockchain ' \
-                     'database maintained by the third-party Bitcoin ' \
-                     'software (Bitcoin-Qt or bitcoind). This error is not ' \
+            LOGERROR('DigiArmory has detected an error in the blockchain ' \
+                     'database maintained by the third-party Digibyte ' \
+                     'software (Digibyte-Qt or digibyted). This error is not ' \
                      'fatal, but may lead to incorrect balances, inability ' \
                      'to send coins, or application instability. It is ' \
                      'unlikely that the error affects your wallets, but it ' \
                      'is possible.  If you experience crashing, or see ' \
                      'incorrect balances on any wallets, it is strongly ' \
                      'recommended you re-download the blockchain via the ' \
-                     '"Factory Reset" option in ArmoryQt.')
+                     '"Factory Reset" option in DigiArmoryQt.')
 
          LOGINFO('Wallet balance: %s' % \
                  coin2str(self.curWlt.getBalance('Spendable')))
 
-         # This is CONNECT call for armoryd to talk to bitcoind
-         LOGINFO('Set up connection to bitcoind')
+         # This is CONNECT call for armoryd to talk to digibyted
+         LOGINFO('Set up connection to digibyted')
          self.NetworkingFactory = ArmoryClientFactory( \
                         TheBDM,
                         func_loseConnect = self.showOfflineMsg, \
@@ -2910,7 +2910,7 @@ class Armory_Daemon(object):
          # For now, all we want to do is see if the server exists.
          sock = socket.create_connection(('127.0.0.1',ARMORY_RPC_PORT), 0.1);
       except socket.error:
-         LOGINFO('No other armoryd.py instance is running.  We\'re the first. %d' % ARMORY_RPC_PORT)
+         LOGINFO('No other digiarmoryd.py instance is running.  We\'re the first. %d' % ARMORY_RPC_PORT)
          retVal = False
 
       # Clean up the socket and return the result.
@@ -2923,7 +2923,7 @@ class Armory_Daemon(object):
       # Open the armoryd.conf config file. At present, it's just a username and
       # password (e.g., "frank:abc123").
       '''
-      Function that sets up and executes an armoryd command using JSON-RPC.
+      Function that sets up and executes an digiarmoryd command using JSON-RPC.
       '''
       with open(ARMORYD_CONF_FILE, 'r') as f:
          usr,pwd = f.readline().strip().split(':')
@@ -3157,3 +3157,4 @@ class Armory_Daemon(object):
 if __name__ == "__main__":
    rpc_server = Armory_Daemon()
    rpc_server.start()
+

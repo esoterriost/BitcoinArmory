@@ -1,8 +1,8 @@
 # This is a sample plugin file that will be used to create a new tab 
 # in the Armory main window.  All plugin files (such as this one) will 
-# be injected with the globals() from ArmoryQt.py, which includes pretty
+# be injected with the globals() from DigiArmoryQt.py, which includes pretty
 # much all of Bitcoin & Armory related stuff that you need.  So this 
-# file can use any utils or objects accessible to functions in ArmoryQt.py.
+# file can use any utils or objects accessible to functions in DigiArmoryQt.py.
 
 import ast
 import urllib2
@@ -61,7 +61,7 @@ class PluginObject(object):
       self.edtEnterBTC = QLineEdit()
       self.lblEnterUSD1 = QRichLabel('$')
       self.lblEnterUSD2 = QRichLabel('USD')
-      self.lblEnterBTC = QRichLabel('BTC')
+      self.lblEnterBTC = QRichLabel('DGB')
       btnClear = QPushButton('Clear')
 
       self.main.connect(self.edtEnterUSD, SIGNAL('textEdited(QString)'), self.updateCalcBTC)

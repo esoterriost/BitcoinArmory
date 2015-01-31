@@ -89,10 +89,10 @@ def parseLinkList(theData):
 
 
 ################################################################################
-# jgarzik'sjj jsonrpc-bitcoin code -- stupid-easy to talk to bitcoind
+# jgarzik'sjj jsonrpc-bitcoin code -- stupid-easy to talk to digibyted
 class SatoshiDaemonManager(object):
    """
-   Use an existing implementation of bitcoind
+   Use an existing implementation of digibyted
    """
 
    class BitcoindError(Exception): pass
@@ -109,7 +109,7 @@ class SatoshiDaemonManager(object):
       self.satoshiHome = None
       self.bitconf = {}
       self.proxy = None
-      self.bitcoind = None
+      self.digibyted = None
       self.isMidQuery = False
       self.last20queries = []
       self.disabled = False
@@ -175,7 +175,7 @@ class SatoshiDaemonManager(object):
 
 
       # We will tell the TDM to write status updates to the log file, and only
-      # every 90 seconds.  After it finishes (or fails), simply launch bitcoind
+      # every 90 seconds.  After it finishes (or fails), simply launch digibyted
       # as we would've done without the torrent
       #####
       def torrentLogToFile(dpflag=Event(), fractionDone=None, timeEst=None,
@@ -310,10 +310,10 @@ class SatoshiDaemonManager(object):
       if pathToBitcoindExe==None:
          pathToBitcoindExe = self.findBitcoind(extraExeSearch)
          if len(pathToBitcoindExe)==0:
-            LOGDEBUG('Failed to find bitcoind')
+            LOGDEBUG('Failed to find digibyted')
             self.failedFindExe = True
          else:
-            LOGINFO('Found bitcoind in the following places:')
+            LOGINFO('Found digibyted in the following places:')
             for p in pathToBitcoindExe:
                LOGINFO('   %s', p)
             pathToBitcoindExe = pathToBitcoindExe[0]
@@ -342,12 +342,12 @@ class SatoshiDaemonManager(object):
             LOGINFO('No home dir, makedir not requested')
             self.failedFindHome = True
 
-      if self.failedFindExe:  raise self.BitcoindError, 'bitcoind not found'
+      if self.failedFindExe:  raise self.BitcoindError, 'digibyted not found'
       if self.failedFindHome: raise self.BitcoindError, 'homedir not found'
 
       self.disabled = False
       self.proxy = None
-      self.bitcoind = None  # this will be a Popen object
+      self.digibyted = None  # this will be a Popen object
       self.isMidQuery = False
       self.last20queries = []
 
@@ -407,7 +407,7 @@ class SatoshiDaemonManager(object):
                   shell = win32com.client.Dispatch('WScript.Shell')
                   targ = shell.CreateShortCut(path).Targetpath
                   targDir = os.path.dirname(targ)
-                  LOGINFO('Found Bitcoin-Qt link on desktop: %s', targDir)
+                  LOGINFO('Found Digibyte-Qt link on desktop: %s', targDir)
                   possBaseDir.append( targDir )
 
          # Also look in default place in ProgramFiles dirs
@@ -422,7 +422,7 @@ class SatoshiDaemonManager(object):
          searchPaths.extend([os.path.join(p, 'Bitcoin') for p in possBaseDir])
 
          for p in searchPaths:
-            testPath = os.path.join(p, 'bitcoind.exe')
+            testPath = os.path.join(p, 'digibyted.exe')
             if os.path.exists(testPath):
                self.foundExe.append(testPath)
 
@@ -436,14 +436,14 @@ class SatoshiDaemonManager(object):
          searchPaths.extend(['/usr/bin/', '/usr/lib/bitcoin/'])
 
          for p in searchPaths:
-            testPath = os.path.join(p, 'bitcoind')
+            testPath = os.path.join(p, 'digibyted')
             if os.path.exists(testPath):
                self.foundExe.append(testPath)
 
          try:
-            locs = subprocess_check_output(['whereis','bitcoind']).split()
+            locs = subprocess_check_output(['whereis','digibyted']).split()
             if len(locs)>1:
-               locs = filter(lambda x: os.path.basename(x)=='bitcoind', locs)
+               locs = filter(lambda x: os.path.basename(x)=='digibyted', locs)
                LOGINFO('"whereis" returned: %s', str(locs))
                self.foundExe.extend(locs)
          except:
@@ -587,7 +587,7 @@ class SatoshiDaemonManager(object):
          raise self.BitcoindError, 'Looks like we have already started theSDM'
 
       if not os.path.exists(self.executable):
-         raise self.BitcoindError, 'Could not find bitcoind'
+         raise self.BitcoindError, 'Could not find digibyted'
 
       
       chk1 = os.path.exists(self.useTorrentFile)
@@ -635,13 +635,13 @@ class SatoshiDaemonManager(object):
          LOGEXCEPT('Failed size check of blocks directory')
 
 
-      # Startup bitcoind and get its process ID (along with our own)
-      self.bitcoind = launchProcess(pargs)
+      # Startup digibyted and get its process ID (along with our own)
+      self.digibyted = launchProcess(pargs)
 
-      self.btcdpid  = self.bitcoind.pid
+      self.btcdpid  = self.digibyted.pid
       self.selfpid  = os.getpid()
 
-      LOGINFO('PID of bitcoind: %d',  self.btcdpid)
+      LOGINFO('PID of digibyted: %d',  self.btcdpid)
       LOGINFO('PID of armory:   %d',  self.selfpid)
 
       # Startup guardian process -- it will watch Armory's PID
@@ -657,54 +657,54 @@ class SatoshiDaemonManager(object):
    def stopBitcoind(self):
       LOGINFO('Called stopBitcoind')
       if not self.isRunningBitcoind():
-         LOGINFO('...but bitcoind is not running, to be able to stop')
+         LOGINFO('...but digibyted is not running, to be able to stop')
          return
 
-      killProcessTree(self.bitcoind.pid)
-      killProcess(self.bitcoind.pid)
+      killProcessTree(self.digibyted.pid)
+      killProcess(self.digibyted.pid)
 
       time.sleep(1)
-      self.bitcoind = None
+      self.digibyted = None
 
 
    #############################################################################
    def isRunningBitcoind(self):
       """
       armoryengine satoshiIsAvailable() only tells us whether there's a
-      running bitcoind that is actively responding on its port.  But it
+      running digibyted that is actively responding on its port.  But it
       won't be responding immediately after we've started it (still doing
-      startup operations).  If bitcoind was started and still running,
+      startup operations).  If digibyted was started and still running,
       then poll() will return None.  Any othe poll() return value means
       that the process terminated
       """
-      if self.bitcoind==None:
+      if self.digibyted==None:
          return False
       else:
-         if not self.bitcoind.poll()==None:
+         if not self.digibyted.poll()==None:
             LOGDEBUG('Bitcoind is no more')
             if self.btcOut==None:
-               self.btcOut, self.btcErr = self.bitcoind.communicate()
-               LOGWARN('bitcoind exited, bitcoind STDOUT:')
+               self.btcOut, self.btcErr = self.digibyted.communicate()
+               LOGWARN('digibyted exited, digibyted STDOUT:')
                for line in self.btcOut.split('\n'):
                   LOGWARN(line)
-               LOGWARN('bitcoind exited, bitcoind STDERR:')
+               LOGWARN('digibyted exited, digibyted STDERR:')
                for line in self.btcErr.split('\n'):
                   LOGWARN(line)
-         return self.bitcoind.poll()==None
+         return self.digibyted.poll()==None
 
    #############################################################################
    def wasRunningBitcoind(self):
-      return (not self.bitcoind==None)
+      return (not self.digibyted==None)
 
    #############################################################################
-   def bitcoindIsResponsive(self):
+   def digibytedIsResponsive(self):
       return satoshiIsAvailable(self.bitconf['host'], self.bitconf['rpcport'])
 
    #############################################################################
    def getSDMState(self):
       """
       As for why I'm doing this:  it turns out that between "initializing"
-      and "synchronizing", bitcoind temporarily stops responding entirely,
+      and "synchronizing", digibyted temporarily stops responding entirely,
       which causes "not-available" to be the state.  I need to smooth that
       out because it wreaks havoc on the GUI which will switch to showing
       a nasty error.
@@ -748,7 +748,7 @@ class SatoshiDaemonManager(object):
 
       latestInfo = self.getTopBlockInfo()
 
-      if self.bitcoind==None and latestInfo['error']=='Uninitialized':
+      if self.digibyted==None and latestInfo['error']=='Uninitialized':
          return 'BitcoindNeverStarted'
 
       if not self.isRunningBitcoind():
@@ -766,7 +766,7 @@ class SatoshiDaemonManager(object):
                return 'BitcoindUnknownCrash'
          else:
             return 'BitcoindNotAvailable'
-      elif not self.bitcoindIsResponsive():
+      elif not self.digibytedIsResponsive():
          # Running but not responsive... must still be initializing
          return 'BitcoindInitializing'
       else:
@@ -784,7 +784,7 @@ class SatoshiDaemonManager(object):
             # If ready, always ready
             return 'BitcoindReady'
 
-         # If we get here, bitcoind is gave us a response.
+         # If we get here, digibyted is gave us a response.
          secSinceLastBlk = RightNow() - latestInfo['toptime']
          blkspersec = latestInfo['blkspersec']
          #print 'Blocks per 10 sec:', ('UNKNOWN' if blkspersec==-1 else blkspersec*10)
@@ -844,11 +844,11 @@ class SatoshiDaemonManager(object):
          LOGEXCEPT('ValueError in bkgd req top blk')
          self.lastTopBlockInfo['error'] = 'ValueError'
       except authproxy.JSONRPCException:
-         # This seems to happen when bitcoind is overwhelmed... not quite ready
+         # This seems to happen when digibyted is overwhelmed... not quite ready
          LOGDEBUG('generic jsonrpc exception')
          self.lastTopBlockInfo['error'] = 'JsonRpcException'
       except socket.error:
-         # Connection isn't available... is bitcoind not running anymore?
+         # Connection isn't available... is digibyted not running anymore?
          LOGDEBUG('generic socket error')
          self.lastTopBlockInfo['error'] = 'SocketError'
       except:
@@ -862,7 +862,7 @@ class SatoshiDaemonManager(object):
    #############################################################################
    def updateTopBlockInfo(self):
       """
-      We want to get the top block information, but if bitcoind is rigorously
+      We want to get the top block information, but if digibyted is rigorously
       downloading and verifying the blockchain, it can sometimes take 10s to
       to respond to JSON-RPC calls!  We must do it in the background...
 

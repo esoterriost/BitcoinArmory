@@ -43,7 +43,7 @@ While that's going, start downloading python-related stuff (there's a lot!)
 
    MSVS is setup to create a standalone .exe of Armory if it finds
    py2exe (otherwise it bails at the last build-step, but you can 
-   still manually run ArmoryQt.py as long as the SWIG dir is in the 
+   still manually run DigiArmoryQt.py as long as the SWIG dir is in the 
    right place, and all packages are installed).  pywin32 is needed
    to
 

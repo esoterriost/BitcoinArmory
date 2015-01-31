@@ -22,7 +22,7 @@ Name "Bitcoin Armory"
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER Armory
-!define MUI_FINISHPAGE_RUN $INSTDIR\ArmoryQt.exe
+!define MUI_FINISHPAGE_RUN $INSTDIR\DigiArmoryQt.exe
 !define MUI_UNICON img\armory48x48.ico
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
@@ -108,13 +108,13 @@ Section -Main SEC0000
     RmDir /r $INSTDIR
     SetOverwrite on
     File /r ArmoryStandalone\*
-    File ArmoryStandalone\ArmoryQt.exe
+    File ArmoryStandalone\DigiArmoryQt.exe
     !insertmacro CreateRegKey ${HKEY_CURRENT_USER} "Software\Armory"
     SetOutPath $DESKTOP
-    CreateShortcut "$DESKTOP\Bitcoin Armory.lnk" $INSTDIR\ArmoryQt.exe
-    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory" "$INSTDIR\ArmoryQt.exe" ""
-    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory (Offline)" "$INSTDIR\ArmoryQt.exe" "--offline"
-    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory (testnet)" "$INSTDIR\ArmoryQt.exe" "--testnet"
+    CreateShortcut "$DESKTOP\Bitcoin Armory.lnk" $INSTDIR\DigiArmoryQt.exe
+    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory" "$INSTDIR\DigiArmoryQt.exe" ""
+    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory (Offline)" "$INSTDIR\DigiArmoryQt.exe" "--offline"
+    !insertmacro CREATE_SMGROUP_SHORTCUT "Bitcoin Armory (testnet)" "$INSTDIR\DigiArmoryQt.exe" "--testnet"
     WriteRegStr HKLM "${REGKEY}\Components" Main 1
 SectionEnd
 
@@ -161,7 +161,7 @@ Section /o -un.Main UNSEC0000
     !insertmacro DELETE_SMGROUP_SHORTCUT "Bitcoin Armory"
     Delete /REBOOTOK "$DESKTOP\Bitcoin Armory.lnk"
     DeleteRegKey /IfEmpty HKEY_CURRENT_USER "Software\Armory"
-    Delete /REBOOTOK $INSTDIR\ArmoryQt.exe
+    Delete /REBOOTOK $INSTDIR\DigiArmoryQt.exe
     RmDir /r /REBOOTOK $INSTDIR
     DeleteRegValue HKLM "${REGKEY}\Components" Main
 SectionEnd

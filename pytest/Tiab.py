@@ -35,7 +35,7 @@ FIRST_WLT_BALANCE = 964.8997
 
 TIAB_SATOSHI_PORT = 19000
 
-# runs a Test In a Box (TIAB) bitcoind session. By copying a prebuilt
+# runs a Test In a Box (TIAB) digibyted session. By copying a prebuilt
 # testnet with a known state
 # Charles's recommendation is that you keep the TIAB somewhere like ~/.armory/tiab.charles
 # and export that path in your .bashrc as ARMORY_TIAB_PATH
@@ -59,7 +59,7 @@ class TiabSession:
    def __del__(self):
       self.clean()
    
-   # exit bitcoind and remove all data
+   # exit digibyted and remove all data
    def clean(self):
       if not self.running:
          return
@@ -72,8 +72,8 @@ class TiabSession:
       shutil.rmtree(self.tiabDirectory)
       self.running=False
    
-   # returns the port the first bitcoind is running on
-   # In future versions of this class, multiple bitcoinds will get different ports,
+   # returns the port the first digibyted is running on
+   # In future versions of this class, multiple digibyteds will get different ports,
    # so therefor, you should call this function to get the port to connect to
    def port(self, instanceNum):
       instance = instanceNum
@@ -84,11 +84,11 @@ class TiabSession:
       else:
          raise RuntimeError("No such instance number")
 
-   # clean() and then start bitcoind again
+   # clean() and then start digibyted again
 
    def callBitcoinD(self, bitcoinDArgs):
       bitcoinDArgsCopy = copy.copy(bitcoinDArgs)
-      bitcoinDArgsCopy.insert(0, "bitcoind")
+      bitcoinDArgsCopy.insert(0, "digibyted")
       return self.processes.append(subprocess.Popen(bitcoinDArgsCopy))
 
    def restart(self):

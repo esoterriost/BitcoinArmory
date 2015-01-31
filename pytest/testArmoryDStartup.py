@@ -6,7 +6,7 @@ import json
 from armoryd import Armory_Daemon
 from armoryengine.ArmoryUtils import CLI_OPTIONS
 
-# runs a Test In a Box (TIAB) bitcoind session. By copying a prebuilt
+# runs a Test In a Box (TIAB) digibyted session. By copying a prebuilt
 # testnet with a known state
 # Charles's recommendation is that you keep the TIAB somewhere like ~/.armory/tiab.charles
 # and export that path in your .bashrc as ARMORY_TIAB_PATH
@@ -30,7 +30,7 @@ class ArmoryDSession:
    def __del__(self):
       self.clean()
    
-   # exit bitcoind and remove all data
+   # exit digibyted and remove all data
    def clean(self):
       if not self.running:
          return
@@ -42,7 +42,7 @@ class ArmoryDSession:
       self.processes = []
       self.running=False
    
-   # clean() and then start bitcoind again
+   # clean() and then start digibyted again
    def callArmoryD(self, additionalArgs, waitForOutput=True):
       armoryDArgs = ['python', self.armorydPath,
             '--testnet',

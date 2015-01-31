@@ -413,9 +413,9 @@ class DlgBugReport(ArmoryDialog):
       faqPage = 'https://bitcoinarmory.com/faqs'
 
       lblDescr = QRichLabel(tr("""
-         <b><u>Send a bug report to the Armory team</u></b>
+         <b><u>Send a bug report to the DigiArmory team</u></b>
          <br><br>
-         If you are having difficulties with Armory, you should first visit
+         If you are having difficulties with DigiArmory, you should first visit
          our <a href="%s">troubleshooting page</a> and our
          <a href="%s">FAQ page</a> which describe solutions to
          many common problems.
@@ -461,9 +461,9 @@ class DlgBugReport(ArmoryDialog):
       self.txtDescr.setMinimumWidth(w)
       self.txtDescr.setMinimumHeight(4*h)
       self.lblOS = QRichLabel(tr("""
-         Note: if you are using this computer to report an Armory problem
+         Note: if you are using this computer to report an DigiArmory problem
          on another computer, please include the operating system of the
-         other computer and the version of Armory it is running."""))
+         other computer and the version of DigiArmory it is running."""))
 
       self.btnSubmit = QPushButton(tr('Submit Report'))
       self.btnCancel = QPushButton(tr('Cancel'))
@@ -475,7 +475,7 @@ class DlgBugReport(ArmoryDialog):
 
       armoryver = getVersionString(BTCARMORY_VERSION)
       lblDetect = QRichLabel( tr("""
-         <b>Detected:</b> %s (%s) / %0.2f GB RAM / Armory version %s<br>
+         <b>Detected:</b> %s (%s) / %0.2f GB RAM / DigiArmory version %s<br>
          <font size=2>(this data will be submitted automatically with the
          report)</font>""") % \
          (OS_NAME, OS_VARIANT[0], SystemSpecs.Memory, armoryver))
@@ -556,7 +556,7 @@ class DlgBugReport(ArmoryDialog):
       if descrLen < 10:
          QMessageBox.warning(self, tr('Empty Description'), tr("""
             You must describe what problem you are having, and any steps
-            to reproduce the problem.  The Armory team cannot look for
+            to reproduce the problem.  The DigiArmory team cannot look for
             problems in the log file if it doesn't know what those problems
             are!."""), QMessageBox.Ok)
          return
@@ -686,12 +686,12 @@ class DlgInconsistentWltReport(ArmoryDialog):
          <font color="%s" size=4><b><u>Important:</u>  Wallet Consistency 
          Issues Detected!</b></font>
          <br><br>
-         Armory now detects certain kinds of hardware errors, and one 
+         DigiArmory now detects certain kinds of hardware errors, and one 
          or more of your wallets
          was flagged.  The consistency logs need to be analyzed by the 
-         Armory team to determine if any further action is required.
+         DigiArmory team to determine if any further action is required.
          <br><br>
-         <b>This warning will pop up every time you start Armory until
+         <b>This warning will pop up every time you start DigiArmory until
          the wallet is fixed</b>""") % (htmlColor('TextWarn')), 
          QMessageBox.Ok)
 
@@ -716,13 +716,13 @@ class DlgInconsistentWltReport(ArmoryDialog):
          hAlign=Qt.AlignHCenter)
 
       lblDescr = QRichLabel(tr("""
-         Armory has detected that %s inconsistent,
+         DigiArmory has detected that %s inconsistent,
          possibly due to hardware errors out of our control.  It <u>strongly
-         recommended</u> you submit the wallet logs to the Armory team 
-         for review.  Until you hear back from an Armory representative, 
+         recommended</u> you submit the wallet logs to the DigiArmory team 
+         for review.  Until you hear back from an DigiArmory representative, 
          we recommend:
          <ul>
-         <li><b>Do not delete any data in your Armory home directory</b></li>
+         <li><b>Do not delete any data in your DigiArmory home directory</b></li>
          <li><b>Do not send or receive any funds with the affected 
                 wallet(s)</b></li>
          <li><b>Create a backup of the wallet analysis logs</b></li>
@@ -770,7 +770,7 @@ class DlgInconsistentWltReport(ArmoryDialog):
 
       armoryver = getVersionString(BTCARMORY_VERSION)
       lblDetect = QRichLabel( tr("""
-         <b>Detected:</b> %s (%s) / %0.2f GB RAM / Armory version %s<br>
+         <b>Detected:</b> %s (%s) / %0.2f GB RAM / DigiArmory version %s<br>
          <font size=2>(this data will be included with the data 
          submission""") % \
          (OS_NAME, OS_VARIANT[0], SystemSpecs.Memory, armoryver))
@@ -938,7 +938,7 @@ class DlgInconsistentWltReport(ArmoryDialog):
                You should receive and email shortly from our support system.
                If you do not receive it, you should follow up your request
                with an email to <a href="%s">%s</a>.  
-               You should hear back from an Armory representative within
+               You should hear back from an DigiArmory representative within
                24 hours.""") % (cemail, cemail), QMessageBox.Ok)
             self.accept()
          else:
@@ -948,7 +948,7 @@ class DlgInconsistentWltReport(ArmoryDialog):
          LOGEXCEPT('Failed:')
          bugpage = 'https://bitcoinarmory.com/support/'
          QMessageBox.information(self, tr('Submission Error!'), tr("""
-            There was a problem submitting your data through Armory.
+            There was a problem submitting your data through DigiArmory.
             Please create a new support ticket using our webpage, and attach
             the following file to it:
             <br><br>
@@ -1046,7 +1046,7 @@ class DlgInconsistentWltReport(ArmoryDialog):
             %s
             <br><br>
             It is still important to complete the rest of this form
-            and submit the data to the Armory team for review!""") % \
+            and submit the data to the DigiArmory team for review!""") % \
             saveTo, QMessageBox.Ok)
          
       except:
@@ -1092,7 +1092,7 @@ class DlgNewWallet(ArmoryDialog):
 
       # Advanced Encryption Options
       lblComputeDescr = QLabel(\
-                  'Armory will test your system\'s speed to determine the most '
+                  'DigiArmory will test your system\'s speed to determine the most '
                   'challenging encryption settings that can be performed '
                   'in a given amount of time.  High settings make it much harder '
                   'for someone to guess your passphrase.  This is used for all '
@@ -1114,7 +1114,7 @@ class DlgNewWallet(ArmoryDialog):
                   'This is the <b>maximum</b> memory that will be '
                   'used as part of the encryption process.  The actual value used '
                   'may be lower, depending on your system\'s speed.  If a '
-                  'low value is chosen, Armory will compensate by chaining '
+                  'low value is chosen, DigiArmory will compensate by chaining '
                   'together more calculations to meet the target time.  High '
                   'memory target will make GPU-acceleration useless for '
                   'guessing your passphrase.')
@@ -1164,7 +1164,7 @@ class DlgNewWallet(ArmoryDialog):
       paperBackupTooltip = self.main.createToolTipWidget(
                   'A paper-backup allows you to recover your wallet/funds even '
                   'if you lose your original wallet file, any time in the future. '
-                  'Because Armory uses "deterministic wallets," '
+                  'Because DigiArmory uses "deterministic wallets," '
                   'a single backup when the wallet is first made is sufficient '
                   'for all future transactions (except ones to imported '
                   'addresses).\n\n'
@@ -1217,7 +1217,7 @@ class DlgNewWallet(ArmoryDialog):
       self.connect(self.chkUseCrypto, SIGNAL("clicked()"), \
                    self.cryptoFrame, SLOT("setEnabled(bool)"))
 
-      self.setWindowTitle('Create Armory wallet')
+      self.setWindowTitle('Create DigiArmory wallet')
       self.setWindowIcon(QIcon(self.main.iconfile))
 
 
@@ -1431,7 +1431,7 @@ class DlgPasswd3(ArmoryDialog):
          '<font color="red"><b>!!! DO NOT FORGET YOUR PASSPHRASE !!!</b></font>', size=4)
       lblWarnTxt1.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
       lblWarnTxt2 = QRichLabel(\
-         '<b>No one can help you recover you bitcoins if you forget the '
+         '<b>No one can help you recover you digibytes if you forget the '
          'passphrase and don\'t have a paper backup!</b> Your wallet and '
          'any <u>digital</u> backups are useless if you forget it.  '
          '<br><br>'
@@ -1584,8 +1584,8 @@ class DlgWalletDetails(ArmoryDialog):
 
       exportStr = 'Data' if self.wlt.watchingOnly else 'Copy'
       
-      lbtnSendBtc = QLabelButton('Send Bitcoins')
-      lbtnGenAddr = QLabelButton('Receive Bitcoins')
+      lbtnSendBtc = QLabelButton('Send Digibytes')
+      lbtnGenAddr = QLabelButton('Receive Digibytes')
       lbtnImportA = QLabelButton('Import/Sweep Private Keys')
       lbtnDeleteA = QLabelButton('Remove Imported Address')
       # lbtnSweepA  = QLabelButton('Sweep Wallet/Address')
@@ -1608,18 +1608,18 @@ class DlgWalletDetails(ArmoryDialog):
       self.connect(lbtnExpWOWlt, SIGNAL(CLICKED), self.execExpWOCopy)
       #self.connect(lbtnRecover, SIGNAL(CLICKED), self.recoverPwd)
 
-      lbtnSendBtc.setToolTip('<u></u>Send bitcoins to other users, or transfer '
+      lbtnSendBtc.setToolTip('<u></u>Send digibytes to other users, or transfer '
                              'between wallets')
       if self.wlt.watchingOnly:
          lbtnSendBtc.setToolTip('<u></u>If you have a full-copy of this wallet '
                                 'on another computer, you can prepare a '
                                 'transaction, to be signed by that computer.')
       lbtnGenAddr.setToolTip('<u></u>Get a new address from this wallet for receiving '
-                             'bitcoins.  Right click on the address list below '
+                             'digibytes.  Right click on the address list below '
                              'to copy an existing address.')
       lbtnImportA.setToolTip('<u></u>Import or "Sweep" an address which is not part '
                              'of your wallet.  Useful for VanityGen addresses '
-                             'and redeeming Casascius physical bitcoins.')
+                             'and redeeming Casascius physical digibytes.')
       lbtnDeleteA.setToolTip('<u></u>Permanently delete an imported address from '
                              'this wallet.  You cannot delete addresses that '
                              'were generated natively by this wallet.')
@@ -1805,7 +1805,7 @@ class DlgWalletDetails(ArmoryDialog):
             'the password with it!'
             '<br><br>'
             '<a href="https://bitcointalk.org/index.php?topic=152151.0">'
-            'Read more about Armory backups</a>', None, yesStr='Ok', \
+            'Read more about DigiArmory backups</a>', None, yesStr='Ok', \
             dnaaStartChk=True)
          self.main.setWltSetting(wlt.uniqueIDB58, 'DNAA_RemindBackup', result[1])
 
@@ -1857,9 +1857,9 @@ class DlgWalletDetails(ArmoryDialog):
       self.lblSpendFunds.setText(spdStr)
       self.lblUnconfFunds.setText(ucnStr)
 
-      self.lblBTC1.setText('<b><font color="%s">BTC</font></b>' % lblcolor)
-      self.lblBTC2.setText('<b>BTC</b>')
-      self.lblBTC3.setText('<b>BTC</b>')
+      self.lblBTC1.setText('<b><font color="%s">DGB</font></b>' % lblcolor)
+      self.lblBTC2.setText('<b>DGB</b>')
+      self.lblBTC3.setText('<b>DGB</b>')
 
 
    #############################################################################
@@ -1918,7 +1918,7 @@ class DlgWalletDetails(ArmoryDialog):
             webbrowser.open(blkchnURL)
          except:
             QMessageBox.critical(self, tr('Could not open browser'), tr("""
-               Armory encountered an error opening your web browser.  To view 
+               DigiArmory encountered an error opening your web browser.  To view 
                this address on blockchain.info, please copy and paste 
                the following URL into your browser: 
                <br><br>
@@ -2034,7 +2034,7 @@ class DlgWalletDetails(ArmoryDialog):
       # if self.main.blkMode == BLOCKCHAINMODE.Offline:
       if TheBDM.getBDMState() in ('Offline', 'Uninitialized'):
          QMessageBox.warning(self, 'Offline Mode', \
-           'Armory is currently running in offline mode, and has no '
+           'DigiArmory is currently running in offline mode, and has no '
            'ability to determine balances or create transactions. '
            '<br><br>'
            'In order to send coins from this wallet you must use a '
@@ -2043,8 +2043,8 @@ class DlgWalletDetails(ArmoryDialog):
            'wallet on an online computer.', QMessageBox.Ok)
          return
       if TheBDM.getBDMState() == 'Scanning':
-         QMessageBox.warning(self, 'Armory Not Ready', \
-           'Armory is currently scanning the blockchain to collect '
+         QMessageBox.warning(self, 'DigiArmory Not Ready', \
+           'DigiArmory is currently scanning the blockchain to collect '
            'the information needed to create transactions.  This typically '
            'takes between one and five minutes.  Please wait until your '
            'balance appears on the main window, then try again.', \
@@ -2148,7 +2148,7 @@ class DlgWalletDetails(ArmoryDialog):
       if not self.main.getSettingOrSetDefault('DNAA_ImportWarning', False):
          result = MsgBoxWithDNAA(MSGBOX.Warning, \
             tr("""Imported Address Warning"""), tr("""
-            Armory supports importing of external private keys into your
+            DigiArmory supports importing of external private keys into your
             wallet but imported addresses are <u>not</u> automatically
             protected by your backups.  If you do not plan to use the
             address again, it is recommended that you "Sweep" the private
@@ -2286,7 +2286,7 @@ class DlgWalletDetails(ArmoryDialog):
       tooltips[WLTFIELDS.BelongsTo] = self.main.createToolTipWidget(
             'Declare who owns this wallet.  If you click on the field and select '
             '"This wallet is mine", it\'s balance will be included in your total '
-            'Armory Balance in the main window')
+            'DigiArmory Balance in the main window')
 
       tooltips[WLTFIELDS.Time] = self.main.createToolTipWidget(
             'This is exactly how long it takes your computer to unlock your '
@@ -2300,7 +2300,7 @@ class DlgWalletDetails(ArmoryDialog):
             'will be useless for guessing your passphrase')
 
       tooltips[WLTFIELDS.Version] = self.main.createToolTipWidget(
-            'Wallets created with different versions of Armory, may have '
+            'Wallets created with different versions of DigiArmory, may have '
             'different wallet versions.  Not all functionality may be '
             'available with all wallet versions.  Creating a new wallet will '
             'always create the latest version.')
@@ -2551,12 +2551,12 @@ def showRecvCoinsWarningIfNecessary(wlt, main):
    numTimesOnline = main.getSettingOrSetDefault("SyncSuccessCount", 0)
    if numTimesOnline < 1 and not TheBDM.getBDMState() == 'Offline':
       result = QMessageBox.warning(main, tr('Careful!'), tr("""
-         Armory is not online yet, and will eventually need to be online to
+         DigiArmory is not online yet, and will eventually need to be online to
          access any funds sent to your wallet.  Please <u><b>do not</b></u>
-         receive Bitcoins to your Armory wallets until you have successfully
+         receive Digibytes to your DigiArmory wallets until you have successfully
          gotten online <i>at least one time</i>.
          <br><br>
-         Armory is still beta software, and some users report difficulty
+         DigiArmory is still beta software, and some users report difficulty
          ever getting online.
          <br><br>
          Do you wish to continue?"""), QMessageBox.Cancel | QMessageBox.Ok)
@@ -2611,14 +2611,14 @@ class DlgKeypoolSettings(ArmoryDialog):
       self.addressesWereGenerated = False
 
       self.lblDescr = QRichLabel(\
-         'Armory pre-computes a pool of addresses beyond the last address '
+         'DigiArmory pre-computes a pool of addresses beyond the last address '
          'you have used, and keeps them in your wallet to "look-ahead."  One '
          'reason it does this is in case you have restored this wallet from '
-         'a backup, and Armory does not know how many addresses you have actually '
+         'a backup, and DigiArmory does not know how many addresses you have actually '
          'used. '
          '<br><br>'
          'If this wallet was restored from a backup and was very active after '
-         'it was backed up, then it is possible Armory did not pre-compute '
+         'it was backed up, then it is possible DigiArmory did not pre-compute '
          'enough addresses to find your entire balance.  <b>This condition is '
          'rare</b>, but it can happen.  You may extend the keypool manually, '
          'below.')
@@ -2675,7 +2675,7 @@ class DlgKeypoolSettings(ArmoryDialog):
             'New addresses have been generated for your wallet, but their '
             'balances are not yet reflected on the main screen.  You must '
             'initiate a blockchain rescan before this happens.  Press the '
-            'button on the dashboard to do a rescan, or simply restart Armory', \
+            'button on the dashboard to do a rescan, or simply restart DigiArmory', \
             QMessageBox.Ok)
 
       super(DlgKeypoolSettings, self).reject()
@@ -2706,8 +2706,8 @@ class DlgKeypoolSettings(ArmoryDialog):
          confirm = QMessageBox.warning(self, 'Are you sure?', \
             'You have entered that you want to compute %d more addresses '
             'for this wallet.  This operation will take a very long time, '
-            'and Armory will become unresponsive until the computation is '
-            'finished.  Armory estimates it will take about %d minutes. '
+            'and DigiArmory will become unresponsive until the computation is '
+            'finished.  DigiArmory estimates it will take about %d minutes. '
             '<br><br>Do you want to continue?' % (naddr, int(naddr / 750.)), \
             QMessageBox.Yes | QMessageBox.No)
 
@@ -2755,7 +2755,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       offlineWallet = (wlttype == WLTTYPES.Offline)
 
       lblDescr = QLabel(\
-            'The following address can be used to receive bitcoins:')
+            'The following address can be used to receive digibytes:')
       self.edtNewAddr = QLineEdit()
       self.edtNewAddr.setReadOnly(True)
       self.edtNewAddr.setText(addrStr)
@@ -2779,7 +2779,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       tooltip1 = self.main.createToolTipWidget(\
             'You can securely use this address as many times as you want. '
             'However, all people to whom you give this address will '
-            'be able to see the number and amount of bitcoins <b>ever</b> '
+            'be able to see the number and amount of digibytes <b>ever</b> '
             'sent to it.  Therefore, using a new address for each transaction '
             'improves overall privacy, but there is no security issues '
             'with reusing any address.')
@@ -2831,7 +2831,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       frmComment.setLayout(frmCommentLayout)
 
 
-      lblRecvWlt = QRichLabel('Bitcoins sent to this address will '
+      lblRecvWlt = QRichLabel('Digibytes sent to this address will '
             'appear in the wallet:', doWrap=False)
 
       lblRecvWlt.setWordWrap(True)
@@ -2949,7 +2949,7 @@ class DlgImportAddress(ArmoryDialog):
                      'has access to it.  Otherwise, sweep it to get '
                      'the funds out of it.  All standard private-key formats '
                      'are supported <i>except for private keys created by '
-                     'Bitcoin-Qt version 0.6.0 and later (compressed)</i>.')
+                     'Digibyte-Qt version 0.6.0 and later (compressed)</i>.')
 
       lblPrivOne = QRichLabel('Private Key')
       self.edtPrivData = QLineEdit()
@@ -2958,9 +2958,9 @@ class DlgImportAddress(ArmoryDialog):
                        'Supported formats are any hexadecimal or Base58 '
                        'representation of a 32-byte private key (with or '
                        'without checksums), and mini-private-key format '
-                       'used on Casascius physical bitcoins.  Private keys '
+                       'used on Casascius physical digibytes.  Private keys '
                        'that use <i>compressed</i> public keys are not yet '
-                       'supported by Armory.')
+                       'supported by DigiArmory.')
 
       frmMid1 = makeHorizFrame([lblPrivOne, self.edtPrivData, privTooltip])
       stkOne = makeVertFrame([HLINE(), lblDescrOne, frmMid1, STRETCH])
@@ -3039,7 +3039,7 @@ class DlgImportAddress(ArmoryDialog):
       sweepTooltip = self.main.createToolTipWidget(\
          'You should never add an untrusted key to your wallet.  By choosing this '
          'option, you are only moving the funds into your wallet, but not the key '
-         'itself.  You should use this option for Casascius physical bitcoins.')
+         'itself.  You should use this option for Casascius physical digibytes.')
 
       importTooltip = self.main.createToolTipWidget(\
          'This option will make the key part of your wallet, meaning that it '
@@ -3150,7 +3150,7 @@ class DlgImportAddress(ArmoryDialog):
          if binary_to_int(binKeyData, BIGENDIAN) >= SECP256K1_ORDER:
             QMessageBox.critical(self, 'Invalid Private Key', \
                'The private key you have entered is actually not valid '
-               'for the elliptic curve used by Bitcoin (secp256k1).  '
+               'for the elliptic curve used by Digibyte (secp256k1).  '
                'Almost any 64-character hex is a valid private key '
                '<b>except</b> for those greater than: '
                '<br><br>'
@@ -3179,7 +3179,7 @@ class DlgImportAddress(ArmoryDialog):
       except CompressedKeyError, e:
          QMessageBox.critical(self, 'Unsupported key type', 'You entered a key '
             'for an address that uses a compressed public key, usually produced '
-            'in Bitcoin-Qt/bitcoind wallets created after version 0.6.0.  Armory '
+            'in Digibyte-Qt/digibyted wallets created after version 0.6.0.  DigiArmory '
             'does not yet support this key type.')
          LOGERROR('Compressed key data recognized but not supported')
          return
@@ -3195,7 +3195,7 @@ class DlgImportAddress(ArmoryDialog):
       if not 'mini' in keyType.lower():
          reply = QMessageBox.question(self, 'Verify Address', \
                'The key data you entered appears to correspond to '
-               'the following Bitcoin address:\n\n\t' + addrStr +
+               'the following Digibyte address:\n\n\t' + addrStr +
                '\n\nIs this the correct address?',
                QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
          if reply == QMessageBox.Cancel:
@@ -3243,7 +3243,7 @@ class DlgImportAddress(ArmoryDialog):
                      '<b>Wallet Name</b>: ' + self.main.walletMap[wltID].labelName + '<br>'
                      '<b>Address Type</b>: ' + typ +
                      '<br><br>'
-                     'The sweep operation will simply move bitcoins out of the wallet '
+                     'The sweep operation will simply move digibytes out of the wallet '
                      'above into this wallet.  If the network charges a fee for this '
                      'transaction, you balance will be reduced by that much.')
                result = QMessageBox.warning(self, 'Duplicate Address', msg, \
@@ -3287,7 +3287,7 @@ class DlgImportAddress(ArmoryDialog):
                    '<b>Wallet Name</b>: ' + self.main.walletMap[wltID].labelName + '<br>'
                    '<b>Address Type</b>: ' + typ +
                    '<br><br>'
-                   'Armory cannot properly display balances or create transactions '
+                   'DigiArmory cannot properly display balances or create transactions '
                    'when the same address is in multiple wallets at once.  ')
             if typ == 'Imported':
                QMessageBox.critical(self, 'Duplicate Addresses', \
@@ -3331,13 +3331,13 @@ class DlgImportAddress(ArmoryDialog):
                doRescanNow = QMessageBox.question(self, 'Rescan Needed', \
                   'The address was imported successfully, but your wallet balance '
                   'will be incorrect until the global transaction history is '
-                  'searched for previous transactions.  Armory must go into offline '
+                  'searched for previous transactions.  DigiArmory must go into offline '
                   'mode for a several minutes while this scan is performed.'
                   '<br><br>'
                   'Would you like to do the scan now?   Pressing "No" will allow '
                   'you to stay in online mode, but your balances may be incorrect '
                   'until you press the rescan button on the dashboard, or restart '
-                  'Armory.', QMessageBox.Yes | QMessageBox.No)
+                  'DigiArmory.', QMessageBox.Yes | QMessageBox.No)
                if doRescanNow == QMessageBox.Yes:
                   LOGINFO('User requested rescan immediately after import')
                   self.main.startRescanBlockchain()
@@ -3350,7 +3350,7 @@ class DlgImportAddress(ArmoryDialog):
             warnMsg = (\
                'The address was imported successfully, but your wallet balance '
                'will be incorrect until the global transaction history is '
-               'searched for previous transactions.  Armory is currently in the '
+               'searched for previous transactions.  DigiArmory is currently in the '
                'middle of a blockchain scan, but it will start another scan as '
                'soon as this one is complete.  Wallet and address balances will '
                'not be available until these operations are completed.', \
@@ -3426,7 +3426,7 @@ class DlgImportAddress(ArmoryDialog):
             reply = QMessageBox.critical(self, 'Duplicate Addresses!', \
                'You are attempting to sweep %d addresses, but %d of them '
                'are already part of existing wallets.  That means that some or '
-               'all of the bitcoins you sweep may already be owned by you. '
+               'all of the digibytes you sweep may already be owned by you. '
                '<br><br>'
                'Would you like to continue anyway?' % \
                (len(allWltList), len(dupeWltList)), \
@@ -3554,13 +3554,13 @@ class DlgImportAddress(ArmoryDialog):
                doRescanNow = QMessageBox.question(self, 'Rescan Needed', \
                   'The addresses were imported successfully, but your wallet balance '
                   'will be incorrect until the global transaction history is '
-                  'searched for previous transactions.  Armory must go into offline '
+                  'searched for previous transactions.  DigiArmory must go into offline '
                   'mode for a several minutes while this scan is performed.'
                   '<br><br>'
                   'Would you like to do the scan now?   Pressing "No" will allow '
                   'you to stay in online mode, but your balances may be incorrect '
                   'until you press the rescan button on the dashboard, or restart '
-                  'Armory', QMessageBox.Yes | QMessageBox.No)
+                  'DigiArmory', QMessageBox.Yes | QMessageBox.No)
                if doRescanNow == QMessageBox.Yes:
                   LOGINFO('User requested rescan immediately after import')
                   self.main.startRescanBlockchain()
@@ -3573,7 +3573,7 @@ class DlgImportAddress(ArmoryDialog):
             warnMsg = tr(\
                'The addresses were imported successfully, but your wallet balance '
                'will be incorrect until the global transaction history is '
-               'searched for previous transactions.  Armory is currently in the '
+               'searched for previous transactions.  DigiArmory is currently in the '
                'middle of a blockchain scan, but it will start another scan as '
                'soon as this one is complete.  Wallet and address balances will '
                'not be available until these operations are completed.', \
@@ -3615,7 +3615,7 @@ class DlgVerifySweep(ArmoryDialog):
       # frmLayout.addWidget(QRichLabel('Funds will be <i>swept</i>...'), 0,0, 1,2)
       frmLayout.addWidget(QRichLabel('      From ' + inputStr, doWrap=False), 1, 0, 1, 2)
       frmLayout.addWidget(QRichLabel('      To ' + outputStr, doWrap=False), 2, 0, 1, 2)
-      frmLayout.addWidget(QRichLabel('      Total <b>%s</b> BTC %s' % (outStr, feeStr), doWrap=False), 3, 0, 1, 2)
+      frmLayout.addWidget(QRichLabel('      Total <b>%s</b> DGB %s' % (outStr, feeStr), doWrap=False), 3, 0, 1, 2)
       frm.setLayout(frmLayout)
 
       lblFinalConfirm = QLabel('Are you sure you want to execute this transaction?')
@@ -3704,7 +3704,7 @@ class DlgDuplicateAddr(ArmoryDialog):
 
       lblDescr = QRichLabel(\
          '<font color=%s>Duplicate addresses detected!</font> The following '
-         'addresses already exist in other Armory wallets:' % htmlColor('TextWarn'))
+         'addresses already exist in other DigiArmory wallets:' % htmlColor('TextWarn'))
 
       fnt = GETFONT('Fixed', 8)
       w, h = tightSizeNChar(fnt, 50)
@@ -3827,9 +3827,9 @@ class DlgAddressInfo(ArmoryDialog):
       if balCoin > 0:
          goodColor = htmlColor('MoneyPos')
          lbls[-1].append(QRichLabel(\
-            '<font color=' + goodColor + '>' + balStr.strip() + '</font> BTC'))
+            '<font color=' + goodColor + '>' + balStr.strip() + '</font> DGB'))
       else:
-         lbls[-1].append(QRichLabel(balStr.strip() + ' BTC'))
+         lbls[-1].append(QRichLabel(balStr.strip() + ' DGB'))
 
 
       # Number of transactions
@@ -4192,13 +4192,13 @@ class DlgEULA(ArmoryDialog):
 
 
       lblPleaseAgree = QRichLabel(\
-         '<b>Armory Bitcoin Client is licensed under the <i>Affero General '
+         '<b>DigiArmory Digibyte Client is licensed under the <i>Affero General '
          'Public License, Version 3 (AGPLv3)</i></b>'
          '<br><br>'
          'Additionally, as a condition of receiving this software '
          'for free, you accept all risks associated with using it '
-         'and the developers of Armory will not be held liable for any '
-         'loss of money or bitcoins due to software defects.'
+         'and the developers of DigiArmory will not be held liable for any '
+         'loss of money or digibytes due to software defects.'
          '<br><br>'
          '<b>Please read the full terms of the license and indicate your '
          'agreement with its terms.</b>')
@@ -4211,7 +4211,7 @@ class DlgEULA(ArmoryDialog):
 
       dlgLayout.addWidget(frmAll)
       self.setLayout(dlgLayout)
-      self.setWindowTitle('Armory License Agreement')
+      self.setWindowTitle('DigiArmory License Agreement')
       self.setWindowIcon(QIcon(self.main.iconfile))
 
 
@@ -4239,19 +4239,19 @@ class DlgIntroMessage(ArmoryDialog):
       lblInfoImg.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
       lblInfoImg.setMaximumWidth(50)
 
-      lblWelcome = QRichLabel('<b>Welcome to Armory!</b>')
+      lblWelcome = QRichLabel('<b>Welcome to DigiArmory!</b>')
       lblWelcome.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
       lblWelcome.setFont(GETFONT('Var', 14))
-      lblSlogan = QRichLabel('<i>The most advanced Bitcoin Client on Earth!</i>')
+      lblSlogan = QRichLabel('<i>The most advanced Digibyte Client on Earth!</i>')
       lblSlogan.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
       lblDescr = QRichLabel(\
-         '<b>You are about to use the most secure and feature-rich Bitcoin client '
+         '<b>You are about to use the most secure and feature-rich Digibyte client '
          'software available!</b>  But please remember, this software '
-         'is still <i>Beta</i> - Armory developers will not be held responsible '
-         'for loss of bitcoins resulting from the use of this software!'
+         'is still <i>Beta</i> - DigiArmory developers will not be held responsible '
+         'for loss of digibytes resulting from the use of this software!'
          '<br><br>'
-         'For more info about Armory, and Bitcoin itself, see '
+         'For more info about DigiArmory, and Digibyte itself, see '
          '<a href="https://bitcoinarmory.com/faqs">frequently '
          'asked questions</a>.')
       lblDescr.setOpenExternalLinks(True)
@@ -4446,7 +4446,7 @@ class DlgImportPaperWallet(ArmoryDialog):
          QMessageBox.question(self, 'Errors Corrected!', \
             'Detected' + article + ' error' + pluralChar + ' on line' +
             pluralChar + ' ' + englishNumberList(errorLines) +
-            ' in the data you entered.  Armory attempted to fix the ' +
+            ' in the data you entered.  DigiArmory attempted to fix the ' +
             'error' + pluralChar + ' but it is not always right.  Be sure '
             'to verify the "Wallet Unique ID" closely on the next window.', \
             QMessageBox.Ok)
@@ -4582,7 +4582,7 @@ class DlgRemoveWallet(ArmoryDialog):
       lblWarning.setAlignment(Qt.AlignHCenter)
 
       lblWarning2 = QLabel('<i>You have requested that the following wallet '
-                            'be removed from Armory:</i>')
+                            'be removed from DigiArmory:</i>')
       lblWarning.setTextFormat(Qt.RichText)
       lblWarning.setWordWrap(True)
       lblWarning.setAlignment(Qt.AlignHCenter)
@@ -4610,11 +4610,11 @@ class DlgRemoveWallet(ArmoryDialog):
          lbls.append([])
          lbls[3].append(QLabel('Current Balance (w/ unconfirmed):'))
          if bal > 0:
-            lbls[3].append(QLabel('<font color="red"><b>' + coin2str(bal, maxZeros=1).strip() + ' BTC</b></font>'))
+            lbls[3].append(QLabel('<font color="red"><b>' + coin2str(bal, maxZeros=1).strip() + ' DGB</b></font>'))
             lbls[3][-1].setTextFormat(Qt.RichText)
             wltEmpty = False
          else:
-            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' BTC'))
+            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' DGB'))
 
 
       # Add two WARNING images on either side of dialog
@@ -4675,10 +4675,10 @@ class DlgRemoveWallet(ArmoryDialog):
 
       ttipExclude = self.main.createToolTipWidget(\
          '[DISABLED] This will not delete any files, but will add this '
-         'wallet to the "ignore list."  This means that Armory '
+         'wallet to the "ignore list."  This means that DigiArmory '
          'will no longer show this wallet in the main screen '
          'and none of its funds will be added to your balance.  '
-         'You can re-include this wallet in Armory at a later '
+         'You can re-include this wallet in DigiArmory at a later '
          'time by selecting the "Excluded Wallets..." option '
          'in the "Wallets" menu.')
       ttipDelete = self.main.createToolTipWidget(\
@@ -4797,7 +4797,7 @@ class DlgRemoveWallet(ArmoryDialog):
       wltID = wlt.uniqueIDB58
       if self.radioExclude.isChecked():
          reply = QMessageBox.warning(self, tr('Verify Intentions'), tr("""
-           Are you sure you want to remove this wallet from your Armory
+           Are you sure you want to remove this wallet from your DigiArmory
            dashboard?  The wallet file will not be deleted, but you will
            no longer have access to the wallet or its funds unless you
            re-enable it through the "Wallets"->"Excluded Wallets" menu."""), \
@@ -4911,11 +4911,11 @@ class DlgRemoveAddress(ArmoryDialog):
          lbls.append([])
          lbls[-1].append(QLabel('Address Balance (w/ unconfirmed):'))
          if bal > 0:
-            lbls[-1].append(QLabel('<font color="red"><b>' + coin2str(bal, maxZeros=1) + ' BTC</b></font>'))
+            lbls[-1].append(QLabel('<font color="red"><b>' + coin2str(bal, maxZeros=1) + ' DGB</b></font>'))
             lbls[-1][-1].setTextFormat(Qt.RichText)
             addrEmpty = False
          else:
-            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' BTC'))
+            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' DGB'))
 
 
       # Add two WARNING images on either side of dialog
@@ -4968,7 +4968,7 @@ class DlgRemoveAddress(ArmoryDialog):
            'Simply deleting an address does not prevent anyone '
            'from sending money to it.  If you have given this address '
            'to anyone in the past, make sure that they know not to '
-           'use it again, since any bitcoins sent to it will be '
+           'use it again, since any digibytes sent to it will be '
            'inaccessible.\n\n '
            'If you are maintaining an external copy of this address '
            'please ignore this warning\n\n'
@@ -5163,7 +5163,7 @@ class DlgConfirmSend(ArmoryDialog):
 
 
       lblMsg = QRichLabel(tr("""
-         This transaction will spend <b>%s BTC</b> from 
+         This transaction will spend <b>%s DGB</b> from 
          <font color="%s">Wallet "<b>%s</b>" (%s)</font> to the following
          recipients:""") % 
          (totalSendStr, htmlColor('TextBlue'), wlt.labelName, wlt.uniqueIDB58))
@@ -5174,7 +5174,7 @@ class DlgConfirmSend(ArmoryDialog):
             outputs are going to the same wallet from which they came 
             and do not affect the wallet's final balance.
             The total balance of the wallet will actually only decrease 
-            <b>%s BTC</b> as a result of this transaction.  %s</font>""") % \
+            <b>%s DGB</b> as a result of this transaction.  %s</font>""") % \
             (sendFromWalletStr, showAllMsg))
       elif len(showAllMsg)>0:
          lblAfterBox.setText(showAllMsg)
@@ -5261,7 +5261,7 @@ class DlgSendBitcoins(ArmoryDialog):
 
       self.spendFromLockboxID = spendFromLockboxID
 
-      self.frame = SendBitcoinsFrame(self, main, tr('Send Bitcoins'),
+      self.frame = SendBitcoinsFrame(self, main, tr('Send Digibytes'),
                    wlt, prefill, wltIDList, onlyOfflineWallets=onlyOfflineWallets,
                    sendCallback=self.createTxAndBroadcast,
                    createUnsignedTxCallback=self.createUnsignedTxAndDisplay, 
@@ -5419,7 +5419,7 @@ class DlgOfflineSelect(ArmoryDialog):
          the private keys needed for it """))
 
       lblBroadc = QRichLabel(tr("""
-         Send a pre-signed transaction to the Bitcoin network to finalize it"""))
+         Send a pre-signed transaction to the Digibyte network to finalize it"""))
 
       lblBroadc.setMinimumWidth(tightSizeNChar(lblBroadc, 45)[0])
 
@@ -5800,10 +5800,10 @@ class DlgTxFeeOptions(ArmoryDialog):
 
       lblDescr = QLabel(\
          'Transaction fees go to people who contribute processing power to '
-         'the Bitcoin network to process transactions and keep it secure.')
+         'the Digibyte network to process transactions and keep it secure.')
       lblDescr2 = QLabel(\
          'Nearly all transactions are guaranteed to be '
-         'processed if a fee of 0.0005 BTC is included (less than $0.01 USD).  You '
+         'processed if a fee of 0.0005 DGB is included (less than $0.01 USD).  You '
          'will be prompted for confirmation if a higher fee amount is required for '
          'your transaction.')
 
@@ -6083,7 +6083,7 @@ class DlgDispTxInfo(ArmoryDialog):
       if self.mode in (USERMODE.Expert,):
          # Add protocol version and locktime to the display
          lbls.append([])
-         lbls[-1].append(self.main.createToolTipWidget('Bitcoin Protocol Version Number'))
+         lbls[-1].append(self.main.createToolTipWidget('Digibyte Protocol Version Number'))
          lbls[-1].append(QLabel('Tx Version:'))
          lbls[-1].append(QLabel(str(self.pytx.version)))
 
@@ -6164,11 +6164,11 @@ class DlgDispTxInfo(ArmoryDialog):
                'to determine which is which, and so this fields shows the sum '
                'of <b>all</b> outputs.'))
          lbls[-1].append(QLabel('Sum of Outputs:'))
-         lbls[-1].append(QLabel(coin2str(txAmt, maxZeros=1).strip() + '  BTC'))
+         lbls[-1].append(QLabel(coin2str(txAmt, maxZeros=1).strip() + '  DGB'))
       else:
          lbls.append([])
          lbls[-1].append(self.main.createToolTipWidget(
-               'Bitcoins were either sent or received, or sent-to-self'))
+               'Digibytes were either sent or received, or sent-to-self'))
          lbls[-1].append(QLabel('Transaction Direction:'))
          lbls[-1].append(QRichLabel(txdir))
 
@@ -6177,7 +6177,7 @@ class DlgDispTxInfo(ArmoryDialog):
                'The value shown here is the net effect on your '
                'wallet, including transaction fee.'))
          lbls[-1].append(QLabel('Transaction Amount:'))
-         lbls[-1].append(QRichLabel(coin2str(txAmt, maxZeros=1).strip() + '  BTC'))
+         lbls[-1].append(QRichLabel(coin2str(txAmt, maxZeros=1).strip() + '  DGB'))
          if txAmt < 0:
             lbls[-1][-1].setText('<font color="red">' + lbls[-1][-1].text() + '</font> ')
          elif txAmt > 0:
@@ -6188,10 +6188,10 @@ class DlgDispTxInfo(ArmoryDialog):
          fee = self.data[FIELDS.SumIn] - self.data[FIELDS.SumOut]
          lbls.append([])
          lbls[-1].append(self.main.createToolTipWidget(
-            'Transaction fees go to users supplying the Bitcoin network with '
+            'Transaction fees go to users supplying the Digibyte network with '
             'computing power for processing transactions and maintaining security.'))
          lbls[-1].append(QLabel('Tx Fee Paid:'))
-         lbls[-1].append(QLabel(coin2str(fee, maxZeros=0).strip() + '  BTC'))
+         lbls[-1].append(QLabel(coin2str(fee, maxZeros=0).strip() + '  DGB'))
 
 
 
@@ -6231,7 +6231,7 @@ class DlgDispTxInfo(ArmoryDialog):
 
             rlbls[-1].append(QLabel(scrAddr_to_addrStr(sv[0])))
             if numRV > 1:
-               rlbls[-1].append(QLabel(coin2str(sv[1], maxZeros=1) + '  BTC'))
+               rlbls[-1].append(QLabel(coin2str(sv[1], maxZeros=1) + '  DGB'))
             else:
                rlbls[-1].append(QLabel(''))
             ffixBold = GETFONT('Fixed', 10)
@@ -7209,7 +7209,7 @@ class DlgPrintBackup(ArmoryDialog):
             <b><u>Print Wallet Backup Fragments</u></b><br><br>
             When any %d of these fragments are combined, all <u>previous
             <b>and</b> future</u> addresses generated by this wallet will be
-            restored, giving you complete access to your bitcoins.  The
+            restored, giving you complete access to your digibytes.  The
             data can be copied by hand if a working printer is not
             available.  Please make sure that all data lines contain
             <b>9 columns</b>
@@ -7436,7 +7436,7 @@ class DlgPrintBackup(ArmoryDialog):
          self.scene.drawPixmapFile(':/armory_logo_h36.png')
       self.scene.newLine()
 
-      self.scene.drawText('Paper Backup for Armory Wallet', GETFONT('Var', 11))
+      self.scene.drawText('Paper Backup for DigiArmory Wallet', GETFONT('Var', 11))
       self.scene.newLine()
       self.scene.drawText('http://www.bitcoinarmory.com')
 
@@ -7492,7 +7492,7 @@ class DlgPrintBackup(ArmoryDialog):
          container = 'this wallet' if printType == 'SingleSheetFirstPage' else 'these addresses'
          warnMsg = tr("""
             <font color="#aa0000"><b>WARNING:</b></font> Anyone who has access to this
-            page has access to all the bitcoins in %s!  Please keep this
+            page has access to all the digibytes in %s!  Please keep this
             page in a safe place.""" % container)
 
       self.scene.newLine()
@@ -7519,7 +7519,7 @@ class DlgPrintBackup(ArmoryDialog):
                The following is a list of all private keys imported into your
                wallet before this backup was made.   These keys are encrypted
                with the SecurePrint\xe2\x84\xa2 code and can only be restored
-               by entering them into Armory.  Print a copy of this backup without
+               by entering them into DigiArmory.  Print a copy of this backup without
                the SecurePrint\xe2\x84\xa2 option if you want to be able to import
                them into another application.""")
          else:
@@ -7748,11 +7748,11 @@ def OpenPaperBackupWindow(backupType, parent, main, wlt, unlockTitle=None):
          <li>Verify each line of the backup data contains <b>9 columns</b>
          of <b>4 letters each</b> (excluding any "ID" lines).</li>
          <li>%s</li>
-         <li>Use Armory's backup tester to test the backup before you
+         <li>Use DigiArmory's backup tester to test the backup before you
              physically secure it.</li>
       </ul>
       <br>
-      Armory has a backup tester that uses the exact same
+      DigiArmory has a backup tester that uses the exact same
       process as restoring your wallet, but stops before it writes any
       data to disk.  Would you like to test your backup now?
       """) % verifyText, yesStr="Test Backup", noStr="Cancel")
@@ -7779,25 +7779,25 @@ class DlgBadConnection(ArmoryDialog):
       lblDescr = QLabel()
       if not haveInternet and not CLI_OPTIONS.offline:
          lblDescr = QRichLabel(\
-            'Armory was not able to detect an internet connection, so Armory '
+            'DigiArmory was not able to detect an internet connection, so DigiArmory '
             'will operate in "Offline" mode.  In this mode, only wallet'
             '-management and unsigned-transaction functionality will be available. '
             '<br><br>'
             'If this is an error, please check your internet connection and '
-            'restart Armory.<br><br>Would you like to continue in "Offline" mode? ')
+            'restart DigiArmory.<br><br>Would you like to continue in "Offline" mode? ')
       elif haveInternet and not haveSatoshi:
          lblDescr = QRichLabel(\
-            'Armory was not able to detect the presence of Bitcoin-Qt or bitcoind '
+            'DigiArmory was not able to detect the presence of Digibyte-Qt or digibyted '
             'client software (available at http://www.bitcoin.org).  Please make sure that '
             'the one of those programs is... <br>'
             '<br><b>(1)</b> ...open and connected to the network '
-            '<br><b>(2)</b> ...on the same network as Armory (main-network or test-network)'
+            '<br><b>(2)</b> ...on the same network as DigiArmory (main-network or test-network)'
             '<br><b>(3)</b> ...synchronized with the blockchain before '
-            'starting Armory<br><br>Without the Bitcoin-Qt or bitcoind open, you will only '
-            'be able to run Armory in "Offline" mode, which will not have access '
+            'starting DigiArmory<br><br>Without the Digibyte-Qt or digibyted open, you will only '
+            'be able to run DigiArmory in "Offline" mode, which will not have access '
             'to new blockchain data, and you will not be able to send outgoing '
             'transactions<br><br>If you do not want to be in "Offline" mode, please '
-            'restart Armory after one of these programs is open and synchronized with '
+            'restart DigiArmory after one of these programs is open and synchronized with '
             'the network')
       else:
          # Nothing to do -- we shouldn't have even gotten here
@@ -7812,7 +7812,7 @@ class DlgBadConnection(ArmoryDialog):
 
       lblDescr.setMinimumWidth(500)
       self.btnAccept = QPushButton("Continue in Offline Mode")
-      self.btnCancel = QPushButton("Close Armory")
+      self.btnCancel = QPushButton("Close DigiArmory")
       self.connect(self.btnAccept, SIGNAL(CLICKED), self.accept)
       self.connect(self.btnCancel, SIGNAL(CLICKED), abortLoad)
       buttonBox = QDialogButtonBox()
@@ -8154,9 +8154,9 @@ class DlgECDSACalc(ArmoryDialog):
       gystr = '483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8'
 
       lblDescr = QRichLabel(tr("""
-         Use this form to perform Bitcoin elliptic curve calculations.  All
+         Use this form to perform Digibyte elliptic curve calculations.  All
          operations are performed on the secp256k1 elliptic curve, which is
-         the one used for Bitcoin.
+         the one used for Digibyte.
          Supply all values as 32-byte, big-endian, hex-encoded integers.
          <br><br>
          The following is the secp256k1 generator point coordinates (G): <br>
@@ -8224,7 +8224,7 @@ class DlgECDSACalc(ArmoryDialog):
       if not CryptoECDSA().ECVerifyPoint(binBx, binBy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>B</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Digibyte (secp256k1).', QMessageBox.Ok)
          return
 
       C = CryptoECDSA().ECMultiplyPoint(binA, binBx, binBy)
@@ -8246,13 +8246,13 @@ class DlgECDSACalc(ArmoryDialog):
       if not CryptoECDSA().ECVerifyPoint(binAx, binAy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>A</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Digibyte (secp256k1).', QMessageBox.Ok)
          return
 
       if not CryptoECDSA().ECVerifyPoint(binBx, binBy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>B</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Digibyte (secp256k1).', QMessageBox.Ok)
          return
 
       C = CryptoECDSA().ECAddPoints(binAx, binAy, binBx, binBy)
@@ -8323,7 +8323,7 @@ class DlgAddressBook(ArmoryDialog):
       if self.isBrowsingOnly or selectExistingOnly:
          lblDescr = QRichLabel('Browse all receiving addresses in '
                                'this wallet, and all addresses to which this '
-                               'wallet has sent bitcoins.')
+                               'wallet has sent digibytes.')
 
       lblToWlt = QRichLabel('<b>Send to Wallet:</b>')
       lblToAddr = QRichLabel('<b>Send to Address:</b>')
@@ -8421,7 +8421,7 @@ class DlgAddressBook(ArmoryDialog):
       self.useBareMultiSigCheckBox.setVisible(False)
       self.ttipBareMS = self.main.createToolTipWidget( tr("""
          EXPERT OPTION:  Do not check this box unless you know what it means
-                         and you need it!  Forces Armory to exposes public 
+                         and you need it!  Forces DigiArmory to exposes public 
                          keys to the blockchain before the funds are spent.  
                          This is only needed for very specific use cases, 
                          and otherwise creates blockchain bloat."""))
@@ -8706,7 +8706,7 @@ class DlgAddressBook(ArmoryDialog):
             self.useBareMultiSigCheckBox.setChecked(False)
             self.useBareMultiSigCheckBox.setToolTip(tr("""
                Bare multi-sig is not available for M-of-N lockboxes on the 
-               main Bitcoin network with N higher than 3."""))
+               main Digibyte network with N higher than 3."""))
          else:
             self.useBareMultiSigCheckBox.setEnabled(True)
 
@@ -8788,7 +8788,7 @@ class DlgAddressBook(ArmoryDialog):
       if not wid:
          QMessageBox.critical(self, tr('No Public Key'), tr("""
             This operation requires a full public key, not just an address.  
-            Unfortunately, Armory cannot find the public key for the address
+            Unfortunately, DigiArmory cannot find the public key for the address
             you selected.  In general public keys will only be available 
             for addresses in your wallet."""), QMessageBox.Ok)
          return None
@@ -8894,7 +8894,7 @@ class DlgHelpAbout(ArmoryDialog):
       imgLogo.setPixmap(QPixmap(':/armory_logo_h56.png'))
       imgLogo.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
-      lblHead = QRichLabel('Armory Bitcoin Wallet : Version %s-beta' % \
+      lblHead = QRichLabel('DigiArmory Digibyte Wallet : Version %s-beta' % \
                                     getVersionString(BTCARMORY_VERSION), doWrap=False)
       lblWebpage = QRichLabel('<a href="https://www.bitcoinarmory.com">https://www.bitcoinarmory.com</a>')
       lblWebpage.setOpenExternalLinks(True)
@@ -8915,7 +8915,7 @@ class DlgHelpAbout(ArmoryDialog):
 
       self.setMinimumWidth(450)
 
-      self.setWindowTitle('About Armory')
+      self.setWindowTitle('About DigiArmory')
 
 
 ################################################################################
@@ -8926,20 +8926,20 @@ class DlgSettings(ArmoryDialog):
 
 
       ##########################################################################
-      # bitcoind-management settings
+      # digibyted-management settings
       self.chkManageSatoshi = QCheckBox(tr("""
-         Let Armory run Bitcoin-Qt/bitcoind in the background"""))
+         Let DigiArmory run Digibyte-Qt/digibyted in the background"""))
       self.edtSatoshiExePath = QLineEdit()
       self.edtSatoshiHomePath = QLineEdit()
       self.edtSatoshiExePath.setMinimumWidth(tightSizeNChar(GETFONT('Fixed', 10), 40)[0])
       self.connect(self.chkManageSatoshi, SIGNAL(CLICKED), self.clickChkManage)
       self.startChk = self.main.getSettingOrSetDefault('ManageSatoshi', not OS_MACOSX)
       if self.startChk:
-         self.chkManageSatoshi.setChecked(True)
+         self.chkManageSatoshi.setChecked(False)
       if OS_MACOSX:
          self.chkManageSatoshi.setEnabled(False)
          lblManageSatoshi = QRichLabel(\
-            'Bitcoin-Qt/bitcoind management is not available on Mac/OSX')
+            'Digibyte-Qt/digibyted management is not available on Mac/OSX')
       else:
          if self.main.settings.hasSetting('SatoshiExe'):
             satexe = self.main.settings.get('SatoshiExe')
@@ -8949,10 +8949,10 @@ class DlgSettings(ArmoryDialog):
             sathome = self.main.settings.get('SatoshiDatadir')
 
          lblManageSatoshi = QRichLabel(\
-            '<b>Bitcoin Software Management</b>'
+            '<b>DigiArmory Software Management</b>'
             '<br><br>'
-            'By default, Armory will manage the Bitcoin engine/software in the '
-            'background.  You can choose to manage it yourself, or tell Armory '
+            'By default, DigiArmory will manage the Digibyte engine/software in the '
+            'background.  You can choose to manage it yourself, or tell DigiArmory '
             'about non-standard installation configuration.')
       if self.main.settings.hasSetting('SatoshiExe'):
          self.edtSatoshiExePath.setText(self.main.settings.get('SatoshiExe'))
@@ -8961,9 +8961,9 @@ class DlgSettings(ArmoryDialog):
          self.edtSatoshiHomePath.setText(self.main.settings.get('SatoshiDatadir'))
          self.edtSatoshiHomePath.home(False)
 
-      lblDescrExe = QRichLabel('Bitcoin Install Dir:')
-      lblDescrHome = QRichLabel('Bitcoin Home Dir:')
-      lblDefaultExe = QRichLabel('Leave blank to have Armory search default '
+      lblDescrExe = QRichLabel('Digibyte Install Dir:')
+      lblDescrHome = QRichLabel('Digibyte Home Dir:')
+      lblDefaultExe = QRichLabel('Leave blank to have DigiArmory search default '
                                   'locations for your OS', size=2)
       lblDefaultHome = QRichLabel('Leave blank to use default datadir '
                                   '(%s)' % BTC_HOME_DIR, size=2)
@@ -8988,7 +8988,7 @@ class DlgSettings(ArmoryDialog):
       frmMgmt.setLayout(layoutMgmt)
 
       self.clickChkManage()
-      # bitcoind-management settings
+      # digibyted-management settings
       ##########################################################################
 
       # We check for internet connection on each startup.
@@ -8999,13 +8999,13 @@ class DlgSettings(ArmoryDialog):
       self.chkSkipOnlineCheck.setChecked(skipOnlineChk)
 
       self.chkSkipVersionCheck = QCheckBox(tr("""
-         Skip periodic version queries to Armory server"""))
+         Skip periodic version queries to DigiArmory server"""))
       skipVerChk = self.main.getSettingOrSetDefault('SkipVersionCheck', False)
       self.chkSkipVersionCheck.setChecked(skipVerChk)
 
 
       self.chkDisableTorrent = QCheckBox(tr("""
-         Disable torrent download (force synchronization via Bitcoin P2P)"""))
+         Disable torrent download (force synchronization via Digibyte P2P)"""))
       disableTorrent = self.main.getSettingOrSetDefault('DisableTorrent', False)
       self.chkDisableTorrent.setChecked(disableTorrent)
 
@@ -9018,13 +9018,13 @@ class DlgSettings(ArmoryDialog):
       lblPrivacyTitle = QRichLabel("<b>Privacy Settings</b>")
       lblPrivStatsDescr = QRichLabel("""
          When this software checks for updates and security alerts, it sends
-         your operating system and Armory version to ATI server for statistical
+         your operating system and DigiArmory version to ATI server for statistical
          purposes.  No attempt is made to identify you.  No IP addresses are 
          logged by ATI servers.  You can continue to receive notifications 
          but not send any statistical information.""")
       lblPrivTorDescr = QRichLabel("""
-         If you are going to use Armory and Bitcoin Core with a proxy (such
-         as Tor), you should disable all Armory communications that might operate 
+         If you are going to use DigiArmory and Digibyte Core with a proxy (such
+         as Tor), you should disable all DigiArmory communications that might operate 
          outside the proxy.""")
 
       self.chkPrivacyStats = QCheckBox(tr("""
@@ -9043,27 +9043,27 @@ class DlgSettings(ArmoryDialog):
 
    
       lblDefaultUriTitle = QRichLabel(tr("""
-         <b>Set Armory as default URL handler</b>"""))
+         <b>Set DigiArmory as default URL handler</b>"""))
       lblDefaultURI = QRichLabel(tr("""
-         Set Armory to be the default when you click on "bitcoin:"
+         Set DigiArmory to be the default when you click on "digibyte:"
          links in your browser or in emails.
          You can test if your operating system is supported by clicking
-         on a "bitcoin:" link right after clicking this button."""))
-      btnDefaultURI = QPushButton(tr('Set Armory as Default'))
+         on a "digibyte:" link right after clicking this button."""))
+      btnDefaultURI = QPushButton(tr('Set DigiArmory as Default'))
       frmBtnDefaultURI = makeHorizFrame([btnDefaultURI, 'Stretch'])
 
       self.chkAskURIAtStartup = QCheckBox(tr("""
-         Check whether Armory is the default handler at startup"""))
+         Check whether DigiArmory is the default handler at startup"""))
       askuriDNAA = self.main.getSettingOrSetDefault('DNAA_DefaultApp', False)
       self.chkAskURIAtStartup.setChecked(not askuriDNAA)
 
       def clickRegURI():
          self.main.setupUriRegistration(justDoIt=True)
          QMessageBox.information(self, tr('Registered'), tr("""
-            Armory just attempted to register itself to handle "bitcoin:"
+            DigiArmory just attempted to register itself to handle "digibyte:"
             links, but this does not work on all operating systems.  You can
             test it by going to the
-            <a href="http://www.bitcoinarmory.com">Bitcoin Armory
+            <a href="http://www.bitcoinarmory.com">Digibyte Armory
             website</a> and clicking the link at the bottom of the
             homepage."""), QMessageBox.Ok)
 
@@ -9073,9 +9073,9 @@ class DlgSettings(ArmoryDialog):
       ###############################################################
       # Announcements and Alerts
       lblAnnounce = QRichLabel(tr("""
-         Armory Technologies, Inc. will periodically post announcements and
+         DigiArmory Technologies, Inc. will periodically post announcements and
          security alerts.  ATI will also use this channel to notify you of
-         new Armory versions.  All these notifications are signed by an
+         new DigiArmory versions.  All these notifications are signed by an
          offline private key controlled exclusively by ATI."""))
       self.radioAnnounce1024 = QRadioButton(tr("""
          (Level 1) All announcements including testing/unstable versions"""))
@@ -9094,9 +9094,9 @@ class DlgSettings(ArmoryDialog):
 
       lblDisableAnnounce = QRichLabel(tr("""
          <font color="%s">If you must completely disable all notifications
-         from the Armory team, you can run Armory with the
+         from the DigiArmory team, you can run DigiArmory with the
          "--skip-announce-check" flag from the command-line, or add it to
-         the Armory shortcut target</font>""") % htmlColor('DisableFG'))
+         the DigiArmory shortcut target</font>""") % htmlColor('DisableFG'))
 
       btnGroupAnnounce = QButtonGroup(self)
       btnGroupAnnounce.addButton(self.radioAnnounce1024)
@@ -9134,8 +9134,8 @@ class DlgSettings(ArmoryDialog):
          <b>Default fee to include with transactions:</b><br>"""))
       lblDefaultDescr = QRichLabel(tr("""
          Fees go to users that contribute computing power to keep the
-         Bitcoin network secure.  It also increases the priority of your
-         transactions so they confirm faster (%s BTC is standard).""") % \
+         Digibyte network secure.  It also increases the priority of your
+         transactions so they confirm faster (%s DGB is standard).""") % \
          coin2strNZS(MIN_TX_FEE))
 
       ttipDefaultFee = self.main.createToolTipWidget(tr("""
@@ -9156,14 +9156,14 @@ class DlgSettings(ArmoryDialog):
       lblMinimizeDescr = QRichLabel(tr("""
          <b>Minimize to System Tray</b>
          <br>
-         You can have Armory automatically minimize itself to your system
-         tray on open or close.  Armory will stay open but run in the
-         background, and you will still receive notifications.  Access Armory
+         You can have DigiArmory automatically minimize itself to your system
+         tray on open or close.  DigiArmory will stay open but run in the
+         background, and you will still receive notifications.  Access DigiArmory
          through the icon on your system tray.
          <br><br>
          If select "Minimize on close", the 'x' on the top window bar will
-         minimize Armory instead of exiting the application.  You can always use
-         <i>"File"</i>\xe2\x86\x92<i>"Quit Armory"</i> to actually close it."""))
+         minimize DigiArmory instead of exiting the application.  You can always use
+         <i>"File"</i>\xe2\x86\x92<i>"Quit DigiArmory"</i> to actually close it."""))
 
       moo = self.main.getSettingOrSetDefault('MinimizeOnOpen', False)
       self.chkMinOnOpen = QCheckBox(tr('Minimize to system tray on open'))
@@ -9185,10 +9185,10 @@ class DlgSettings(ArmoryDialog):
       notifyDiscon = self.main.getSettingOrSetDefault('NotifyDiscon', not OS_MACOSX)
       notifyReconn = self.main.getSettingOrSetDefault('NotifyReconn', not OS_MACOSX)
 
-      self.chkBtcIn = QCheckBox('Bitcoins Received')
-      self.chkBtcOut = QCheckBox('Bitcoins Sent')
-      self.chkDiscon = QCheckBox('Bitcoin-Qt/bitcoind disconnected')
-      self.chkReconn = QCheckBox('Bitcoin-Qt/bitcoind reconnected')
+      self.chkBtcIn = QCheckBox('Digibytes Received')
+      self.chkBtcOut = QCheckBox('Digibytes Sent')
+      self.chkDiscon = QCheckBox('Digibyte-Qt/digibyted disconnected')
+      self.chkReconn = QCheckBox('Digibyte-Qt/digibyted reconnected')
       self.chkBtcIn.setChecked(notifyBtcIn)
       self.chkBtcOut.setChecked(notifyBtcOut)
       self.chkDiscon.setChecked(notifyDiscon)
@@ -9302,7 +9302,7 @@ class DlgSettings(ArmoryDialog):
       elif self.main.usermode == USERMODE.Expert:
          self.cmbUsermode.setCurrentIndex(2)
 
-      lblUsermode = QRichLabel('<b>Armory user mode:</b>')
+      lblUsermode = QRichLabel('<b>DigiArmory user mode:</b>')
       self.lblUsermodeDescr = QRichLabel('')
       self.setUsermodeDescr()
 
@@ -9454,7 +9454,7 @@ class DlgSettings(ArmoryDialog):
       self.setLayout(dlgLayout)
 
       self.setMinimumWidth(650)
-      self.setWindowTitle('Armory Settings')
+      self.setWindowTitle('DigiArmory Settings')
 
       # NOTE:  This was getting complicated for a variety of reasons, so switched
       #        to manually constructing the options window.  May come back to this
@@ -9491,11 +9491,11 @@ class DlgSettings(ArmoryDialog):
          pathExe = unicode(self.edtSatoshiExePath.text()).strip()
          if len(pathExe) > 0:
             if not os.path.exists(pathExe):
-               exeName = 'bitcoin-qt.exe' if OS_WINDOWS else 'bitcoin-qt'
+               exeName = 'digibyte-qt.exe' if OS_WINDOWS else 'digibyte-qt'
                QMessageBox.warning(self, 'Invalid Path', \
-                  'The path you specified for the Bitcoin software installation '
+                  'The path you specified for the Digibyte software installation '
                   'does not exist.  Please select the directory that contains %s '
-                  'or leave it blank to have Armory search the default location '
+                  'or leave it blank to have DigiArmory search the default location '
                   'for your operating system' % exeName, QMessageBox.Ok)
                return
             if os.path.isfile(pathExe):
@@ -9504,16 +9504,16 @@ class DlgSettings(ArmoryDialog):
          else:
             self.main.settings.delete('SatoshiExe')
 
-         # Check valid path is supplied for bitcoind home directory
+         # Check valid path is supplied for digibyted home directory
          pathHome = unicode(self.edtSatoshiHomePath.text()).strip()
          if len(pathHome) > 0:
             if not os.path.exists(pathHome):
-               exeName = 'bitcoin-qt.exe' if OS_WINDOWS else 'bitcoin-qt'
+               exeName = 'digibyte-qt.exe' if OS_WINDOWS else 'digibyte-qt'
                QMessageBox.warning(self, 'Invalid Path', \
-                  'The path you specified for the Bitcoin software home directory '
+                  'The path you specified for the Digibyte software home directory '
                   'does not exist.  Only specify this directory if you use a '
-                  'non-standard "-datadir=" option when running Bitcoin-Qt or '
-                  'bitcoind.  If you leave this field blank, the following '
+                  'non-standard "-datadir=" option when running Digibyte-Qt or '
+                  'digibyted.  If you leave this field blank, the following '
                   'path will be used: <br><br> %s' % BTC_HOME_DIR, QMessageBox.Ok)
                return
             self.main.writeSetting('SatoshiDatadir', pathHome)
@@ -9535,7 +9535,7 @@ class DlgSettings(ArmoryDialog):
       except:
          QMessageBox.warning(self, 'Invalid Amount', \
             'The default fee specified could not be understood.  Please '
-            'specify in BTC with no more than 8 decimal places.', \
+            'specify in DGB with no more than 8 decimal places.', \
             QMessageBox.Ok)
          return
 
@@ -9572,12 +9572,12 @@ class DlgSettings(ArmoryDialog):
       if self.chkPrivacyTor.isChecked() and not oldTorSetting:
          annURL = 'https://bitcoinarmory.com/announcements/'
          QMessageBox.warning(self, 'Disable Security Alerts?', tr("""
-            You have chosen to disable all Armory communications that are
+            You have chosen to disable all DigiArmory communications that are
             incompatible with proxies/Tor.  This includes 
             checking for security alerts.  If you leave this option
             checked, it is highly recommended that you manually check
             for updates in the "<i>Announcements</i>" tab on the main 
-            window from another online Armory installation and/or
+            window from another online DigiArmory installation and/or
             bookmark our announcements page: 
             <br><br>
             <a href="%s">%s</a>""") % (annURL,annURL), QMessageBox.Ok) 
@@ -9608,13 +9608,13 @@ class DlgSettings(ArmoryDialog):
       if modestr.lower() == 'standard':
          strDescr += \
             ('"Standard" is for users that only need the core set of features '
-             'to send and receive bitcoins.  This includes maintaining multiple '
+             'to send and receive digibytes.  This includes maintaining multiple '
              'wallets, wallet encryption, and the ability to make backups '
              'of your wallets.')
       elif modestr.lower() == 'advanced':
          strDescr += \
             ('"Advanced" mode provides '
-             'extra Armory features such as private key '
+             'extra DigiArmory features such as private key '
              'importing & sweeping, message signing, and the offline wallet '
              'interface.  But, with advanced features come advanced risks...')
       elif modestr.lower() == 'expert':
@@ -9622,7 +9622,7 @@ class DlgSettings(ArmoryDialog):
             ('"Expert" mode is similar to "Advanced" but includes '
              'access to lower-level info about transactions, scripts, keys '
              'and network protocol.  Most extra functionality is geared '
-             'towards Bitcoin software developers.')
+             'towards Digibyte software developers.')
       self.lblUsermodeDescr.setText(strDescr)
 
 
@@ -10031,8 +10031,8 @@ class DlgRequestPayment(ArmoryDialog):
 
       lblDescr = QRichLabel(\
          'Create a clickable link that you can copy into email or webpage to '
-         'request a payment.   If the user is running a Bitcoin program '
-         'that supports "bitcoin:" links, that program will open with '
+         'request a payment.   If the user is running a Digibyte program '
+         'that supports "digibyte:" links, that program will open with '
          'all this information pre-filled after they click the link.')
 
       lblDescr.setContentsMargins(5, 5, 5, 5)
@@ -10040,17 +10040,17 @@ class DlgRequestPayment(ArmoryDialog):
 
 
       ttipPreview = self.main.createToolTipWidget(\
-         'The following Bitcoin desktop applications <i>try</i> to '
-         'register themselves with your computer to handle "bitcoin:" '
-         'links: Armory, Multibit, Electrum')
+         'The following Digibyte desktop applications <i>try</i> to '
+         'register themselves with your computer to handle "digibyte:" '
+         'links: DigiArmory, Multibit, Electrum')
       ttipLinkText = self.main.createToolTipWidget(\
          'This is the text to be shown as the clickable link.  It should '
          'usually begin with "Click here..." to reaffirm to the user it is '
          'is clickable.')
       ttipAmount = self.main.createToolTipWidget(\
-         'All amounts are specifed in BTC')
+         'All amounts are specifed in DGB')
       ttipAddress = self.main.createToolTipWidget(\
-         'The person clicking the link will be sending bitcoins to this address')
+         'The person clicking the link will be sending digibytes to this address')
       ttipMessage = self.main.createToolTipWidget(\
          'This will be pre-filled as the label/comment field '
          'after the user clicks the link. They '
@@ -10077,7 +10077,7 @@ class DlgRequestPayment(ArmoryDialog):
       layoutEntry.addWidget(ttipAddress, i, 2)
 
       i += 1
-      layoutEntry.addWidget(QRichLabel('<b>Request (BTC):</b>'), i, 0)
+      layoutEntry.addWidget(QRichLabel('<b>Request (DGB):</b>'), i, 0)
       layoutEntry.addWidget(self.edtAmount, i, 1)
 
       i += 1
@@ -10234,7 +10234,7 @@ class DlgRequestPayment(ArmoryDialog):
       self.dispText += '<br>'
       self.dispText += '<b>Pay to</b>:\t%s<br>' % addr
       if amt:
-         self.dispText += '<b>Amount</b>:\t%s BTC<br>' % coin2str(amt, maxZeros=0).strip()
+         self.dispText += '<b>Amount</b>:\t%s DGB<br>' % coin2str(amt, maxZeros=0).strip()
       if msgStr:
          self.dispText += '<b>Message</b>:\t%s<br>' % msgStr
       self.lblLink.setText(self.dispText)
@@ -10249,7 +10249,7 @@ class DlgRequestPayment(ArmoryDialog):
       self.plainText += 'If clicking on the line above does not work, use this payment info:\n'
       self.plainText += 'Pay to:  %s' % addr
       if amt:
-         self.plainText += '\nAmount:  %s BTC' % coin2str(amt, maxZeros=0).strip()
+         self.plainText += '\nAmount:  %s DGB' % coin2str(amt, maxZeros=0).strip()
       if msgStr:
          self.plainText += '\nMessage: %s' % msgStr
       self.plainText += '\n'
@@ -10378,15 +10378,15 @@ class DlgNotificationWithDNAA(ArmoryDialog):
          currVerStr = getVersionString(BTCARMORY_VERSION)
          versionString = tr("""You are using version %s<br>""") % currVerStr
       elif minver=='*':
-         versionString = tr('Affects Armory versions:  ')
+         versionString = tr('Affects DigiArmory versions:  ')
          if maxver=='*':
-            versionString = 'Affects all Armory versions'
+            versionString = 'Affects all DigiArmory versions'
          elif maxExclude:
             versionString += tr('before %s<br>' % maxver)
          else:
             versionString += tr('%s%s<br>' % (LTE, maxver))
       elif minExclude:
-         versionString = tr('Affects Armory versions ')
+         versionString = tr('Affects DigiArmory versions ')
          if maxver=='*':
             versionString += tr('after %s<br>' % minver)
          elif maxExclude:
@@ -10394,7 +10394,7 @@ class DlgNotificationWithDNAA(ArmoryDialog):
          else:
             versionString += tr('after %s,  %s%s<br>' % (minver, LTE, maxver))
       else:
-         versionString = tr('Affects Armory versions ')
+         versionString = tr('Affects DigiArmory versions ')
          if maxver=='*':
             versionString += tr('%s%s<br>' % (GTE,minver))
          elif maxExclude:
@@ -10418,11 +10418,11 @@ class DlgNotificationWithDNAA(ArmoryDialog):
          headerSz = 4         
           
          if isTesting:
-            titleStr = tr('New Armory Test Build')
+            titleStr = tr('New DigiArmory Test Build')
             headerStr = tr("""New Testing Version Available!""")        
          else:
-            titleStr = tr('Upgrade Armory')
-            headerStr = tr("""Armory is out-of-date!""")
+            titleStr = tr('Upgrade DigiArmory')
+            headerStr = tr("""DigiArmory is out-of-date!""")
             
       elif 0 <= priority < 2048:
          iconFile = ':/MsgBox_info48.png'
@@ -10434,19 +10434,19 @@ class DlgNotificationWithDNAA(ArmoryDialog):
          titleStr = ''
          headerSz = 4
          headerStr = tr("""
-            Important Information from <i>Armory Technologies, Inc.</i>""")
+            Important Information from <i>DigiArmory Technologies, Inc.</i>""")
       elif 4096 <= priority < 5120:
          iconFile = ':/MsgBox_critical64.png'
          titleStr = tr('Alert')
          headerSz = 4
          headerStr = tr("""
-            Security Alert from <i>Armory Technologies, Inc.</i>""")
+            Security Alert from <i>DigiArmory Technologies, Inc.</i>""")
       elif 5120 <= priority:
          iconFile = ':/MsgBox_critical64.png'
          titleStr = tr('Alert')
          headerSz = 4
          headerStr = tr("""
-            Critical Security Alert from <i>Armory Technologies, Inc.</i>""")
+            Critical Security Alert from <i>DigiArmory Technologies, Inc.</i>""")
 
       lblHeader =  QRichLabel(tr("""
          <font size=%d color="%s"><b>%s</b></font><br>""") % \
@@ -10463,13 +10463,13 @@ class DlgNotificationWithDNAA(ArmoryDialog):
       lastWord = ''
       if not isUpgrade:
          lastWord = tr("""
-         If new versions of Armory are available, you can get them
+         If new versions of DigiArmory are available, you can get them
          using our <font color="red"><a href="secureDL(Armory)">secure
          downloader</a></font> """)
 
       lblBottomInfo = QRichLabel(tr("""
          You can access all alerts and announcements from the
-         "Announcements" tab on the main Armory window.""") + lastWord)
+         "Announcements" tab on the main DigiArmory window.""") + lastWord)
 
 
       def doUDD(href=None):
@@ -10579,12 +10579,12 @@ class DlgUriCopyAndPaste(ArmoryDialog):
       super(DlgUriCopyAndPaste, self).__init__(parent, main)
 
       self.uriDict = {}
-      lblDescr = QRichLabel('Copy and paste a raw bitcoin URL string here.  '
-                            'A valid string starts with "bitcoin:" followed '
-                            'by a bitcoin address.'
+      lblDescr = QRichLabel('Copy and paste a raw digibyte URL string here.  '
+                            'A valid string starts with "digibyte:" followed '
+                            'by a digibyte address.'
                             '<br><br>'
-                            'You should use this feature if there is a "bitcoin:" '
-                            'link in a webpage or email that does not load Armory '
+                            'You should use this feature if there is a "digibyte:" '
+                            'link in a webpage or email that does not load DigiArmory '
                             'when you click on it.  Instead, right-click on the '
                             'link and select "Copy Link Location" then paste it '
                             'into the box below. ')
@@ -10807,7 +10807,7 @@ class DlgQRCodeDisplay(ArmoryDialog):
 # STUB STUB STUB STUB STUB
 class ArmoryPref(object):
    """
-   Create a class that will handle arbitrary preferences for Armory.  This
+   Create a class that will handle arbitrary preferences for DigiArmory.  This
    means that I can just create maps/lists of preferences, and auto-include
    them in the preferences dialog, and know how to set/get them.  This will
    be subclassed for each unique/custom preference type that is needed.
@@ -10871,7 +10871,7 @@ class DlgInstallLinux(ArmoryDialog):
 
 
       lblOptions = QRichLabel(\
-         'If you have manually installed Bitcoin-Qt or bitcoind on this system '
+         'If you have manually installed Digibyte-Qt or digibyted on this system '
          'before, it is recommended you use the method here you previously used.  '
          'If you get errors using this option, try using the manual instructions '
          'below.')
@@ -10889,12 +10889,12 @@ class DlgInstallLinux(ArmoryDialog):
       # Install via PPA
       lblAutoPPATitle = QRichLabel('<b>Install PPA for me (Ubuntu only):</b>')
       lblAutoPPA = QRichLabel(\
-         'Have Armory install the PPA for you.  The does not work on all '
+         'Have DigiArmory install the PPA for you.  The does not work on all '
          'systems, so try the manual instructions below, if it fails.  '
-         'Using the PPA will install the Bitcoin software using your '
+         'Using the PPA will install the Digibyte software using your '
          'system\'s package manager, and you will be notified of updates along with '
          'other software on your system.')
-      self.btnAutoPPA = QPushButton('Install Bitcoin PPA')
+      self.btnAutoPPA = QPushButton('Install Digibyte PPA')
       self.connect(self.btnAutoPPA, SIGNAL(CLICKED), self.doPPA)
       self.btnAutoPPA.setToolTip(\
          'Click to install the Bitcoin PPA for Ubuntu')
@@ -10915,7 +10915,7 @@ class DlgInstallLinux(ArmoryDialog):
          '<br>'
          'sudo apt-get update'
          '<br>'
-         'sudo apt-get install bitcoin-qt bitcoind')
+         'sudo apt-get install digibyte-qt digibyted')
       lblInstallPPACmds.setFont(GETFONT('Courier', 10))
       lblInstallPPACmds.setTextInteractionFlags(Qt.TextSelectableByMouse | \
                                                 Qt.TextSelectableByKeyboard)
@@ -10938,15 +10938,15 @@ class DlgInstallLinux(ArmoryDialog):
       lblManualExperiment = QRichLabel(\
          '<b>Download and set it up for me!  (All Linux):</b>'
          '<br><br>'
-         'Armory will download and verify the binaries from www.bitcoin.org.  '
-         'Your Armory settings will automatically be adjusted to point to that '
+         'DigiArmory will download and verify the binaries from www.bitcoin.org.  '
+         'Your DigiArmory settings will automatically be adjusted to point to that '
          'as the installation directory.')
       btnManualExperiment = QPushButton('Install for me!')
       self.connect(btnManualExperiment, SIGNAL(CLICKED), self.tryManualInstall)
       self.chkCustomDLPath = QCheckBox('Select custom download location')
 
       lblInstallManualDescr = QRichLabel(\
-         '<b>Manual download and install of the Bitcoin software:</b><br>'
+         '<b>Manual download and install of the Digibyte software:</b><br>'
          '<ol>'
          '<li>Go to <a href="http://www.bitcoin.org/en/download">'
          'http://www.bitcoin.org/en/download</a></li>'
@@ -10956,8 +10956,8 @@ class DlgInstallLinux(ArmoryDialog):
          '</ol>'
          '<br>'
          'Once the downloaded archive is unpacked, then click the button below '
-         'to open the Armory settings and change the "Bitcoin Installation Path" '
-         'to point to the new directory.  Then restart Armory')
+         'to open the DigiArmory settings and change the "Digibyte Installation Path" '
+         'to point to the new directory.  Then restart DigiArmory')
       lblInstallManualDescr.setOpenExternalLinks(True)
 
 
@@ -11002,7 +11002,7 @@ class DlgInstallLinux(ArmoryDialog):
 
       self.radioUbuntuPPA.setChecked(True)
       self.clickInstallOpt()
-      self.setWindowTitle('Install Bitcoin in Linux')
+      self.setWindowTitle('Install Digibyte in Linux')
 
       from twisted.internet import reactor
       reactor.callLater(0.2, self.main.checkForLatestVersion)
@@ -11012,9 +11012,9 @@ class DlgInstallLinux(ArmoryDialog):
       dlDict = self.main.downloadDict.copy()
       if not 'SATOSHI' in dlDict or not 'Linux' in dlDict['SATOSHI']:
          QMessageBox.warning(self, 'Not available', \
-            'Armory does not actually have the information needed to execute '
-            'this process securely.  Please visit the bitcoin.org and download '
-            'the Linux version of the Bitcoin software, then modify your '
+            'DigiArmory does not actually have the information needed to execute '
+            'this process securely.  Please visit the digibyte.co and download '
+            'the Linux version of the Digibyte software, then modify your '
             'settings to point to where it was unpacked. ', QMessageBox.Ok)
          return
 
@@ -11023,7 +11023,7 @@ class DlgInstallLinux(ArmoryDialog):
          if not os.path.exists(installPath):
             os.makedirs(installPath)
       else:
-         title = 'Download Bitcoin software to...'
+         title = 'Download Digibyte software to...'
          initPath = self.main.settings.get('LastDirectory')
          if not OS_MACOSX:
             installPath = unicode(QFileDialog.getExistingDirectory(self, title, initPath))
@@ -11047,7 +11047,7 @@ class DlgInstallLinux(ArmoryDialog):
       if len(fileData) == 0 or dlg.dlVerifyFailed:
          QMessageBox.critical(self, 'Download Failed', \
             'The download failed.  Please visit www.bitcoin.org '
-            'to download and install Bitcoin-Qt manually.', QMessageBox.Ok)
+            'to download and install Digibyte-Qt manually.', QMessageBox.Ok)
          import webbrowser
          webbrowser.open('http://www.bitcoin.org/en/download')
          return
@@ -11114,11 +11114,11 @@ def tryInstallLinux(main):
    def doit():
       #print '\n'
       #print '***** Executing auto-install in linux...'
-      out, err = execAndWait('gksudo "apt-get remove -y bitcoin-qt bitcoind"', \
+      out, err = execAndWait('gksudo "apt-get remove -y digibyte-qt digibyted"', \
                              timeout=20)
       out, err = execAndWait(('gksudo apt-add-repository ppa:bitcoin/bitcoin; '
                              'gksudo apt-get update; '
-                             'gksudo "apt-get install -y bitcoin-qt bitcoind"'), \
+                             'gksudo "apt-get install -y digibyte-qt digibyted"'), \
                              timeout=120)
       try:
          TheSDM.setupSDM()
@@ -11132,12 +11132,12 @@ def tryInstallLinux(main):
          LOGINFO('***** Printing errors\n' + err)
          LOGINFO('***** End print errors\n')
          QMessageBox.warning(main, 'Unknown Error', \
-            'An error was reported while trying to install the Bitcoin '
+            'An error was reported while trying to install the Digibyte '
             'software.  The following information is given:<br><br>%s' % err, \
             QMessageBox.Ok)
          raise
 
-   DlgExecLongProcess(doit, 'Installing Bitcoin Software...', main, main).exec_()
+   DlgExecLongProcess(doit, 'Installing Digibyte Software...', main, main).exec_()
 
 
 ################################################################################
@@ -11430,11 +11430,11 @@ class DlgSimpleBackup(ArmoryDialog):
       self.wlt = wlt
 
       lblDescrTitle = QRichLabel(tr("""
-         <b>Protect Your Bitcoins -- Make a Wallet Backup!</b>"""))
+         <b>Protect Your Digibytes -- Make a Wallet Backup!</b>"""))
 
       lblDescr = QRichLabel(tr("""
          A failed hard-drive or forgotten passphrase will lead to
-         <u>permanent loss of bitcoins</u>!  Luckily, Armory wallets only
+         <u>permanent loss of digibytes</u>!  Luckily, DigiArmory wallets only
          need to be backed up <u>one time</u>, and protect you in both
          of these events.   If you've ever forgotten a password or had
          a hardware failure, make a backup! """))
@@ -12301,7 +12301,7 @@ class DlgUniversalRestoreSelect(ArmoryDialog):
 
       lblDescrTitle = QRichLabel(tr("""
          <b><u>Restore Wallet from Backup</u></b>"""))
-      lblDescr = QRichLabel(tr("""You can restore any kind of backup ever created by Armory using
+      lblDescr = QRichLabel(tr("""You can restore any kind of backup ever created by DigiArmory using
          one of the options below.  If you have a list of private keys
          you should open the target wallet and select "Import/Sweep
          Private Keys."  """))
@@ -12598,7 +12598,7 @@ class DlgRestoreSingle(ArmoryDialog):
          pluralStr = 'error' if nError == 1 else 'errors'
          QMessageBox.question(self, tr('Errors Corrected'), tr("""
             Detected %d @{error|errors}@ in the data you entered.
-            Armory attempted to fix the @{error|errors}@ but it is not
+            DigiArmory attempted to fix the @{error|errors}@ but it is not
             always right.  Be sure to verify the "Wallet Unique ID"
             closely on the next window.""", nError, nError), \
             QMessageBox.Ok)
@@ -13006,7 +13006,7 @@ class DlgRestoreFragged(ArmoryDialog):
       if self.thisIsATest:
          descr += tr(""" <br><br>
             <b>For testing purposes, you may enter more fragments than needed
-            and Armory will test all subsets of the entered fragments to verify
+            and DigiArmory will test all subsets of the entered fragments to verify
             that each one still recovers the wallet successfully.</b>""")
 
       lblDescr = QRichLabel(descr)
@@ -13946,7 +13946,7 @@ def verifyRecoveryTestID(parent, computedWltID, expectedWltID=None):
    if expectedWltID == None:
       # Testing an arbitrary paper backup
       yesno = QMessageBox.question(parent, tr('Recovery Test'), tr("""
-         From the data you entered, Armory calculated the following
+         From the data you entered, DigiArmory calculated the following
          wallet ID: <font color="blue"><b>%s</b></font>
          <br><br>
          Does this match the wallet ID on the backup you are
@@ -14113,11 +14113,11 @@ class DlgWltRecoverWallet(ArmoryDialog):
          <b>Wallet Recovery Tool:
          </b><br>
          This tool will recover data from damaged or inconsistent 
-         wallets.  Specify a wallet file and Armory will analyze the
+         wallets.  Specify a wallet file and DigiArmory will analyze the
          wallet and fix any errors with it. 
          <br><br>
          <font color="%s">If any problems are found with the specified
-         wallet, Armory will provide explanation and instructions to 
+         wallet, DigiArmory will provide explanation and instructions to 
          transition to a new wallet. """) % htmlColor('TextWarn'))
       lblDesc.setScaledContents(True)
 
@@ -14564,7 +14564,7 @@ class DlgCorruptWallet(DlgProgress):
       lblDescr = QRichLabel(tr("""
          <font color="%s" size=5><b><u>%s</u></b></font>
          <br><br>
-         Armory software now detects and prevents certain kinds of 
+         DigiArmory software now detects and prevents certain kinds of 
          hardware errors that could lead to problems with your wallet.  
          <br> """) % (htmlColor('TextWarn'), titleStr))
 
@@ -14573,16 +14573,16 @@ class DlgCorruptWallet(DlgProgress):
 
       if alreadyFailed:
          self.lblFirstMsg = QRichLabel(tr("""
-            Armory has detected that wallet file <b>Wallet "%s" (%s)</b> 
+            DigiArmory has detected that wallet file <b>Wallet "%s" (%s)</b> 
             is inconsistent and should be further analyzed to ensure that your
             funds are protected.
             <br><br>
             <font color="%s">This error will pop up every time you start 
-            Armory until the wallet has been analyzed and fixed!</font>""") % \
+            DigiArmory until the wallet has been analyzed and fixed!</font>""") % \
             (wallet.labelName, wallet.uniqueIDB58, htmlColor('TextWarn')))
       elif isinstance(wallet, PyBtcWallet):
          self.lblFirstMsg = QRichLabel(tr("""
-            Armory will perform a consistency check on <b>Wallet "%s" (%s)</b> 
+            DigiArmory will perform a consistency check on <b>Wallet "%s" (%s)</b> 
             and determine if any further action is required to keep your funds
             protected.  This check is normally performed on startup on all 
             your wallets, but you can click below to force another 
@@ -14793,7 +14793,7 @@ class DlgCorruptWallet(DlgProgress):
                wallet!</u></b></font>
                <br>
                It is important that you send us the recovery logs 
-               and an email address so the Armory team can check for 
+               and an email address so the DigiArmory team can check for 
                further risk to your funds!</b></font>""") % \
                (htmlColor('TextWarn')))
             #self.main.statusBar().showMessage('Wallets fixed!', 15000)
@@ -14836,13 +14836,13 @@ class DlgFactoryReset(ArmoryDialog):
       super(DlgFactoryReset, self).__init__(parent, main)
 
       lblDescr = QRichLabel(tr("""
-         <b><u>Armory Factory Reset</u></b>
+         <b><u>DigiArmory Factory Reset</u></b>
          <br><br>
          It is <i>strongly</i> recommended that you make backups of your
          wallets before continuing, though <b>wallet files will never be
-         intentionally deleted!</b>  All Armory
-         wallet files, and the wallet.dat file used by Bitcoin-Qt/bitcoind
-         should remain untouched in their current locations.  All Armory
+         intentionally deleted!</b>  All DigiArmory
+         wallet files, and the wallet.dat file used by Digibyte-Qt/digibyted
+         should remain untouched in their current locations.  All DigiArmory
          wallets will automatically be detected and loaded after the reset.
          <br><br>
          If you are not sure which option to pick, try the "lightest option"
@@ -14856,21 +14856,21 @@ class DlgFactoryReset(ArmoryDialog):
          <b>Delete settings and rescan (lightest option)</b>"""))
       self.lblSettings = QRichLabel(tr("""
          Only delete the settings file and transient network data.  The
-         databases built by Armory will be rescanned (about 5-45 minutes)"""))
+         databases built by DigiArmory will be rescanned (about 5-45 minutes)"""))
 
       self.rdoArmoryDB = QRadioButton()
       self.lblArmoryDBText = QRichLabel(tr("""
          <b>Also delete databases and rebuild</b>"""))
       self.lblArmoryDB = QRichLabel(tr("""
-         Will delete settings, network data, and delete and Armory's databases,
+         Will delete settings, network data, and delete and DigiArmory's databases,
          forcing a rebuild and rescan (45 min to 3 hours)"""))
 
       self.rdoBitcoinDB = QRadioButton()
       self.lblBitcoinDBText = QRichLabel(tr("""
          <b>Also re-download the blockchain (most extreme)</b>"""))
       self.lblBitcoinDB = QRichLabel(tr("""
-         This will delete settings, network data, Armory's databases,
-         <b>and</b> the Bitcoin software databases.  Bitcoin-Qt/bitcoind will
+         This will delete settings, network data, DigiArmory's databases,
+         <b>and</b> the Digibyte software databases.  Digibyte-Qt/digibyted will
          have to download the 15+ GB blockchain again.  Only use this if you
          suspect blockchain corruption, such as receiving StdOut/StdErr errors
          on the dashboard (8-72 hours depending on your connection)"""))
@@ -14933,7 +14933,7 @@ class DlgFactoryReset(ArmoryDialog):
 
       if self.rdoSettings.isChecked():
          reply = QMessageBox.warning(self, tr('Confirmation'), tr("""
-            You are about to delete your settings and force Armory to rescan
+            You are about to delete your settings and force DigiArmory to rescan
             its databases.  Are you sure you want to do this?"""), \
             QMessageBox.Cancel | QMessageBox.Ok)
 
@@ -14948,7 +14948,7 @@ class DlgFactoryReset(ArmoryDialog):
 
       elif self.rdoArmoryDB.isChecked():
          reply = QMessageBox.warning(self, tr('Confirmation'), tr("""
-            You are about to delete your settings and force Armory to delete
+            You are about to delete your settings and force DigiArmory to delete
             and rebuild its databases.  Are you sure you want to do this?"""), \
             QMessageBox.Cancel | QMessageBox.Ok)
 
@@ -14968,7 +14968,7 @@ class DlgFactoryReset(ArmoryDialog):
             
          reply = QMessageBox.warning(self, tr('Confirmation'), tr("""
             You are about to %sdelete <b>all</b>
-            blockchain databases on your system.  The Bitcoin software will
+            blockchain databases on your system.  The Digibyte software will
             have to redownload 15+ GB of blockchain data over the peer-to-peer
             network again which can take from 8 to 72 hours depending on
             your system speed and connection.  <br><br><b>Are you absolutely
@@ -14985,14 +14985,14 @@ class DlgFactoryReset(ArmoryDialog):
 
          if not self.main.settings.get('ManageSatoshi'):
             # Must have user shutdown Bitcoin sw now, and delete DBs now
-            reply = MsgBoxCustom(MSGBOX.Warning, tr('Restart Armory'), tr("""
-               <b>Bitcoin-Qt (or bitcoind) must be closed to do the reset!</b>
-               Please close all Bitcoin software, <u><b>right now</b></u>,
+            reply = MsgBoxCustom(MSGBOX.Warning, tr('Restart DigiArmory'), tr("""
+               <b>Digibyte-Qt (or digibyted) must be closed to do the reset!</b>
+               Please close all Digibyte software, <u><b>right now</b></u>,
                before clicking "Continue".
                <br><br>
-               Armory will now close.  Please restart Bitcoin-Qt/bitcoind
+               DigiArmory will now close.  Please restart Digibyte-Qt/digibyted
                first and wait for it to finish synchronizing before restarting
-               Armory."""), wCancel=True, yesStr="Continue")
+               DigiArmory."""), wCancel=True, yesStr="Continue")
 
             if not reply:
                QMessageBox.warning(self, tr('Aborted'), tr("""
@@ -15004,8 +15004,8 @@ class DlgFactoryReset(ArmoryDialog):
             # Do the delete operation now
             deleteBitcoindDBs()
          else:
-            reply = QMessageBox.warning(self, tr('Restart Armory'), tr("""
-               Armory will now close to apply the requested changes.  Please
+            reply = QMessageBox.warning(self, tr('Restart DigiArmory'), tr("""
+               DigiArmory will now close to apply the requested changes.  Please
                restart it when you are ready to start the blockchain download
                again."""), QMessageBox.Ok)
 
@@ -15027,8 +15027,8 @@ class DlgFactoryReset(ArmoryDialog):
          self.accept()
 
 
-      QMessageBox.information(self, tr('Restart Armory'), tr("""
-         Armory will now close so that the requested changes can
+      QMessageBox.information(self, tr('Restart DigiArmory'), tr("""
+         DigiArmory will now close so that the requested changes can
          be applied."""), QMessageBox.Ok)
       self.accept()
 
@@ -15046,7 +15046,7 @@ class DlgForkedImports(ArmoryDialog):
       
       descr3 = 'When you fix a corrupted wallet, any damaged private keys will be off \
       the determinstic chain. It means these private keys cannot be recreated \
-      by your paper backup. If such private keys are encountered, Armory saves \
+      by your paper backup. If such private keys are encountered, DigiArmory saves \
       them as forked imported private keys after it fixes the relevant wallets.'
       
       descr4 = '<h1 style="color: orange;"> - Do not accept payments to these wallets anymore<br>\
@@ -15097,8 +15097,8 @@ class DlgBroadcastBlindTx(ArmoryDialog):
       self.pytx = None
 
       lblDescr = QRichLabel(tr("""
-         Copy a raw, hex-encoded transaction below to have Armory 
-         broadcast it to the Bitcoin network.  This function is 
+         Copy a raw, hex-encoded transaction below to have DigiArmory 
+         broadcast it to the Digibyte network.  This function is 
          provided as a convenience to expert users, and carries 
          no guarantees of usefulness.
          <br><br>
@@ -15107,11 +15107,11 @@ class DlgBroadcastBlindTx(ArmoryDialog):
          <ul>
             <li>The transaction will be "broadcast" by sending it
                 to the connected Bitcon Core instance which will
-                forward it to the rest of the Bitcoin network.  
+                forward it to the rest of the Digibyte network.  
                 However, if the transaction is non-standard or 
-                does not satisfy standard fee rules, Bitcoin Core 
+                does not satisfy standard fee rules, Digibyte Core 
                 <u>will</u> drop it and it 
-                will never be seen by the Bitcoin network. 
+                will never be seen by the Digibyte network. 
             </li>
             <li>There will be no feedback as to whether the
                 transaction succeeded.  You will have to verify the
@@ -15206,11 +15206,11 @@ class DlgBroadcastBlindTx(ArmoryDialog):
          dispToExplorer = 'https://blockchain.info/search/%s...' % hexhash[:16]
 
       QMessageBox.information(self, tr("Broadcast!"), tr("""
-         Your transaction was successfully sent to the local Bitcoin
+         Your transaction was successfully sent to the local Digibyte
          Core instance, though there is no guarantees that it was
          forwarded to the rest of the network.   On testnet, just about
          every valid transaction will successfully propagate.  On the
-         main Bitcoin network, this will fail unless it was a standard
+         main Digibyte network, this will fail unless it was a standard
          transaction type.
 
          The transaction 
@@ -15239,7 +15239,7 @@ class DlgPrivacyPolicy(ArmoryDialog):
 
       if popupType=='generic':
          descrTxt = tr("""
-            Unless explicitly disabled, Armory periodically contacts ATI 
+            Unless explicitly disabled, DigiArmory periodically contacts ATI 
             servers for alerts and software updates.  These checks expose 
             your IP address, software version, and operating system 
             to ATI servers, as well as any other servers 
@@ -15251,12 +15251,12 @@ class DlgPrivacyPolicy(ArmoryDialog):
             By using this software and submitting this information to 
             ATI, you are agreeing to the ATI privacy policy at the 
             link below.  The page also includes information
-            about changing Armory's default privacy settings.""")
+            about changing DigiArmory's default privacy settings.""")
       elif popupType=='submitbug':
          descrTxt = tr("""
             You are submitting a bug report to ATI servers.  Your log 
             files will be included unless you explicitly unselected it
-            from the bug submission screen.  Armory log files do not 
+            from the bug submission screen.  DigiArmory log files do not 
             contain any <u>security</u>-sensitive
             information, but some users may consider the information to be
             <u>privacy</u>-sensitive.  The log files may identify some 
@@ -15274,7 +15274,7 @@ class DlgPrivacyPolicy(ArmoryDialog):
             By using this software and submitting this information to 
             ATI, you are agreeing to the ATI privacy policy at the 
             link below.  The page also includes information about 
-            changing Armory's default privacy settings.
+            changing DigiArmory's default privacy settings.
             <br><br>""")
          
 
@@ -15326,3 +15326,4 @@ from ui.WalletFrames import SelectWalletFrame, WalletBackupFrame,\
 from ui.TxFrames import  SendBitcoinsFrame, SignBroadcastOfflineTxFrame,\
    ReviewOfflineTxFrame
 from ui.MultiSigDialogs import DlgMultiSpendReview
+

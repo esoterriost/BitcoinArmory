@@ -32,7 +32,7 @@ if pwd().split('/')[-1]=='dpkgfiles':
    cd('..')
 
 if not os.path.exists('./armoryengine/ArmoryUtils.py') or \
-   not os.path.exists('./ArmoryQt.py'):
+   not os.path.exists('./DigiArmoryQt.py'):
    print '***ERROR: Must run this script from the root Armory directory!'
    exit(1)
 

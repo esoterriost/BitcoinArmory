@@ -52,7 +52,7 @@ class SendBitcoinsFrame(ArmoryFrame):
 
       feetip = self.main.createToolTipWidget(\
             'Transaction fees go to users who contribute computing power to '
-            'keep the Bitcoin network secure, and in return they get your transaction '
+            'keep the Digibyte network secure, and in return they get your transaction '
             'included in the blockchain faster.  <b>Most transactions '
             'do not require a fee</b> but it is recommended anyway '
             'since it guarantees quick processing and helps the network.')
@@ -90,7 +90,7 @@ class SendBitcoinsFrame(ArmoryFrame):
       self.vertLine = VLINE()
 
       self.ttipSendChange = self.main.createToolTipWidget(\
-            'Most transactions end up with oversized inputs and Armory will send '
+            'Most transactions end up with oversized inputs and DigiArmory will send '
             'the change to the next address in this wallet.  You may change this '
             'behavior by checking this box.')
       self.ttipFeedback = self.main.createToolTipWidget(\
@@ -99,9 +99,9 @@ class SendBitcoinsFrame(ArmoryFrame):
             'created this wallet solely for managing imported addresses, '
             'and want to keep all funds within existing addresses.')
       self.ttipSpecify = self.main.createToolTipWidget(\
-            'You can specify any valid Bitcoin address for the change.  '
+            'You can specify any valid Digibyte address for the change.  '
             '<b>NOTE:</b> If the address you specify is not in this wallet, '
-            'Armory will not be able to distinguish the outputs when it shows '
+            'DigiArmory will not be able to distinguish the outputs when it shows '
             'up in your ledger.  The change will look like a second recipient, '
             'and the total debit to your wallet will be equal to the amount '
             'you sent to the recipient <b>plus</b> the change.')
@@ -146,18 +146,18 @@ class SendBitcoinsFrame(ArmoryFrame):
          
       txFrm = makeHorizFrame(componentList, condenseMargins=True)
 
-      btnEnterURI = QPushButton('Manually Enter "bitcoin:" Link')
+      btnEnterURI = QPushButton('Manually Enter "digibyte:" Link')
       ttipEnterURI = self.main.createToolTipWidget( tr("""
-         Armory does not always succeed at registering itself to handle 
+         DigiArmory does not always succeed at registering itself to handle 
          URL links from webpages and email.  
-         Click this button to copy a "bitcoin:" link directly into Armory."""))
+         Click this button to copy a "digibyte:" link directly into DigiArmory."""))
       self.connect(btnEnterURI, SIGNAL("clicked()"), self.clickEnterURI)
       fromFrameList = [self.frmSelectedWlt]
       if not USE_TESTNET:
-         btnDonate = QPushButton("Donate to Armory Developers!")
+         btnDonate = QPushButton("Donate to DigiArmory Developers!")
          ttipDonate = self.main.createToolTipWidget(\
             'Making this software was a lot of work.  You can give back '
-            'by adding a small donation to go to the Armory developers.  '
+            'by adding a small donation to go to the DigiArmory developers.  '
             'You will have the ability to change the donation amount '
             'before finalizing the transaction.')
          self.connect(btnDonate, SIGNAL("clicked()"), self.addDonation)
@@ -236,7 +236,7 @@ class SendBitcoinsFrame(ArmoryFrame):
       self.setLayout(layout)
 
       self.makeRecipFrame(1)
-      self.setWindowTitle('Send Bitcoins')
+      self.setWindowTitle('Send Digibytes')
       self.setMinimumHeight(self.maxHeight * 20)
       # self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
 
@@ -264,15 +264,15 @@ class SendBitcoinsFrame(ArmoryFrame):
            not dnaaDonate and \
            not USE_TESTNET:
          result = MsgBoxWithDNAA(MSGBOX.Question, 'Please donate!', tr("""
-            <i>Armory</i> is the result of thousands of hours of development 
+            <i>DigiArmory</i> is the result of thousands of hours of development 
             by very talented coders.  Yet, this software 
-            has been given to you for free to benefit the greater Bitcoin 
+            has been given to you for free to benefit the greater Digibyte 
             community! 
             <br><br>
             If you are satisfied with this software, please consider 
             donating what you think this software would be worth as a commercial 
             application.
-            <br><br><b>Are you willing to donate to the Armory developers?</b> If you 
+            <br><br><b>Are you willing to donate to the DigiArmory developers?</b> If you 
             select "Yes," a donation field will be added to your 
             next transaction.  You will have the opportunity to remove it or change 
             the amount before sending the transaction."""), None)
@@ -319,7 +319,7 @@ class SendBitcoinsFrame(ArmoryFrame):
          self.btnSend.setToolTip('Click to create an unsigned transaction!')
       else:
          self.btnSend.setText('Send!')
-         self.btnSend.setToolTip('Click to send bitcoins!')
+         self.btnSend.setToolTip('Click to send digibytes!')
       
 
    #############################################################################
@@ -477,7 +477,7 @@ class SendBitcoinsFrame(ArmoryFrame):
             value = str2coin(valueStr, negAllowed=False)
             if value == 0:
                QMessageBox.critical(self, 'Zero Amount', \
-                  'You cannot send 0 BTC to any recipients.  <br>Please enter '
+                  'You cannot send 0 DGB to any recipients.  <br>Please enter '
                   'a positive amount for recipient %d.' % (row+1), QMessageBox.Ok)
                return False
 
@@ -488,8 +488,8 @@ class SendBitcoinsFrame(ArmoryFrame):
             return False
          except TooMuchPrecisionError:
             QMessageBox.critical(self, 'Too much precision', \
-               'Bitcoins can only be specified down to 8 decimal places. '
-               'The smallest value that can be sent is  0.0000 0001 BTC. '
+               'Digibytes can only be specified down to 8 decimal places. '
+               'The smallest value that can be sent is  0.0000 0001 DGB. '
                'Please enter a new amount for recipient %d.' % (row + 1), QMessageBox.Ok)
             return False
          except ValueError:
@@ -522,15 +522,15 @@ class SendBitcoinsFrame(ArmoryFrame):
                reply = QMessageBox.warning(self, tr('Non-Standard to Spend'), tr("""
                   Due to the Lockbox size (%d-of-%d) of recipient %d, spending
                   funds from this Lockbox is valid but non-standard for versions
-                  of Bitcoin prior to 0.10.0. This means if your version of
-                  Bitcoin is 0.9.x or below, and you try to broadcast a
+                  of Digibyte prior to 0.10.0. This means if your version of
+                  Digibyte is 0.9.x or below, and you try to broadcast a
                   transaction that spends from this Lockbox the transaction
                   will not be accepted. If you have version 0.10.0, but all
                   of your peers have an older version your transaction will
                   not be forwarded to the rest of the network. If you deposit
-                  Bitcoins into this Lockbox you may have to wait until you
+                  Digibytes into this Lockbox you may have to wait until you
                   and at least some of your peers have upgraded to 0.10.0
-                  before those Bitcoins can be spent. Alternatively, if you
+                  before those Digibytes can be spent. Alternatively, if you
                   have enough computing power to mine your own transactions,
                   or know someone who does, you can arrange to have any valid
                   but non-standard transaction included in the block chain.""") % \
@@ -550,14 +550,14 @@ class SendBitcoinsFrame(ArmoryFrame):
          return False
       except TooMuchPrecisionError:
          QMessageBox.critical(self, tr('Too much precision'), tr("""
-            Bitcoins can only be specified down to 8 decimal places. 
-            The smallest unit of a Bitcoin is 0.0000 0001 BTC. 
+            Digibytes can only be specified down to 8 decimal places. 
+            The smallest unit of a Digibyte is 0.0000 0001 DGB. 
             Please enter a fee of at least 0.0000 0001"""), QMessageBox.Ok)
          return False
       except:
          QMessageBox.critical(self, tr('Invalid Fee String'), tr("""
             The fee you specified is invalid.  A standard fee is 
-            0.0001 BTC, though some transactions may succeed with 
+            0.0001 DGB, though some transactions may succeed with 
             zero fee."""), QMessageBox.Ok)
          LOGERROR(tr('Invalid fee specified: "%s"') % feeStr)
          return False
@@ -569,13 +569,13 @@ class SendBitcoinsFrame(ArmoryFrame):
          valMax = coin2str(bal, maxZeros=2).strip()
          if self.altBalance == None:
             QMessageBox.critical(self, tr('Insufficient Funds'), tr("""
-            You just tried to send more Bitcoins than you have available. You only 
-            have %s BTC (spendable) in this wallet!""") % \
+            You just tried to send more Digibytes than you have available. You only 
+            have %s DGB (spendable) in this wallet!""") % \
             valMax, QMessageBox.Ok)
          else:
             QMessageBox.critical(self, tr('Insufficient Funds'), tr("""
-            You just tried to send more Bitcoins than you have available. You only 
-            have %s BTC with this coin control selection!""") % \
+            You just tried to send more Digibytes than you have available. You only 
+            have %s DGB with this coin control selection!""") % \
             (valTry, valMax), QMessageBox.Ok)
          return False
 
@@ -607,9 +607,9 @@ class SendBitcoinsFrame(ArmoryFrame):
 
       if minFee > 99*MIN_RELAY_TX_FEE:
          QMessageBox.critical(self, tr('Minimum Transaction Fee Is Too Large'), tr("""
-            The minimum fee for this transaction is <b>%s BTC</b>. That fee is too
+            The minimum fee for this transaction is <b>%s DGB</b>. That fee is too
             large and indicates that there are probably too many small inputs to fit
-            into a single transaction. To send these Bitcoins, this transaction must
+            into a single transaction. To send these Digibytes, this transaction must
             be broken up into to smaller pieces.            
             """) % coin2strNZS(minFee), QMessageBox.Ok)
          return False
@@ -627,21 +627,21 @@ class SendBitcoinsFrame(ArmoryFrame):
             QMessageBox.warning(self, tr('Insufficient Balance'), tr("""
                The required transaction fee causes this transaction to exceed 
                your balance.  In order to send this transaction, you will be 
-               required to pay a fee of <b>%s BTC</b>. 
+               required to pay a fee of <b>%s DGB</b>. 
                <br><br>
                Please go back and adjust the value of your transaction, not 
-               to exceed a total of <b>%s BTC</b> (the necessary fee has 
+               to exceed a total of <b>%s DGB</b> (the necessary fee has 
                been entered into the form, so you can use the "MAX" button 
                to enter the remaining balance for a recipient).""") % \
                (minFeeStr, newBalStr), QMessageBox.Ok)
             return
 
          reply = QMessageBox.warning(self, tr('Insufficient Fee'), tr("""
-            The fee you have specified (%s BTC) is insufficient for the 
+            The fee you have specified (%s DGB) is insufficient for the 
             size and priority of your transaction.  You must include at 
-            least %s BTC to send this transaction. 
+            least %s DGB to send this transaction. 
             <br><br> 
-            Do you agree to the fee of %s BTC?""") % \
+            Do you agree to the fee of %s DGB?""") % \
             (usrFeeStr, minFeeStr, minFeeStr), \
             QMessageBox.Yes | QMessageBox.Cancel)
 
@@ -656,13 +656,13 @@ class SendBitcoinsFrame(ArmoryFrame):
       # Warn user of excessive fee specified
       if fee > 100*MIN_RELAY_TX_FEE or (minFee > 0 and fee > 10*minFee):
          reply = QMessageBox.warning(self, tr('Excessive Fee'), tr("""
-            You have specified a fee of <b>%s BTC</b> which is much higher
-            than the minimum fee required for this transaction: <b>%s BTC</b>.
+            You have specified a fee of <b>%s DGB</b> which is much higher
+            than the minimum fee required for this transaction: <b>%s DGB</b>.
             Are you <i>absolutely sure</i> that you want to send with this
             fee?  
             <br><br>
             If you do not want this fee, click "No" and then change the fee
-            at the bottom of the "Send Bitcoins" window before trying 
+            at the bottom of the "Send Digibytes" window before trying 
             again.""") % (coin2strNZS(fee), coin2strNZS(minFee)), QMessageBox.Yes | QMessageBox.No)
 
          if not reply==QMessageBox.Yes:
@@ -672,8 +672,8 @@ class SendBitcoinsFrame(ArmoryFrame):
       if len(utxoSelect) == 0:
          QMessageBox.critical(self, tr('Coin Selection Error'), tr("""
             There was an error constructing your transaction, due to a 
-            quirk in the way Bitcoin transactions work.  If you see this
-            error more than once, try sending your BTC in two or more 
+            quirk in the way Digibyte transactions work.  If you see this
+            error more than once, try sending your DGB in two or more 
             separate transactions."""), QMessageBox.Ok)
          return False
 
@@ -1000,7 +1000,7 @@ class SendBitcoinsFrame(ArmoryFrame):
          self.widgetTable[r]['QLE_AMT'].setMaximumHeight(self.maxHeight)
          self.widgetTable[r]['QLE_AMT'].setAlignment(Qt.AlignLeft)
 
-         self.widgetTable[r]['LBL_BTC'] = QLabel('BTC')
+         self.widgetTable[r]['LBL_BTC'] = QLabel('DGB')
          self.widgetTable[r]['LBL_BTC'].setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
          self.widgetTable[r]['BTN_MAX'] = \
@@ -1075,7 +1075,7 @@ class SendBitcoinsFrame(ArmoryFrame):
       self.widgetTable[-1]['QLE_ADDR'].setText(ARMORY_DONATION_ADDR)
       self.widgetTable[-1]['QLE_AMT'].setText(coin2str(amt, maxZeros=2).strip())
       self.widgetTable[-1]['QLE_COMM'].setText(\
-            'Donation to Armory developers.  Thank you for your generosity!')
+            'Donation to DigiArmory developers.  Thank you for your generosity!')
 
    #############################################################################
    def clickEnterURI(self):
@@ -1239,7 +1239,7 @@ class ReviewOfflineTxFrame(ArmoryDialog):
             just requested, but is invalid because it does not contain any
             signatures.  You must take this data to the computer with the 
             full wallet to get it signed, then bring it back here to be
-            broadcast to the Bitcoin network.
+            broadcast to the Digibyte network.
             <br><br>
             Use "Save as file..." to save an <i>*.unsigned.tx</i> 
             file to USB drive or other removable media.  
@@ -1273,7 +1273,7 @@ class ReviewOfflineTxFrame(ArmoryDialog):
       suffix = ('' if OS_WINDOWS else '.unsigned.tx')
       toSave = self.main.getFileSave(\
                       'Save Unsigned Transaction', \
-                      ['Armory Transactions (*.unsigned.tx)'], \
+                      ['DigiArmory Transactions (*.unsigned.tx)'], \
                       'armory_%s_%s' % (dpid, suffix))
       LOGINFO('Saving unsigned tx file: %s', toSave)
       try:
@@ -1304,7 +1304,7 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
          'If the transaction is unsigned and you have the correct wallet, '
          'you will have the opportunity to sign it.  If it is already signed '
          'you will have the opportunity to broadcast it to '
-         'the Bitcoin network to make it final.')
+         'the Digibyte network to make it final.')
 
       self.txtUSTX = QTextEdit()
       self.txtUSTX.setFont(GETFONT('Fixed', 8))
@@ -1350,7 +1350,7 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
       # ##
       self.infoLbls.append([])
       self.infoLbls[-1].append(self.main.createToolTipWidget(\
-            'This is wallet from which the offline transaction spends bitcoins'))
+            'This is wallet from which the offline transaction spends digibytes'))
       self.infoLbls[-1].append(QRichLabel('<b>Wallet:</b>'))
       self.infoLbls[-1].append(QRichLabel(''))
 
@@ -1469,7 +1469,7 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
             self.btnBroadcast.setEnabled(True)
          else:
             self.btnBroadcast.setEnabled(False)
-            self.btnBroadcast.setToolTip('No connection to Bitcoin network!')
+            self.btnBroadcast.setToolTip('No connection to Digibyte network!')
 
       self.btnSave.setEnabled(True)
       self.btnCopyHex.setEnabled(False)
@@ -1593,7 +1593,7 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
 
          ##### 3
          if self.leValue:
-            self.infoLbls[3][2].setText(coin2strNZS(self.leValue) + '  BTC')
+            self.infoLbls[3][2].setText(coin2strNZS(self.leValue) + '  DGB')
          else:
             self.infoLbls[3][2].setText('')
 
@@ -1706,15 +1706,15 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
    def broadTx(self):
       if self.main.netMode == NETWORKMODE.Disconnected:
          QMessageBox.warning(self, 'No Internet!', \
-            'Armory lost its connection to Bitcoin-Qt, and cannot '
+            'DigiArmory lost its connection to Digibyte-Qt, and cannot '
             'broadcast any transactions until it is reconnected. '
-            'Please verify that Bitcoin-Qt (or bitcoind) is open '
+            'Please verify that Digibyte-Qt (or digibyted) is open '
             'and synchronized with the network.', QMessageBox.Ok)
          return
       elif self.main.netMode == NETWORKMODE.Offline:
          QMessageBox.warning(self, 'No Internet!', \
-            'You do not currently have a connection to the Bitcoin network. '
-            'If this does not seem correct, verify that Bitcoin-Qt is open '
+            'You do not currently have a connection to the Digibyte network. '
+            'If this does not seem correct, verify that Digibyte-Qt is open '
             'and synchronized with the network.', QMessageBox.Ok)
          return
 
@@ -1770,7 +1770,7 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
       if not self.ustxReadable:
          QMessageBox.warning(self, 'Formatting Error', \
             'The transaction data was not in a format recognized by '
-            'Armory.')
+            'DigiArmory.')
          return
 
 
@@ -1786,14 +1786,14 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
          QMessageBox.information(self, 'Transaction Saved!', \
             'Your transaction has been saved to the following location:'
             '\n\n%s\n\nIt can now be broadcast from any computer running '
-            'Armory in online mode.' % newSaveFile, QMessageBox.Ok)
+            'DigiArmory in online mode.' % newSaveFile, QMessageBox.Ok)
          return
 
    def saveTx(self):
       if not self.ustxReadable:
          QMessageBox.warning(self, 'Formatting Error', \
             'The transaction data was not in a format recognized by '
-            'Armory.')
+            'DigiArmory.')
          return
 
 
@@ -1849,5 +1849,6 @@ class SignBroadcastOfflineTxFrame(ArmoryFrame):
 # Need to put circular imports at the end of the script to avoid an import deadlock
 from qtdialogs import CLICKED, DlgConfirmSend, DlgUriCopyAndPaste, \
          DlgUnlockWallet, extractTxInfo, DlgDispTxInfo, NO_CHANGE
+
 
 

@@ -13,7 +13,7 @@
 #
 #  NOTE:       This was created before wallets ever used encryption.  It's 
 #              probably fairly useless... but any unencrypted wallets created
-#              before Bitcoin-Qt 0.6.0 would still be recoverable, even if 
+#              before Digibyte-Qt 0.6.0 would still be recoverable, even if 
 #              corrupted
 #
 #

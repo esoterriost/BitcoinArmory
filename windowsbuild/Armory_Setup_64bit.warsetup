@@ -7,7 +7,7 @@
   <projectFeatures featureId="ID90E1C812AFA05D225FBD63E0FC11FD98" featureName="Armory" featureDescription="The complete package" configurableDirectory="APPLICATIONFOLDER" configurableDirectoryDefaultPath="[ProjectName]" enableInDefaultInstall="true" enableInMinimalInstall="true" excludeFromBuild="false">
     <childFeatures featureId="ID56094662528CCBB1F81093993B346D0C" featureName="Program" featureDescription="Full Client Installation" enableInDefaultInstall="true" enableInMinimalInstall="true" excludeFromBuild="false">
       <components componentId="ID1682" componentGuid="addd80c0-d01a-478e-aa6b-6921162d6f65">
-        <componentFiles fileId="ID_0296d6b2_c234_47b5_8862_3f2c4d4ee0d3" srcName="ArmoryQt.exe" srcDirectory="..\ArmoryStandalone" dstName="Armory.exe" dstPath="" isTrueTypeFont="false" isComModule="false" typelibGuid="" menuName="Armory" shortcutInProgramFilesMenu="true" shortcutOnDesktop="true" shortcutInQuickLaunch="false" shortcutInStartupFolder="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <componentFiles fileId="ID_0296d6b2_c234_47b5_8862_3f2c4d4ee0d3" srcName="DigiArmoryQt.exe" srcDirectory="..\ArmoryStandalone" dstName="DigiArmory.exe" dstPath="" isTrueTypeFont="false" isComModule="false" typelibGuid="" menuName="Armory" shortcutInProgramFilesMenu="true" shortcutOnDesktop="true" shortcutInQuickLaunch="false" shortcutInStartupFolder="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
           <service StartWhenInstalled="true" Remove="both" id="ID1681" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
         </componentFiles>
         <addToCreateFolder>false</addToCreateFolder>
@@ -409,8 +409,8 @@
         <addToCreateFolder>false</addToCreateFolder>
       </components>
       <defaultInstallMode>0</defaultInstallMode>
-      <shortcuts srcPath="[APPLICATIONFOLDER]\Armory.exe" dstPath="[APPLICATIONFOLDER]\Armory (Offline)" workingDir="" commandArguments="--offline" description="Use Armory for cold storage or quick wallet management" showOnProgramMenu="true" showOnQuickLaunchBar="false" showOnDesktop="false" shortcutId="ID1697" />
-      <shortcuts srcPath="[APPLICATIONFOLDER]\Armory.exe" dstPath="[APPLICATIONFOLDER]\Armory (Testnet)" workingDir="" commandArguments="--testnet" description="Use Armory on the Test Network" showOnProgramMenu="true" showOnQuickLaunchBar="false" showOnDesktop="false" shortcutId="ID1698" />
+      <shortcuts srcPath="[APPLICATIONFOLDER]\DigiArmory.exe" dstPath="[APPLICATIONFOLDER]\Armory (Offline)" workingDir="" commandArguments="--offline" description="Use Armory for cold storage or quick wallet management" showOnProgramMenu="true" showOnQuickLaunchBar="false" showOnDesktop="false" shortcutId="ID1697" />
+      <shortcuts srcPath="[APPLICATIONFOLDER]\DigiArmory.exe" dstPath="[APPLICATIONFOLDER]\Armory (Testnet)" workingDir="" commandArguments="--testnet" description="Use Armory on the Test Network" showOnProgramMenu="true" showOnQuickLaunchBar="false" showOnDesktop="false" shortcutId="ID1698" />
     </childFeatures>
     <childFeatures featureId="ID04A049AFE1CA659EF1B8257EDB64A6DD" featureName="Source Code" featureDescription="Armory Sources" enableInDefaultInstall="true" enableInMinimalInstall="true" excludeFromBuild="false">
       <components componentId="ID1510" componentGuid="e767c37d-10b4-435c-8be7-a45685ca28e9">
@@ -492,7 +492,7 @@
         <addToCreateFolder>false</addToCreateFolder>
       </components>
       <components componentId="ID1544" componentGuid="eb0cf706-c6ee-4f6f-b9b8-dbcfdb5980ac">
-        <componentFiles fileId="ID_2366ad2b_ce24_428c_9f46_e52d5a68c60d" srcName="ArmoryQt.py" srcDirectory=".." dstName="ArmoryQt.py" dstPath="" isTrueTypeFont="false" isComModule="false" typelibGuid="" menuName="ArmoryQt" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutInStartupFolder="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <componentFiles fileId="ID_2366ad2b_ce24_428c_9f46_e52d5a68c60d" srcName="DigiArmoryQt.py" srcDirectory=".." dstName="DigiArmoryQt.py" dstPath="" isTrueTypeFont="false" isComModule="false" typelibGuid="" menuName="ArmoryQt" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutInStartupFolder="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
           <service StartWhenInstalled="true" Remove="both" id="ID1543" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
         </componentFiles>
         <addToCreateFolder>false</addToCreateFolder>

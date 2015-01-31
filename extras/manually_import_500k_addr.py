@@ -2,7 +2,7 @@
 # This takes a sample AddressEntry serialization as seen in the wallet files,
 # and appends 500k copies of it with private keys found in the wltfile.  This 
 # is useful for appending mass amounts of addresses to your wallet, though don't
-# expect ArmoryQt.py to work with 500k+ addresses.  But the underlying C++ code
+# expect DigiArmoryQt.py to work with 500k+ addresses.  But the underlying C++ code
 # CAN handle it.  Use a script like the following to get the balance of the 
 # wallet after it has all your addresses:
 # 

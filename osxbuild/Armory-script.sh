@@ -28,4 +28,4 @@ export DYLD_FRAMEWORK_PATH="${LIBDIR}:${FRDIR}"
 ln -sf "$FRDIR/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python" "$DIRNAME/Python"
 
 # Call ArmoryQt and get this party started!
-"$DIRNAME/Python" "$ARMORYDIR/ArmoryQt.py" "$@"
+"$DIRNAME/Python" "$ARMORYDIR/DigiArmoryQt.py" "$@"

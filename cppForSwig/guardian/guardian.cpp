@@ -7,9 +7,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 
 // A very simple program that simply monitors one PID, and kills another one
-// when it disappears.  This is needed for when Armory spawns a bitcoind 
+// when it disappears.  This is needed for when Armory spawns a digibyted 
 // process in the background, but crashes before it can close it.  Armory 
-// will launch this "guardian" to kill bitcoind.exe if Armory.exe disappears.
+// will launch this "guardian" to kill digibyted.exe if DigiArmory.exe disappears.
 // 
 #include <windows.h>
 #include <tlhelp32.h>
